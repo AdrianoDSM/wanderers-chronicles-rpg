@@ -1,0 +1,86 @@
+.header {
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--beige-dark);
+    background-color: var(--paper);
+    top: 0;
+    position: sticky;
+    z-index: 100;
+}
+
+.container {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.logo h1 {
+
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--crimson);
+    margin: 0 1.5rem;
+    line-height: 1.2;
+
+}
+
+.logo p {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-left: 1.5rem;
+    line-height: 1.2;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navLink {
+    margin: 0 2rem;
+    font-size: 1.2rem;
+}
+
+.navLink:hover {
+    color: var(--crimson);
+    transition: all 0.2s;
+    border-bottom: 1px solid;
+}
+
+.navButton {
+    padding: 1rem 1.5rem;
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: var(--crimson);
+    color: var(--);
+    font-weight: 500;
+    margin: 0 4rem;
+}
+
+.navButton:hover {
+    background-color: var(--crimson-light);
+    transition: all 0.2s;
+    color: white;
+}
+
+.navButtonPrimary {
+    background-color: var(--crimson);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.navButtonPrimary:hover {
+    background-color: var(--crimson-dark);
+    transition: all 0.2s;
+}
