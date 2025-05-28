@@ -1,31 +1,42 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Playfair_Display, Lora } from "next/font/google"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Playfair_Display, Lora } from "next/font/google";
+import "./globals.css";
+import SessionSync from "@/components/SessionSync";
+import { SessionProviderWrapper } from "./providers/SessionProviderWrapper";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
-})
+});
 
 const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
-})
+});
 
 export const metadata: Metadata = {
   title: "Wanderers Chronicles | RPG Journal",
-  description: "Registre as histórias épicas de suas campanhas de RPG em estilo de jornal",
-}
+  description:
+    "Registre as histórias épicas de suas campanhas de RPG em estilo de jornal",
+};
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="pt-BR">
-      <body className={`${playfair.variable} ${lora.variable}`}>{children}</body>
+      <body className={`${playfair.variable} ${lora.variable}`}>
+        <SessionProviderWrapper session={session}>
+          <SessionSync />
+          {children}
+        </SessionProviderWrapper>
+      </body>
     </html>
-  )
+  );
 }

@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2vw;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.cardBox {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 24px);
+  padding: clamp(16px, 4vw, 32px);
+  margin: 0 auto;
+  border-radius: 8px;
+  border: 2px solid var(--beige-dark);
+  max-width: 800px;
+  width: 100%;
+  background-color: var(--beige);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.mainTitle {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--crimson);
+  border-bottom: 2px solid var(--crimson);
+  padding-bottom: 16px;
+  line-height: 1.2;
+  gap: 6px;
+}
+
+.mainTitle p {
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  color: var(--ink-light);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.subTitle {
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  color: var(--ink);
+  line-height: 1.2;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--beige-dark);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.subTitle p {
+  padding: 0 clamp(16px, 6vw, 80px);
+  color: var(--ink-light);
+  line-height: 1.4;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  text-align: center;
+}
+
+.linkHome {
+  margin-left: 0;
+  align-self: flex-start;
+  color: var(--crimson);
+  font-family: var(--font-lora);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+.linkHome:hover {
+  color: var(--crimson-light);
+}
+
+.footer {
+  border-top: 1px solid var(--beige-dark);
+  padding-top: clamp(16px, 3vw, 24px);
+  margin-top: clamp(12px, 2vw, 20px);
+}
+
+.footerText {
+  font-family: var(--font-lora);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+}
+
+.footerLink {
+  color: var(--crimson);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footerLink:hover {
+  color: var(--crimson-light);
+}
