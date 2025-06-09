@@ -10,7 +10,7 @@
 .container {
     max-width: 95%;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 1 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,7 +19,6 @@
 .logo {
     display: flex;
     align-items: center;
-    flex-direction: row;
 }
 
 .logo h1 {
@@ -39,6 +38,12 @@
     line-height: 1.2;
 }
 
+.navWrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
 .nav {
     display: flex;
     align-items: center;
@@ -46,24 +51,30 @@
 }
 
 .navLink {
-    margin: 0 2rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    border: 2px solid var(--beige-dark);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    background-color: var(--beige-light);
+    line-height: 2;
 }
 
 .navLink:hover {
     color: var(--crimson);
     transition: all 0.2s;
-    border-bottom: 1px solid;
+    border: 2px solid;
 }
 
 .navButton {
+    box-sizing: border-box;
     padding: 1rem 1.5rem;
     border: 1px solid;
     border-radius: 4px;
     border-color: var(--crimson);
     color: var(--);
     font-weight: 500;
-    margin: 0 4rem;
+    background-color: var(--beige-light);
 }
 
 .navButton:hover {
@@ -83,4 +94,46 @@
 .navButtonPrimary:hover {
     background-color: var(--crimson-dark);
     transition: all 0.2s;
+}
+
+.navHome {
+  display: flex;
+  gap: 2rem;
+}
+
+.navAuth {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 1110px) {
+
+    .navHome {
+        display: none;
+    }
+}
+
+@media (max-width: 740px) {
+  .container {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .logo {
+    grid-row: 1;
+    justify-content: center;
+  }
+
+  .navLink {
+    text-align: center;
+  }
+
+  .navAuth {
+    grid-row: 2;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
 }

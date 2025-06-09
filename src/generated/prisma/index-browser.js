@@ -128,6 +128,53 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.CampaignScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ownerId: 'ownerId'
+};
+
+exports.Prisma.NoteScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  campaignId: 'campaignId',
+  sessionId: 'sessionId'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  sessionDate: 'sessionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  campaignId: 'campaignId'
+};
+
+exports.Prisma.CharacterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  status: 'status',
+  imageUrl: 'imageUrl',
+  strength: 'strength',
+  dexterity: 'dexterity',
+  constitution: 'constitution',
+  intelligence: 'intelligence',
+  wisdom: 'wisdom',
+  charisma: 'charisma',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  campaignId: 'campaignId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -142,10 +189,29 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.CampaignStatus = exports.$Enums.CampaignStatus = {
+  ACTIVE: 'ACTIVE',
+  PAUSED: 'PAUSED',
+  FINISHED: 'FINISHED'
+};
 
+exports.CharacterType = exports.$Enums.CharacterType = {
+  PC: 'PC',
+  NPC: 'NPC'
+};
+
+exports.CharacterStatus = exports.$Enums.CharacterStatus = {
+  ALIVE: 'ALIVE',
+  DEAD: 'DEAD',
+  UNKNOWN: 'UNKNOWN'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Campaign: 'Campaign',
+  Note: 'Note',
+  Session: 'Session',
+  Character: 'Character'
 };
 
 /**

@@ -14,29 +14,31 @@ export const Header = () => {
             height={100}
           />
           <div>
-          <h1>Wanderers Chronicles</h1>
-          <p>Edição Especial • Desde 2025</p>
+            <h1>Wanderers Chronicles</h1>
+            <p>Edição Especial • Desde 2025</p>
           </div>
         </div>
-        <nav className={styles.navHome}>
-          <Link href="/" className={styles.navLink}>
-            Início
-          </Link>
-          <Link href="#features" className={styles.navLink}>
-            Recursos
-          </Link>
-          <Link href="#testimonials" className={styles.navLink}>
-            Depoimentos
-          </Link>
-        </nav>
-        <nav className={styles.navAuth}>
-          <Link href="#" className={styles.navButton}>
-            Entrar
-          </Link>
-          <Link href="#" className={styles.navButtonPrimary}>
-            Registrar
-          </Link>
-        </nav>
+        <div className={styles.navWrapper}>
+          <nav className={styles.navHome}>
+            <Link href="/" className={styles.navLink}>
+              Início
+            </Link>
+            <Link href="#features" className={styles.navLink}>
+              Recursos
+            </Link>
+            <Link href="#testimonials" className={styles.navLink}>
+              Depoimentos
+            </Link>
+          </nav>
+          <nav className={styles.navAuth}>
+            <Link href="/login" className={styles.navButton}>
+              Entrar
+            </Link>
+            <Link href="/register" className={styles.navButtonPrimary}>
+              Registrar
+            </Link>
+          </nav>
+        </div>
       </div>
     </header>
   );
