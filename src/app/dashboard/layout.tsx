@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { SessionProviderWrapper } from "../providers/SessionProviderWrapper";
+import { DashboardAside } from "@/components/DashboardAside/dashboardAside";
+import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
 
 export default async function DashboardLayout({
   children,
