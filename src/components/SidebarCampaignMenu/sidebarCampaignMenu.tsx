@@ -3,7 +3,7 @@
 import { useCreateCampaignStore } from "@/store/useCreateCampaignStore";
 import { useSidebarCampaignMenuStore } from "@/store/useSidebarCampaignStore";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { ArrowDown, Plus } from "lucide-react";
 import styles from "./sidebarCampaignMenu.module.css";
 
 type Campaign = {
@@ -22,25 +22,26 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
 
   return (
     <div className={styles.campaignMenuWrapper}>
-      <Link href="/dashboard" className={styles.campaignMenuOption}>
+      <Link href="/dashboard" className={styles.dashboardButton}>
         Dashboard
       </Link>
       <div className={styles.campaignSection}>
         <div className={styles.dropdownHeader}>
-          <button className={styles.campaignMenuOption} onClick={toggleMenu}>
+          <button className={styles.dropdownButton} onClick={toggleMenu}>
             Minhas Campanhas
+          <ArrowDown className={`${styles.arrow} ${isOpen ? styles.rotate : ""}`}
+            size={20}/>
           </button>
-          <button
+          {/* <button
             type="button"
             aria-label="Nova Campanha"
             className={styles.plusButton}
             onClick={openCreateCampaignModal}
           >
             <Plus size={16} />
-          </button>
+          </button> */}
         </div>
-        {isOpen && (
-          <ul className={styles.dropdownCampaign}>
+          <ul className={`${styles.dropdownCampaign} ${isOpen ? styles.open : ""}`}>
             {campaigns.length > 0 ? (
               campaigns.map((campaign) => (
                 <li key={campaign.id}>
@@ -54,17 +55,17 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
               ))
             ) : (
               <li className={styles.emptyCampaign}>
-                Nenhuma campanha criada. {" "}
                 <button
+                    type='button'
                     onClick={openCreateCampaignModal}
-                    className={styles.createFirstCampaign}
-                >
-                    Criar agora
+                    className={styles.emptyCampaignButton}
+                    >
+                    Crie sua Campanha
+                    <Plus size={20}/>
                 </button>
               </li>
             )}
           </ul>
-        )}
       </div>
     </div>
   );

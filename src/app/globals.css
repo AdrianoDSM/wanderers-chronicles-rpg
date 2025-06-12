@@ -45,3 +45,14 @@ span,
 button {
   font-family: var(--font-lora);
 }
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

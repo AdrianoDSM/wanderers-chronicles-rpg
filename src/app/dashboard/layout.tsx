@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { SessionProviderWrapper } from "../providers/SessionProviderWrapper";
 import { DashboardAside } from "@/components/DashboardAside/dashboardAside";
 import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
+import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCampaignModal";
 
 export default async function DashboardLayout({
   children,
@@ -25,6 +26,7 @@ export default async function DashboardLayout({
           <DashboardHeader />
           <main>{children}</main>
         </div>
+        <CreateCampaignModal />
       </div>
     </SessionProviderWrapper>
   );
