@@ -42,7 +42,8 @@ p,
 a,
 li,
 span,
-button {
+button,
+label {
   font-family: var(--font-lora);
 }
 
@@ -55,4 +56,24 @@ ul, li {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+textarea {
+  all: unset;
+  resize: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
