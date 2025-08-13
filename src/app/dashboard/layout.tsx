@@ -6,7 +6,7 @@ import { SessionProviderWrapper } from "../providers/SessionProviderWrapper";
 import { DashboardAside } from "@/components/DashboardAside/dashboardAside";
 import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
 import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCampaignModal";
-
+import "./dashboard.css"
 export default async function DashboardLayout({
   children,
 }: {
@@ -20,9 +20,9 @@ export default async function DashboardLayout({
 
   return (
     <SessionProviderWrapper session={session}>
-      <div>
+      <div className="dashboard-wrapper">
         <DashboardAside />
-        <div>
+        <div className="dashboard-content">
           <DashboardHeader />
           <main>{children}</main>
         </div>

@@ -4,6 +4,8 @@
 
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -11,9 +13,11 @@ interface Props {
 }
 
 export function SessionProviderWrapper({ children, session }: Props) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <SessionProvider session={session} refetchInterval={60}>
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </SessionProvider>
   );
 }
