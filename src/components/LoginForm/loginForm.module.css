@@ -20,7 +20,7 @@
   font-size: 1rem;
   font-weight: 500;
   align-self: start;
-  color: var(--ink);
+  color: var(--silver-light);
   font-family: var(--font-playfair);
 }
 
@@ -31,21 +31,21 @@
   font-size: 1rem;
   font-family: var(--font-lora);
   color: var(--ink);
-  background-color: var(--beige-light);
-  border: 2px solid var(--beige-dark);
+  background-color: var(--silver-light);
+  border: 2px solid var(--silver-dark);
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 .formInput:focus {
   outline: none;
-  border-color: var(--crimson);
-  background-color: var(--paper);
+  border-color: var(--crimson-dark);
+  background-color: var(--silver-dark);
   box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
 }
 
 .formInput::placeholder {
-  color: var(--ink-light);
+  color: var(--graphite);
   opacity: 0.7;
 }
 
@@ -53,14 +53,14 @@
   align-self: flex-start;
   margin: 0 0.5rem;
   font-size: 0.7rem;
-  color: var(--crimson-light);
+  color: var(--crimson);
 }
 
 .formButton {
   box-sizing: border-box;
   margin-top: 10px;
   padding: 12px 50px;
-  color: white;
+  color: var(--silver-light);
   background-color: var(--crimson);
   border: none;
   border-radius: 5px;
@@ -68,7 +68,9 @@
 
 .formButton:hover {
   cursor: pointer;
-  background-color: var(--crimson-light);
+  background-color: var(--crimson-dark);
+  color: var(--silver);
+  transition: all 0.2s;
 }
 
 

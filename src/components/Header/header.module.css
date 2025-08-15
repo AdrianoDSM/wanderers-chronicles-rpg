@@ -1,7 +1,7 @@
 .header {
     padding: 1.5rem;
     border-bottom: 2px solid var(--beige-dark);
-    background-color: var(--paper);
+    background-color: var(--graphite);
     top: 0;
     position: sticky;
     z-index: 100;
@@ -52,15 +52,16 @@
 
 .navLink {
     font-size: 1rem;
-    border: 2px solid var(--beige-dark);
+    border: 2px solid var(--silver);
     border-radius: 5px;
     box-sizing: border-box;
     padding: 0.5rem 1rem;
-    background-color: var(--beige-light);
+    background-color: var(--crimson);
     line-height: 2;
 }
 
 .navLink:hover {
+    background-color: var(--silver);
     color: var(--crimson);
     transition: all 0.2s;
     border: 2px solid;
@@ -72,20 +73,20 @@
     border: 1px solid;
     border-radius: 4px;
     border-color: var(--crimson);
-    color: var(--);
+    color: var(--crimson);
     font-weight: 500;
-    background-color: var(--beige-light);
+    background-color: var(--silver);
 }
 
 .navButton:hover {
-    background-color: var(--crimson-light);
+    background-color: var(--silver-light);
     transition: all 0.2s;
-    color: white;
+    color: var(--crimson-light);
 }
 
 .navButtonPrimary {
     background-color: var(--crimson);
-    color: white;
+    color: var(--silver-light);
     padding: 1rem 1.5rem;
     border-radius: 4px;
     font-weight: 500;
@@ -93,6 +94,7 @@
 
 .navButtonPrimary:hover {
     background-color: var(--crimson-dark);
+    color: var(--silver);
     transition: all 0.2s;
 }
 

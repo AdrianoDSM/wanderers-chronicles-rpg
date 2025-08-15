@@ -34,14 +34,17 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
             />
             Minhas Campanhas
             <div></div>
-            <button
-              type="button"
+            <span
+              role="button"
               aria-label="Nova Campanha"
               className={styles.plusButton}
-              onClick={openCreateCampaignModal}
+              onClick={(e) => {
+                e.stopPropagation();
+                openCreateCampaignModal();
+              }}
             >
               <Plus size={20} />
-            </button>
+            </span>
           </button>
         </div>
         <ul

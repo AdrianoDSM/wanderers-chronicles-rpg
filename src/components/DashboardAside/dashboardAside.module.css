@@ -5,7 +5,7 @@
     height: 100vh;
     width: 17vw;
     min-width: 250px;
-    border-right: 3px solid var(--beige-dark);
+    border-right: 3px solid var(--silver-dark);
 }
 
 .titleBox {
@@ -14,7 +14,7 @@
     width: 100%;
     height: 10vh;
     min-height: 70px;
-    border-bottom: 2px solid var(--beige-dark);
+    border-bottom: 2px solid var(--silver-dark);
     align-items: center;
     justify-content: center;
 }
@@ -26,7 +26,7 @@
 
 .subtitle {
     font-size: 0.9rem;
-    color: var(--ink-light);
+    color: var(--silver);
     font-style: italic;
 }
 
@@ -36,7 +36,7 @@
     width: 100%;
     height: 10vh;
     min-height: 60px;
-    border-bottom: 2px solid var(--beige-dark);
+    border-bottom: 2px solid var(--silver-dark);
     align-items: center;
     justify-content: space-evenly;
 }
@@ -44,7 +44,7 @@
 .avatar {
     display: flex;
     background-color: var(--crimson);
-    color: white;
+    color: var(--silver-light);
     justify-content: center;
     align-items: center;    
     width: 48px;
@@ -56,9 +56,10 @@
 
 .username {
     font-size: 1.2rem;
+    color: var(--silver-light);
 }
 
 .email {
     font-size: 0.9rem;
-    color: var(--ink-light);
+    color: var(--silver-dark);
 }

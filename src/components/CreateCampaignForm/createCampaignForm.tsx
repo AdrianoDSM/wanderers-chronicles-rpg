@@ -31,7 +31,7 @@ export function CreateCampaignForm() {
     try {
       const campaign = await createCampaign(data);
       toast.success("Campanha criada com sucesso!");
-      router.push(`/campaign/${campaign.name}`);
+      router.push(`/campaign/${campaign.id}`);
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

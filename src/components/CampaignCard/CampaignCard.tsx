@@ -33,7 +33,6 @@ export function CampaignCard({
       <h2>{campaign.name}</h2>
       <p>{campaign.description || "Sem descrição"}</p>
       <p>Status: {statusLabel}</p>
-      <p>Owner: {campaign.owner.name}</p>
       <p>Sessões: {campaign.sessions?.length || 0}</p>
       <small>
         Criada em: {new Date(campaign.createdAt).toLocaleDateString("pt-BR")}
