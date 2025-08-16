@@ -54,12 +54,14 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
             campaigns.map((campaign) => (
               <>
                 <li key={campaign.id}>
+                  <div className={styles.campaignButtonContainer}>
                   <Link
-                    href={`/campaign/${campaign.id}`}
+                    href={`/campaign/${campaign.name}`}
                     className={styles.campaignButton}
                   >
                     {campaign.name}
                   </Link>
+                  </div>
                 </li>
               </>
             ))

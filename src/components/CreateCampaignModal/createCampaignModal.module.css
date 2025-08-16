@@ -11,10 +11,10 @@
 }
 
 .modal {
-  background-color: var(--beige);
+  background-color: var(--graphite);
   padding: clamp(1.5rem, 5vw, 2rem);
   border-radius: 8px;
-  border: 2px solid var(--beige-dark);
+  border: 2px solid var(--silver-dark);
   max-width: 500px;
   width: 100%;
   text-align: center;
@@ -28,7 +28,7 @@
 }
 
 .subtitle {
-  color: var(--ink-light);
+  color: var(--silver-light);
   font-style: italic;
   font-size: 1rem;
   margin-bottom: 1.5rem;

@@ -1,0 +1,75 @@
+.header {
+    padding: 0;
+    margin: 0;
+    height: 12vh;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid var(--silver-dark);
+}
+
+.container {
+    width: 84vw;
+    padding: 0 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.title {
+    color: var(--crimson-dark);
+    font-weight: 900;
+}
+
+.subtitle {
+    color: var(--silver-dark);
+    font-style: italic;
+}
+
+.headerButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.createCampaignButton {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--crimson-dark);
+    color: var(--silver-light);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.createCampaignButton:hover {
+    background-color: var(--crimson);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+}
+
+.profileButton {
+    display: flex;
+    background-color: var(--crimson-dark);
+    color: var(--silver-light);
+    justify-content: center;
+    align-items: center;    
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.profileButton:hover {
+    color: var(--silver);
+    background-color: var(--crimson);
+    transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.5);
+}

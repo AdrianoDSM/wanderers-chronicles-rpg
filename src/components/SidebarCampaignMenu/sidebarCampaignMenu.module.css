@@ -13,11 +13,16 @@
   color: var(--silver-light);
   font-weight: 600;
   width: 90%;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 1rem;
   height: 3rem;
   border-radius: 5px;
+}
+
+.dashboardButton:hover {
+  color: var(--silver);
+  background-color: var(--crimson-dark);
 }
 
 .campaignSection {
@@ -46,6 +51,11 @@
   font-family: var(--font-lora);
 }
 
+.dropdownHeader:hover {
+  color: var(--silver);
+  background-color: var(--crimson-dark);
+}
+
 .arrow {
   color: var(--silver-light);
   transition: transform 0.3s ease;
@@ -63,7 +73,7 @@
 .dropdownCampaign {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.25rem;
   width: 100%;
   background-color: var(--silver-dark);
   margin-top: 0.5rem;
@@ -81,6 +91,13 @@
   transform: translateY(0);
 }
 
+.campaignButtonContainer {
+  display: flex;
+  margin: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--crimson);
+}
+
 .campaignButton {
   display: flex;
   justify-content: space-between;
@@ -88,8 +105,14 @@
   padding: 0 1rem;
   height: 3rem;
   width: 100%;
-  color: var(--crimson);
+  color: var(--silver-light);
   font-weight: 600;
+}
+
+.campaignButton:hover {
+  color: var(--silver);
+  background-color: var(--crimson-dark);
+  border-radius: 5px;
 }
 
 .emptyCampaign {

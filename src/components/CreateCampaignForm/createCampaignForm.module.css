@@ -12,7 +12,7 @@
 
 .label {
   font-size: 1rem;
-  color: var(--ink);
+  color: var(--silver-light);
   text-align: left;
   font-family: var(--font-playfair);
 }
@@ -24,8 +24,8 @@
   font-size: 1rem;
   font-family: var(--font-lora);
   color: var(--ink);
-  background-color: var(--beige-light);
-  border: 2px solid var(--beige-dark);
+  background-color: var(--silver-light);
+  border: 2px solid var(--silver-dark);
   border-radius: 4px;
   resize: none;
   transition: all 0.2s;
@@ -35,13 +35,13 @@
 .textarea:focus {
   outline: none;
   border-color: var(--crimson);
-  background-color: var(--paper);
-  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+  background-color: var(--silver);
+  box-shadow: 0 0 0 4px rgba(220, 20, 60, 0.2);
 }
 
 .charCount {
   font-size: 0.75rem;
-  color: var(--ink-light);
+  color: var(--silver-light);
   text-align: right;
 }
 
@@ -53,15 +53,18 @@
 
 .button {
   background-color: var(--crimson);
-  color: white;
+  color: var(--silver-light);
   border: none;
   border-radius: 5px;
   padding: 12px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   margin-top: 1rem;
+  transition: all 0.2s;
 }
 
 .button:hover {
-  background-color: var(--crimson-light);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+  background-color: var(--crimson-dark);
 }

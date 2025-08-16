@@ -20,7 +20,6 @@ export function CreateCampaignModal() {
       tabIndex={-1}>
         <h2 className={styles.title}>Crie sua Campanha</h2>
         <p className={styles.subtitle}>Nomeie e descreva brevemente sua campanha</p>
-
         <CreateCampaignForm/>
       </div>
     </div>

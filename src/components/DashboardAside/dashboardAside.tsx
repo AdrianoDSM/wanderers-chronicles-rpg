@@ -19,7 +19,6 @@ export async function DashboardAside () {
         <div>
           <h3 className={styles.title}>Wanderers Chronicles</h3>
           <p className={styles.subtitle}>Your Chronicles</p>
-          
         </div>
       </div>
       <UserInfo />
