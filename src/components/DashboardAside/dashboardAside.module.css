@@ -63,3 +63,35 @@
     font-size: 0.9rem;
     color: var(--silver-dark);
 }
+
+.footer {
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: column;
+    margin-top: auto;
+    border-top: 2px solid var(--silver-dark);
+    background-color: var(-graphite);
+}
+
+.footerButton {
+    margin: 0.2rem 0.5rem;
+    display: flex;
+    align-items: center;
+    width: 85%;
+    height: 2.5rem;
+    padding-left: 1rem;
+    gap: 1rem;
+    background-color: var(--silver-dark);
+    color: var(--crimson-dark);
+    border-radius: 5px;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.footerButton:hover {
+    background-color: var(--silver);
+    color: var(--crimson);
+}

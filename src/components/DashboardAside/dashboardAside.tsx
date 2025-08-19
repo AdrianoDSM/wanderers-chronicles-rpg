@@ -3,6 +3,8 @@ import styles from "./dashboardAside.module.css";
 import { SidebarCampaignMenu } from "../SidebarCampaignMenu/sidebarCampaignMenu";
 import { UserInfo } from "../SidebarUserInfo/sidebarUserInfo";
 import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
+import { Settings } from "lucide-react";
+import { LogoutButton } from "../LogoutButton/logoutButton";
 
 export async function DashboardAside () {
   const campaigns = await getUserCampaigns()
@@ -25,7 +27,13 @@ export async function DashboardAside () {
       <div>
         <SidebarCampaignMenu campaigns={campaigns} />
       </div>
-      <div></div>
+      <div className={styles.footer}>
+        <button className={styles.footerButton}>
+        <Settings/>
+        Configurações
+        </button>
+        <LogoutButton className={styles.footerButton}/>
+      </div>
     </aside>
   );
 };

@@ -1,14 +1,26 @@
 "use client";
 
+import { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useCampaignStore } from "@/store/useCampaignStore";
+import { useCarouselStore } from "@/store/useCarouselStore";
 import { CampaignCard } from "../CampaignCard/CampaignCard";
 import { CampaignProps } from "@/types/models/Campaign";
+import styles from "./CampaignList.module.css";
+import { useResponsiveCards } from "@/hooks/useResponsiveCards";
 
 export function CampaignList() {
   const { selectedCampaignId, setSelectedCampaign } = useCampaignStore();
+  const { cardWidth, cardsPerPage, pageIndex, setPageIndex } =
+    useCarouselStore();
 
-  const { data: campaigns, isLoading, isError } = useQuery<CampaignProps[]>({
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const {
+    data: campaigns,
+    isLoading,
+    isError,
+  } = useQuery<CampaignProps[]>({
     queryKey: ["campaigns"],
     queryFn: async () => {
       const res = await fetch("/api/campaigns");
@@ -17,20 +29,58 @@ export function CampaignList() {
     },
   });
 
+  useResponsiveCards(containerRef, campaigns?.length || 0);
+
   if (isLoading) return <p>Carregando campanhas...</p>;
   if (isError) return <p>Erro ao carregar campanhas.</p>;
-  if (!campaigns || campaigns.length === 0) return <p>Nenhuma campanha encontrada</p>
+  if (!campaigns || campaigns.length === 0)
+    return <p>Nenhuma campanha encontrada</p>;
+
+  const maxPageIndex = Math.max(
+    0,
+    Math.ceil(campaigns.length / cardsPerPage) - 1
+  );
+
+  const scrollToPage = (index: number) => {
+    if (!containerRef.current) return;
+    containerRef.current.scrollTo({
+      left: index * cardsPerPage * cardWidth,
+      behavior: "smooth",
+    });
+    setPageIndex(index);
+  };
+
+  const handleLeft = () => scrollToPage(Math.max(0, pageIndex - 1));
+  const handleRight = () => scrollToPage(Math.min(maxPageIndex, pageIndex + 1));
 
   return (
-    <div>
-      {campaigns?.map((c) => (
-        <CampaignCard
-          key={c.id}
-          campaign={c}
-          isSelected={selectedCampaignId === c.id}
-          onSelect={setSelectedCampaign}
-        />
-      ))}
+    <div className={styles.container}>
+      <button
+        className={`${styles.arrow} ${styles.arrowLeft}`}
+        onClick={handleLeft}
+        disabled={pageIndex === 0}
+      >
+        &#8592;
+      </button>
+
+      <div className={styles.inner} ref={containerRef}>
+        {campaigns?.map((c) => (
+          <CampaignCard
+            key={c.id}
+            campaign={c}
+            isSelected={selectedCampaignId === c.id}
+            onSelect={setSelectedCampaign}
+          />
+        ))}
+      </div>
+
+      <button
+        className={`${styles.arrow} ${styles.arrowRight}`}
+        onClick={handleRight}
+        disabled={pageIndex === maxPageIndex}
+      >
+        &#8594;
+      </button>
     </div>
   );
 }

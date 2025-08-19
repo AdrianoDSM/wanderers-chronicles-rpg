@@ -1,0 +1,7 @@
+.campaignCard {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--crimson);
+    border-radius: 5px;
+    padding: 2rem 5rem;
+}

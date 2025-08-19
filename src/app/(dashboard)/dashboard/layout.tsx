@@ -7,6 +7,7 @@ import { DashboardAside } from "@/components/DashboardAside/dashboardAside";
 import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
 import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCampaignModal";
 import "./dashboard.css";
+
 export default async function DashboardLayout({
   children,
 }: {

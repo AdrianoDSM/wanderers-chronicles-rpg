@@ -1,11 +1,11 @@
-// import styles from "./CampaignCard.module.css";
+import styles from "./CampaignCard.module.css";
 import { CampaignProps } from "@/types/models/Campaign";
 import { CampaignStatus } from "@/types/enums/CampaignStatus";
 
 interface CampaignCardProps {
   campaign: CampaignProps;
   isSelected: boolean;
-  onSelect: (id: string) => void;
+  onSelect: (id: string | null) => void;
 }
 
 export function CampaignCard({
@@ -25,10 +25,20 @@ export function CampaignCard({
         return "";
     }
   })();
+
+  const handleClick = () => {
+    if (isSelected) {
+      onSelect(null);
+    }
+      else {
+        onSelect(campaign.id);
+      }
+    }
+  
   return (
     <div
-      className={`campaign-card ${isSelected ? "selected" : ""}`}
-      onClick={() => onSelect(campaign.id)}
+      className={`${styles.campaignCard} ${isSelected ? styles.selected : ""}`}
+      onClick={handleClick}
     >
       <h2>{campaign.name}</h2>
       <p>{campaign.description || "Sem descrição"}</p>
