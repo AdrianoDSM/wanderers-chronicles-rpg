@@ -16,7 +16,7 @@ export function CampaignCard({
   const statusLabel = (() => {
     switch (campaign.status) {
       case CampaignStatus.ACTIVE:
-        return "Active";
+        return "Ativo";
       case CampaignStatus.PAUSED:
         return "Paused";
       case CampaignStatus.FINISHED:
@@ -40,11 +40,15 @@ export function CampaignCard({
       className={`${styles.campaignCard} ${isSelected ? styles.selected : ""}`}
       onClick={handleClick}
     >
+      <div className={styles.titleDiv}>
       <h2>{campaign.name}</h2>
-      <p>{campaign.description || "Sem descrição"}</p>
-      <p>Status: {statusLabel}</p>
-      <p>Sessões: {campaign.sessions?.length || 0}</p>
-      <small>
+      <p>{statusLabel}</p>
+      </div>
+      <div className={styles.subtitleDiv}>
+      <p>{campaign.sessions?.length || 0} Sessões</p>
+      <p>{campaign.characters?.length || 0} Personagens</p>
+      </div>
+      <small className={styles.createdAt}>
         Criada em: {new Date(campaign.createdAt).toLocaleDateString("pt-BR")}
       </small>
     </div>

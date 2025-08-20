@@ -1,11 +1,27 @@
 .container {
-    width: 60%;
+    width: 80%;
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
     padding: 0 5rem;
     background-color: var(--silver-dark);
     border-radius: 5px;
+}
+
+.carouselWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header {
+    width: 100%;
+    padding: 2rem 0 1rem 0;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--crimson-dark);
+    border-bottom: 2px solid var(--crimson-dark);
 }
 
 .inner {
@@ -28,22 +44,35 @@
     background-color: var(--graphite);
     border: none;
     cursor: pointer;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
     border-radius: 50%;
     z-index: 10;
     font-size: 1.5rem;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow svg {
+  color: var(--silver-dark);
+}
+
+.arrow:hover:not(:disabled) {
+  background-color: var(--crimson-dark);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .arrow:disabled {
     opacity: 0.3;
     cursor: default;
+    transform: translateY(-50%) scale(1);
 }
 
 .arrowLeft {
-    left: 1rem;
+    left: -4rem;
 }
 
 .arrowRight {
-    right: 1rem;
+    right: -4rem;
 }

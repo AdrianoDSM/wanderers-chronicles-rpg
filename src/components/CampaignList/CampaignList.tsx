@@ -8,6 +8,8 @@ import { CampaignCard } from "../CampaignCard/CampaignCard";
 import { CampaignProps } from "@/types/models/Campaign";
 import styles from "./CampaignList.module.css";
 import { useResponsiveCards } from "@/hooks/useResponsiveCards";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 export function CampaignList() {
   const { selectedCampaignId, setSelectedCampaign } = useCampaignStore();
@@ -55,12 +57,16 @@ export function CampaignList() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.header}>
+        <h2>Suas campanhas</h2>
+      </div>
+      <div className={styles.carouselWrapper}>
       <button
         className={`${styles.arrow} ${styles.arrowLeft}`}
         onClick={handleLeft}
         disabled={pageIndex === 0}
       >
-        &#8592;
+        <ChevronLeft size={28}/>
       </button>
 
       <div className={styles.inner} ref={containerRef}>
@@ -79,8 +85,9 @@ export function CampaignList() {
         onClick={handleRight}
         disabled={pageIndex === maxPageIndex}
       >
-        &#8594;
+        <ChevronRight size={28}/>
       </button>
+      </div>
     </div>
   );
 }

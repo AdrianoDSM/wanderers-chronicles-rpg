@@ -1,7 +1,51 @@
 .campaignCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--crimson-dark);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 20rem;
+  min-width: 14rem;
+  height: auto;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.campaignCard:hover { 
+  transform: translateY(-1px);
+  box-shadow:
+  0 0 4px rgba(220, 20, 60, 0.6),
+  0 0 12px rgba(220, 20, 60, 0.4),
+  0 0 20px rgba(220, 20, 60, 0.2);
+}
+
+.selected {
+  transform: scale(1.02);
+  background-color: var(--crimson);
+  box-shadow:
+  0 0 4px rgba(220, 20, 60, 0.6),
+  0 0 12px rgba(220, 20, 60, 0.4),
+  0 0 20px rgba(220, 20, 60, 0.2);
+}
+
+.titleDiv {
     display: flex;
-    flex-direction: column;
-    background-color: var(--crimson);
-    border-radius: 5px;
-    padding: 2rem 5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtitleDiv {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+
+.createdAt {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 0.7rem;
 }
