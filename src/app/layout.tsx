@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { Playfair_Display, Lora } from "next/font/google";
 import "./globals.css";
 import SessionSync from "@/components/SessionSync";
-import { SessionProviderWrapper } from "./providers/SessionProviderWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { SessionProviderWrapper } from "./providers/SessionProviderWrapper";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],

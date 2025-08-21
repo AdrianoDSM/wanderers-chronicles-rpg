@@ -40,6 +40,7 @@ export function CampaignCard({
       className={`${styles.campaignCard} ${isSelected ? styles.selected : ""}`}
       onClick={handleClick}
     >
+      <div className={styles.headline}>
       <div className={styles.titleDiv}>
       <h2>{campaign.name}</h2>
       <p>{statusLabel}</p>
@@ -47,6 +48,7 @@ export function CampaignCard({
       <div className={styles.subtitleDiv}>
       <p>{campaign.sessions?.length || 0} Sessões</p>
       <p>{campaign.characters?.length || 0} Personagens</p>
+      </div>
       </div>
       <small className={styles.createdAt}>
         Criada em: {new Date(campaign.createdAt).toLocaleDateString("pt-BR")}

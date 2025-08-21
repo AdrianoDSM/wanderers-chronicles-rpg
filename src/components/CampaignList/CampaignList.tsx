@@ -33,10 +33,10 @@ export function CampaignList() {
 
   useResponsiveCards(containerRef, campaigns?.length || 0);
 
-  if (isLoading) return <p>Carregando campanhas...</p>;
-  if (isError) return <p>Erro ao carregar campanhas.</p>;
+  if (isLoading) return <div className={styles.containerLoading}><p>Carregando campanhas...</p></div>;
+  if (isError) return <div className={styles.containerLoading}><p>Erro ao carregar campanhas.</p></div>;
   if (!campaigns || campaigns.length === 0)
-    return <p>Nenhuma campanha encontrada</p>;
+    return <div className={styles.containerLoading}><p>Nenhuma campanha encontrada</p></div>;
 
   const maxPageIndex = Math.max(
     0,

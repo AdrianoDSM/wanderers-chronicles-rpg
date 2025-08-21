@@ -2,11 +2,12 @@ import { getServerSession } from "next-auth";
 import type { ReactNode } from "react";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import { SessionProviderWrapper } from "../../providers/SessionProviderWrapper";
-import { DashboardAside } from "@/components/DashboardAside/dashboardAside";
+import { Shell } from "../../providers/Shell";
 import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
 import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCampaignModal";
-import "./dashboard.css";
+import styles from './dashboard.module.css';
+import { AsideWrapper } from "@/components/AsideWrapper/AsideWrapper";
+import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
 
 export default async function DashboardLayout({
   children,
@@ -14,21 +15,22 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+  const campaigns = await getUserCampaigns()
 
   if (!session) {
     redirect("/login");
   }
 
   return (
-    <SessionProviderWrapper session={session}>
-      <div className="dashboard-wrapper">
-        <DashboardAside />
-        <div className="dashboard-content">
+    <Shell session={session}>
+      <div className={styles.dashboardWrapper}>
+        <AsideWrapper campaigns={campaigns} />
+        <div className={styles.dashboardContent}>
           <DashboardHeader />
-          <main>{children}</main>
+          <main className={styles.mainWrapper}>{children}</main>
         </div>
         <CreateCampaignModal />
       </div>
-    </SessionProviderWrapper>
+    </Shell>
   );
 }

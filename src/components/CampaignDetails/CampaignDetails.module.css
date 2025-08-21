@@ -1,0 +1,75 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--silver-dark);
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2rem 5rem;
+    gap: 1rem;
+    border: 2px solid var(--crimson-dark);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--crimson-dark);
+    margin-bottom: 1rem;
+}
+
+.header h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--crimson-dark);
+    padding-bottom: 0.5rem;
+}
+
+.description {
+    border: 1px solid var(--crimson-dark);
+    border-radius: 5px;
+    color: var(--crimson);
+    height: auto;
+    min-height: 8rem;
+    background-color: var(--silver);
+    width: 80%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.cardsWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--crimson-dark);
+    border-radius: 5px;
+    padding: 0.5rem;
+    min-width: 12rem;
+    width: auto;
+    min-height: 6rem;
+    height: auto;
+    color: var(--crimson);
+}
+
+.card span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card p {
+    font-style: italic;
+}
+
+.createdAt {
+    align-self: flex-end;
+    font-size: 0.7rem;
+    margin-top: auto;
+    color: var(--crimson-dark);
+}

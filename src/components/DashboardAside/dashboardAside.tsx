@@ -2,15 +2,15 @@ import Image from "next/image";
 import styles from "./dashboardAside.module.css";
 import { SidebarCampaignMenu } from "../SidebarCampaignMenu/sidebarCampaignMenu";
 import { UserInfo } from "../SidebarUserInfo/sidebarUserInfo";
-import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
 import { Settings } from "lucide-react";
 import { LogoutButton } from "../LogoutButton/logoutButton";
+import { CollapseAsideButton } from "../CollapseAsideButton/CollapseAsideButton";
+import type { Campaign } from "@/generated/prisma";
 
-export async function DashboardAside () {
-  const campaigns = await getUserCampaigns()
+export function DashboardAside ({campaigns}: {campaigns: Campaign[]}) {
 
   return (
-    <aside className={styles.aside}>
+    <>
       <div className={styles.titleBox}>
         <Image
           src="/logo.png"
@@ -23,6 +23,7 @@ export async function DashboardAside () {
           <p className={styles.subtitle}>Your Chronicles</p>
         </div>
       </div>
+      <CollapseAsideButton/>
       <UserInfo />
       <div>
         <SidebarCampaignMenu campaigns={campaigns} />
@@ -34,6 +35,6 @@ export async function DashboardAside () {
         </button>
         <LogoutButton className={styles.footerButton}/>
       </div>
-    </aside>
+    </>
   );
 };
