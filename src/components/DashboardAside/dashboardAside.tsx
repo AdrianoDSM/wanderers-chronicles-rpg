@@ -4,7 +4,6 @@ import { SidebarCampaignMenu } from "../SidebarCampaignMenu/sidebarCampaignMenu"
 import { UserInfo } from "../SidebarUserInfo/sidebarUserInfo";
 import { Settings } from "lucide-react";
 import { LogoutButton } from "../LogoutButton/logoutButton";
-import { CollapseAsideButton } from "../CollapseAsideButton/CollapseAsideButton";
 import type { Campaign } from "@/generated/prisma";
 
 export function DashboardAside ({campaigns}: {campaigns: Campaign[]}) {
@@ -23,11 +22,8 @@ export function DashboardAside ({campaigns}: {campaigns: Campaign[]}) {
           <p className={styles.subtitle}>Your Chronicles</p>
         </div>
       </div>
-      <CollapseAsideButton/>
       <UserInfo />
-      <div>
         <SidebarCampaignMenu campaigns={campaigns} />
-      </div>
       <div className={styles.footer}>
         <button className={styles.footerButton}>
         <Settings/>

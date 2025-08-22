@@ -8,6 +8,7 @@ import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCamp
 import styles from './dashboard.module.css';
 import { AsideWrapper } from "@/components/AsideWrapper/AsideWrapper";
 import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
+import { CollapseAsideButtonWrapper } from "@/components/CollapseAsideButton/CollapseAsideButtonWrapper";
 
 export default async function DashboardLayout({
   children,
@@ -26,6 +27,7 @@ export default async function DashboardLayout({
       <div className={styles.dashboardWrapper}>
         <AsideWrapper campaigns={campaigns} />
         <div className={styles.dashboardContent}>
+          <CollapseAsideButtonWrapper/>
           <DashboardHeader />
           <main className={styles.mainWrapper}>{children}</main>
         </div>

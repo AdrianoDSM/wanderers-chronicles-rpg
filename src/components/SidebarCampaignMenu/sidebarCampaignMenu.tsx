@@ -33,7 +33,6 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
               size={20}
             />
             Minhas Campanhas
-            <div></div>
             <span
               role="button"
               aria-label="Nova Campanha"

@@ -1,0 +1,20 @@
+.wrapperButton {
+  position: absolute;
+  align-self: flex-start;
+  margin-top: 1rem;
+  margin-left: 0.25rem;
+  z-index: 999;
+  background-color: var(--crimson);
+  color: var(--silver);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: margin-left 0.3s ease;
+}
+
+.wrapperButton:hover {
+  background-color: var(--crimson-dark);
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+  transform: translateY(-1px);
+}

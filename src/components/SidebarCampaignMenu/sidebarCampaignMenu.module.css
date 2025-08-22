@@ -130,3 +130,119 @@
   font-weight: 600;
   padding: 0.75rem 1rem;
 }
+
+@media (max-width: 910px) {
+  .campaignMenuWrapper {
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .dashboardButton {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    height: 3.2rem;
+    font-size: 1rem;
+    padding-left: 0;
+  }
+
+  .campaignSection {
+    width: 90%;
+    align-items: center;
+
+    max-height: 300px;
+  }
+
+  .dropdownHeader {
+    height: 3.2rem;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .dropdownButton {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    padding: 0.75rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+  }
+
+  .plusButton {
+    font-size: 1.2rem;
+  }
+
+  .dropdownCampaign {
+    width: 100%;
+    padding: 0.5rem;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--crimson) var(--silver-dark);
+  }
+
+  .dropdownCampaign::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdownCampaign::-webkit-scrollbar-track {
+    background: var(--silver-dark);
+  }
+
+  .dropdownCampaign::-webkit-scrollbar-thumb {
+    background-color: var(--crimson);
+    border-radius: 3px;
+  }
+
+  .campaignButtonContainer {
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+
+  .campaignButton {
+    font-size: 0.95rem;
+    height: 3rem;
+    padding: 0 1rem;
+  }
+
+  .emptyCampaign {
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  .createCampaignButton {
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}
+
+
+@media (max-width: 400px) {
+
+  .dashboardButton {
+    height: 2rem;
+    width: 80%;
+    padding-left: 0;
+  }
+
+  .dropdownHeader {
+    height: 2rem;
+    width: 89%;
+  }
+
+  .dropdownCampaign {
+    width: 90%;
+  }
+
+  .campaignSection {
+    max-height: 175px;
+  }
+}

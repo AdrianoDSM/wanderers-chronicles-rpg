@@ -8,12 +8,14 @@
 }
 
 .container {
-    width: 84vw;
-    padding: 0 3rem;
+    width: 100%;
+    padding: 1rem 4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;    
 }
 
 .titleContainer {
@@ -25,6 +27,7 @@
 .title {
     color: var(--crimson-dark);
     font-weight: 900;
+    font-size: 1.8rem;
 }
 
 .subtitle {
@@ -35,6 +38,7 @@
 .headerButtons {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .createCampaignButton {
@@ -72,4 +76,47 @@
     background-color: var(--crimson);
     transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(220, 20, 60, 0.5);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    display: none;
+  }
+
+  .headerButtons {
+    width: auto;
+    justify-content: flex-start;
+  }
+
+  .createCampaignButton {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .profileButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 464px) {
+    .title {
+        display: none;
+    }
+
+    .headerButtons {
+        gap: 3rem;
+    }
 }

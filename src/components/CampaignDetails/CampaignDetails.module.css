@@ -3,7 +3,8 @@
     flex-direction: column;
     background-color: var(--silver-dark);
     border-radius: 5px;
-    width: 80%;
+    width: 100%;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem 5rem;
     gap: 1rem;
@@ -38,9 +39,10 @@
 
 .cardsWrapper {
     display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
 }
 
 .card {
@@ -51,11 +53,11 @@
     border: 1px solid var(--crimson-dark);
     border-radius: 5px;
     padding: 0.5rem;
-    min-width: 12rem;
-    width: auto;
-    min-height: 6rem;
+    min-height: 4rem;
     height: auto;
     color: var(--crimson);
+    flex: 1 1 200px;
+    max-width: 250px;
 }
 
 .card span {
@@ -72,4 +74,34 @@
     font-size: 0.7rem;
     margin-top: auto;
     color: var(--crimson-dark);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .description {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .cardsWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .header {
+    gap: 0.5rem;
+    padding: 0 2rem;
+  }
+
+  .createdAt {
+    align-self: center;
+    margin-top: 1rem;
+  }
 }

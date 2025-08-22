@@ -1,0 +1,7 @@
+.asideExpanded .wrapperButton {
+  margin-left: 16vw; /* ou 16vw */
+}
+
+.asideCollapsed .wrapperButton {
+  margin-left: 0;
+}

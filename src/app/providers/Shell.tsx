@@ -5,7 +5,7 @@ import type { Session } from "next-auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { useUIStore } from "@/store/uiStore";
-import styles from "./shell.module.css";
+import styles from "./Shell.module.css";
 
 interface ShellProps {
   children: React.ReactNode;
