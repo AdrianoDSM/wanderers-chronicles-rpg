@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { prisma } from "../prisma";
 
@@ -11,6 +11,7 @@ export async function getUserCampaigns() {
     select: {
       id: true,
       name: true,
+      slug: true,
       createdAt: true,
       updatedAt: true,
       description: true,

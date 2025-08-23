@@ -125,10 +125,13 @@
   background-color: var(--silver-dark);
   border-radius: 5px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: var(--crimson);
   gap: 5.7rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.75rem 1rem;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 910px) {

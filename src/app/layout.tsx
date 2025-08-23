@@ -4,7 +4,7 @@ import { Playfair_Display, Lora } from "next/font/google";
 import "./globals.css";
 import SessionSync from "@/components/SessionSync";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { SessionProviderWrapper } from "./providers/SessionProviderWrapper";
 
 const playfair = Playfair_Display({

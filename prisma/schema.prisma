@@ -12,26 +12,27 @@ model User {
   id        String   @id @default(cuid())
   name      String
   email     String   @unique
-  password  String   
+  password  String
   createdAt DateTime @default(now())
 
   campaigns Campaign[]
 }
 
 model Campaign {
-  id        String   @id @default(cuid())
-  name      String
+  id          String         @id @default(cuid())
+  name        String
+  slug        String        @unique
   description String?
-  status    CampaignStatus @default(ACTIVE)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  status      CampaignStatus @default(ACTIVE)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 
-  ownerId   String
-  owner     User     @relation(fields: [ownerId], references: [id])
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
 
-  notes     Note[]
-  sessions  Session[]
-  characters  Character[]
+  notes      Note[]
+  sessions   Session[]
+  characters Character[]
 }
 
 model Note {
@@ -41,47 +42,47 @@ model Note {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  campaignId  String
-  campaign    Campaign  @relation(fields: [campaignId], references: [id])
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
 
-  sessionId String?   @unique
-  session    Session?  @relation(fields: [sessionId], references: [id])
+  sessionId String?  @unique
+  session   Session? @relation(fields: [sessionId], references: [id])
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  title     String
+  id          String   @id @default(cuid())
+  title       String
   sessionDate DateTime
-
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  campaignId  String
-  campaign    Campaign  @relation(fields: [campaignId], references: [id])
-
-  note    Note?
-}
-
-model Character {
-  id        String   @id @default(cuid())
-  name      String
-  description String?
-  type      CharacterType
-  status    CharacterStatus @default(ALIVE)
-  imageUrl  String
-
-  strength  Int
-  dexterity Int
-  constitution Int
-  intelligence Int
-  wisdom    Int
-  charisma  Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  campaignId  String
-  campaign    Campaign  @relation(fields: [campaignId], references: [id])
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+
+  note Note?
+}
+
+model Character {
+  id          String          @id @default(cuid())
+  name        String
+  description String?
+  type        CharacterType
+  status      CharacterStatus @default(ALIVE)
+  imageUrl    String
+
+  strength     Int
+  dexterity    Int
+  constitution Int
+  intelligence Int
+  wisdom       Int
+  charisma     Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
 }
 
 enum CampaignStatus {

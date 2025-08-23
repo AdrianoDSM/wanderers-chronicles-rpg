@@ -9,6 +9,7 @@ import styles from "./sidebarCampaignMenu.module.css";
 type Campaign = {
   id: string;
   name: string;
+  slug: string;
 };
 
 export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
@@ -55,7 +56,7 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
                 <li key={campaign.id}>
                   <div className={styles.campaignButtonContainer}>
                   <Link
-                    href={`/campaign/${campaign.name}`}
+                    href={`/campaigns/${campaign.slug}`}
                     className={styles.campaignButton}
                   >
                     {campaign.name}

@@ -1,11 +1,10 @@
 import { getServerSession } from "next-auth";
 import type { ReactNode } from "react";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
-import { Shell } from "../../providers/Shell";
-import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
+import { Shell } from "../providers/Shell";
 import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCampaignModal";
-import styles from './dashboard.module.css';
+import styles from './dashboard/dashboard.module.css'
 import { AsideWrapper } from "@/components/AsideWrapper/AsideWrapper";
 import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
 import { CollapseAsideButtonWrapper } from "@/components/CollapseAsideButton/CollapseAsideButtonWrapper";
@@ -28,7 +27,6 @@ export default async function DashboardLayout({
         <AsideWrapper campaigns={campaigns} />
         <div className={styles.dashboardContent}>
           <CollapseAsideButtonWrapper/>
-          <DashboardHeader />
           <main className={styles.mainWrapper}>{children}</main>
         </div>
         <CreateCampaignModal />

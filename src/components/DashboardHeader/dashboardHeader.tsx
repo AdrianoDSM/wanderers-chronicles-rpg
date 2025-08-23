@@ -9,7 +9,7 @@ export const DashboardHeader = () => {
     const { data: session} = useSession();
       const userName = session?.user?.name || "Usuário";
     return (
-        <section className={styles.header}>
+        <header className={styles.header}>
             <div className={styles.container}>
                 <div className={styles.titleContainer}>
                     <h1 className={styles.title}>Dashboard Principal</h1>
@@ -20,6 +20,6 @@ export const DashboardHeader = () => {
                     <button className={styles.profileButton}>{userName.charAt(0)}</button>
                 </div>
             </div>
-        </section>
+        </header>
     )
 }
