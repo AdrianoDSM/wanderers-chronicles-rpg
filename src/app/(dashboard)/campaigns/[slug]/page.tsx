@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+// import styles from './campaign.module.css'
+import CampaignGrid from "@/components/CampaignGrid/CampaignGrid";
 
 interface Props {
   params: { slug: string };
@@ -18,6 +20,9 @@ export default async function CampaignsPage({ params }: Props) {
       status: true,
       createdAt: true,
       slug: true,
+      characters: true,
+      notes: true,
+      sessions: true,
     },
   });
 
@@ -26,21 +31,6 @@ export default async function CampaignsPage({ params }: Props) {
   }
 
   return (
-    <section style={{ padding: "2rem" }}>
-      <h2 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
-        {campaign.name}
-      </h2>
-      <p style={{ marginBottom: "1rem" }}>
-        <strong>Status:</strong> {campaign.status}
-      </p>
-      {campaign.description && (
-        <p style={{ marginBottom: "1rem" }}>
-          <strong>Descrição:</strong> {campaign.description}
-        </p>
-      )}
-      <p style={{ fontSize: "0.9rem", color: "#888" }}>
-        Criada em: {new Date(campaign.createdAt).toLocaleDateString("pt-BR")}
-      </p>
-    </section>
+    <CampaignGrid campaign={campaign}/>
   );
 }

@@ -1,0 +1,114 @@
+.summaryContainer {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: var(--graphite-light);
+    border: 2px solid var(--crimson-dark);
+    display: flex;
+    border-radius: 20px;
+    gap: 1rem;
+}
+
+.summaryContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+}
+
+.titleDiv {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--crimson-dark);
+}
+
+.title {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.status {
+    padding: 1rem;
+    color: var(--graphite-light);
+    font-weight: 600;
+    background-color: var(--crimson-dark);
+    border-radius: 50px;
+}
+
+.infos {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--graphite);
+    width: 14rem;
+    height: 4rem;
+    border-radius: 5px;
+    border: 1px solid var(--crimson-dark);
+    letter-spacing: 1.5px;
+    color: var(--crimson);
+}
+
+.session {
+    display: flex;
+    width: 100%;
+    background-color: var(--graphite);
+    border-radius: 5px;
+    border: 1px solid var(--silver-dark);
+    padding: 2rem;
+    gap: 3rem;
+}
+
+.lastSession {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nextSession {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.session span {
+    letter-spacing: 1.5px;
+}
+
+.session strong {
+    color: var(--crimson);
+    font-size: 1.5rem;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--graphite);
+    height: 100%;
+    width: 50%;
+    border: 1px solid var(--crimson-dark);
+    border-radius: 5px;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.description span {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--crimson-dark);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--crimson-dark);
+    font-weight: 700;
+}
+
+.description p {
+    color: var(--crimson);
+}

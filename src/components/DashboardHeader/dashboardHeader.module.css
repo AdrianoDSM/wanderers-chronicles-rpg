@@ -2,9 +2,11 @@
     padding: 0;
     margin: 0;
     height: 12vh;
+    min-height: 100px;
     display: flex;
     flex-direction: row;
     border-bottom: 2px solid var(--silver-dark);
+    background-color: var(--graphite);
 }
 
 .container {

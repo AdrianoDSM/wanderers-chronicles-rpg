@@ -7,13 +7,13 @@ import type { CharacterProps } from "./Character";
 export interface CampaignProps {
   id: string;
   name: string;
-  description?: string;
+  description?: string | null;
   status: CampaignStatus;
   createdAt: string;
   updatedAt: string;
   ownerId: string;
   owner: UserProps;
-  notes?: NoteProps[];
-  sessions?: SessionProps[];
-  characters?: CharacterProps[];
+  notes?: NoteProps[] | null;
+  sessions?: SessionProps[] | null;
+  characters?: CharacterProps[] | null;
 }

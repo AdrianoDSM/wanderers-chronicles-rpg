@@ -5,8 +5,8 @@
     margin: 0 auto;
     position: relative;
     padding: 1rem 5rem;
-    background-color: var(--silver-dark);
-    border-radius: 5px;
+    background-color: var(--graphite-light);
+    border-radius: 20px;
     border: 2px solid var(--crimson-dark);
 }
 
@@ -17,7 +17,7 @@
     margin: 0 auto;
     position: relative;
     padding: 1rem 5rem;
-    background-color: var(--silver-dark);
+    background-color: var(--graphite-light);
     color: var(--crimson-dark);
     border-radius: 5px;
     border: 2px solid var(--crimson-dark);

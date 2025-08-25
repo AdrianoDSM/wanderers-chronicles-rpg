@@ -47,7 +47,7 @@ export function CampaignCard({
       </div>
       <div className={styles.subtitleDiv}>
       <p>{campaign.sessions?.length || 0} Sessões</p>
-      <p>{campaign.characters?.length || 0} Personagens</p>
+      <p>{campaign.characters?.length || 0} Jogadores</p>
       </div>
       </div>
       <small className={styles.createdAt}>
