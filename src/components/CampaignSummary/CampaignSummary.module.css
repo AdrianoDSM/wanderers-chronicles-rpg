@@ -110,5 +110,6 @@
 }
 
 .description p {
-    color: var(--crimson);
+    padding: 0.5rem;
+    color: var(--silver);
 }

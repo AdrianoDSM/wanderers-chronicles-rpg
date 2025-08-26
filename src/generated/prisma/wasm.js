@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.8.2
- * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+ * Prisma Client JS version: 6.14.0
+ * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
  */
 Prisma.prismaVersion = {
-  client: "6.8.2",
-  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
+  client: "6.14.0",
+  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -139,20 +139,30 @@ exports.Prisma.CampaignScalarFieldEnum = {
   ownerId: 'ownerId'
 };
 
+exports.Prisma.PlayerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  campaignId: 'campaignId'
+};
+
 exports.Prisma.NoteScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
+  type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   campaignId: 'campaignId',
-  sessionId: 'sessionId'
+  characterId: 'characterId'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   title: 'title',
   sessionDate: 'sessionDate',
+  duration: 'duration',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   campaignId: 'campaignId'
@@ -165,14 +175,9 @@ exports.Prisma.CharacterScalarFieldEnum = {
   type: 'type',
   status: 'status',
   imageUrl: 'imageUrl',
-  strength: 'strength',
-  dexterity: 'dexterity',
-  constitution: 'constitution',
-  intelligence: 'intelligence',
-  wisdom: 'wisdom',
-  charisma: 'charisma',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  playerId: 'playerId',
   campaignId: 'campaignId'
 };
 
@@ -196,6 +201,12 @@ exports.CampaignStatus = exports.$Enums.CampaignStatus = {
   FINISHED: 'FINISHED'
 };
 
+exports.NoteType = exports.$Enums.NoteType = {
+  PLANNING: 'PLANNING',
+  LORE: 'LORE',
+  NPC: 'NPC'
+};
+
 exports.CharacterType = exports.$Enums.CharacterType = {
   PC: 'PC',
   NPC: 'NPC'
@@ -210,6 +221,7 @@ exports.CharacterStatus = exports.$Enums.CharacterStatus = {
 exports.Prisma.ModelName = {
   User: 'User',
   Campaign: 'Campaign',
+  Player: 'Player',
   Note: 'Note',
   Session: 'Session',
   Character: 'Character'

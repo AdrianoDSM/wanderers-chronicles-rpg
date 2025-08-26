@@ -42,11 +42,11 @@ export default function CampaignSummary({campaign}: {campaign: CampaignProps}) {
         <div className={styles.session}>
             <div className={styles.lastSession}>
                 <span>Última sessão:</span>
-                <strong>1</strong>
+                <strong>18/12/2025</strong>
             </div>
             <div className={styles.nextSession}>
                 <span>Próxima sessão:</span>
-                <strong>2</strong>
+                <strong>25/12/2025</strong>
             </div>
         </div>
       </div>

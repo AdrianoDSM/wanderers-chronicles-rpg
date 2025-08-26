@@ -21,7 +21,7 @@ model User {
 model Campaign {
   id          String         @id @default(cuid())
   name        String
-  slug        String        @unique
+  slug        String         @unique
   description String?
   status      CampaignStatus @default(ACTIVE)
   createdAt   DateTime       @default(now())
@@ -30,8 +30,20 @@ model Campaign {
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id])
 
+  players    Player[]
   notes      Note[]
   sessions   Session[]
+  characters Character[]
+}
+
+model Player {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+
   characters Character[]
 }
 
@@ -39,28 +51,29 @@ model Note {
   id        String   @id @default(cuid())
   title     String?
   content   String
+  type      NoteType @default(PLANNING)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   campaignId String
   campaign   Campaign @relation(fields: [campaignId], references: [id])
 
-  sessionId String?  @unique
-  session   Session? @relation(fields: [sessionId], references: [id])
+  characterId String?
+  character   Character? @relation(fields: [characterId], references: [id])
 }
 
 model Session {
   id          String   @id @default(cuid())
   title       String
   sessionDate DateTime
+  duration    Int
+  description String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   campaignId String
   campaign   Campaign @relation(fields: [campaignId], references: [id])
-
-  note Note?
 }
 
 model Character {
@@ -71,15 +84,13 @@ model Character {
   status      CharacterStatus @default(ALIVE)
   imageUrl    String
 
-  strength     Int
-  dexterity    Int
-  constitution Int
-  intelligence Int
-  wisdom       Int
-  charisma     Int
+  notes Note[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  playerId String?
+  player   Player? @relation(fields: [playerId], references: [id])
 
   campaignId String
   campaign   Campaign @relation(fields: [campaignId], references: [id])
@@ -99,5 +110,11 @@ enum CharacterStatus {
 
 enum CharacterType {
   PC
+  NPC
+}
+
+enum NoteType {
+  PLANNING
+  LORE
   NPC
 }

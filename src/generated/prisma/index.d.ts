@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Campaign = $Result.DefaultSelection<Prisma.$CampaignPayload>
 /**
+ * Model Player
+ * 
+ */
+export type Player = $Result.DefaultSelection<Prisma.$PlayerPayload>
+/**
  * Model Note
  * 
  */
@@ -68,6 +73,15 @@ export const CharacterType: {
 
 export type CharacterType = (typeof CharacterType)[keyof typeof CharacterType]
 
+
+export const NoteType: {
+  PLANNING: 'PLANNING',
+  LORE: 'LORE',
+  NPC: 'NPC'
+};
+
+export type NoteType = (typeof NoteType)[keyof typeof NoteType]
+
 }
 
 export type CampaignStatus = $Enums.CampaignStatus
@@ -81,6 +95,10 @@ export const CharacterStatus: typeof $Enums.CharacterStatus
 export type CharacterType = $Enums.CharacterType
 
 export const CharacterType: typeof $Enums.CharacterType
+
+export type NoteType = $Enums.NoteType
+
+export const NoteType: typeof $Enums.NoteType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -98,7 +116,7 @@ export const CharacterType: typeof $Enums.CharacterType
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -130,13 +148,6 @@ export class PrismaClient<
    * Disconnect from the database
    */
   $disconnect(): $Utils.JsPromise<void>;
-
-  /**
-   * Add a middleware
-   * @deprecated since 4.16.0. For new code, prefer client extensions instead.
-   * @see https://pris.ly/d/extensions
-   */
-  $use(cb: Prisma.Middleware): void
 
 /**
    * Executes a prepared raw query and returns the number of affected rows.
@@ -228,6 +239,16 @@ export class PrismaClient<
   get campaign(): Prisma.CampaignDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.player`: Exposes CRUD operations for the **Player** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Players
+    * const players = await prisma.player.findMany()
+    * ```
+    */
+  get player(): Prisma.PlayerDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.note`: Exposes CRUD operations for the **Note** model.
     * Example usage:
     * ```ts
@@ -314,8 +335,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.14.0
+   * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
    */
   export type PrismaVersion = {
     client: string
@@ -698,6 +719,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Campaign: 'Campaign',
+    Player: 'Player',
     Note: 'Note',
     Session: 'Session',
     Character: 'Character'
@@ -719,7 +741,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "campaign" | "note" | "session" | "character"
+      modelProps: "user" | "campaign" | "player" | "note" | "session" | "character"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -868,6 +890,80 @@ export namespace Prisma {
           count: {
             args: Prisma.CampaignCountArgs<ExtArgs>
             result: $Utils.Optional<CampaignCountAggregateOutputType> | number
+          }
+        }
+      }
+      Player: {
+        payload: Prisma.$PlayerPayload<ExtArgs>
+        fields: Prisma.PlayerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          findMany: {
+            args: Prisma.PlayerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>[]
+          }
+          create: {
+            args: Prisma.PlayerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          createMany: {
+            args: Prisma.PlayerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          update: {
+            args: Prisma.PlayerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayer>
+          }
+          groupBy: {
+            args: Prisma.PlayerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerCountAggregateOutputType> | number
           }
         }
       }
@@ -1136,16 +1232,24 @@ export namespace Prisma {
     /**
      * @example
      * ```
-     * // Defaults to stdout
+     * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
      * 
-     * // Emit as events
+     * // Emit as events only
      * log: [
-     *   { emit: 'stdout', level: 'query' },
-     *   { emit: 'stdout', level: 'info' },
-     *   { emit: 'stdout', level: 'warn' }
-     *   { emit: 'stdout', level: 'error' }
+     *   { emit: 'event', level: 'query' },
+     *   { emit: 'event', level: 'info' },
+     *   { emit: 'event', level: 'warn' }
+     *   { emit: 'event', level: 'error' }
      * ]
+     * 
+     * / Emit as events and log to stdout
+     * og: [
+     *  { emit: 'stdout', level: 'query' },
+     *  { emit: 'stdout', level: 'info' },
+     *  { emit: 'stdout', level: 'warn' }
+     *  { emit: 'stdout', level: 'error' }
+     * 
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
@@ -1179,6 +1283,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     campaign?: CampaignOmit
+    player?: PlayerOmit
     note?: NoteOmit
     session?: SessionOmit
     character?: CharacterOmit
@@ -1191,10 +1296,15 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
-  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
-    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-    : never
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+
+  export type GetLogType<T> = CheckIsLogLevel<
+    T extends LogDefinition ? T['level'] : T
+  >;
+
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[number]>
+    : never;
 
   export type QueryEvent = {
     timestamp: Date
@@ -1234,25 +1344,6 @@ export namespace Prisma {
     | 'runCommandRaw'
     | 'findRaw'
     | 'groupBy'
-
-  /**
-   * These options are being passed into the middleware as "params"
-   */
-  export type MiddlewareParams = {
-    model?: ModelName
-    action: PrismaAction
-    args: any
-    dataPath: string[]
-    runInTransaction: boolean
-  }
-
-  /**
-   * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
-   */
-  export type Middleware<T = any> = (
-    params: MiddlewareParams,
-    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
-  ) => $Utils.JsPromise<T>
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -1307,12 +1398,14 @@ export namespace Prisma {
    */
 
   export type CampaignCountOutputType = {
+    players: number
     notes: number
     sessions: number
     characters: number
   }
 
   export type CampaignCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    players?: boolean | CampaignCountOutputTypeCountPlayersArgs
     notes?: boolean | CampaignCountOutputTypeCountNotesArgs
     sessions?: boolean | CampaignCountOutputTypeCountSessionsArgs
     characters?: boolean | CampaignCountOutputTypeCountCharactersArgs
@@ -1327,6 +1420,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the CampaignCountOutputType
      */
     select?: CampaignCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CampaignCountOutputType without action
+   */
+  export type CampaignCountOutputTypeCountPlayersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerWhereInput
   }
 
   /**
@@ -1348,6 +1448,68 @@ export namespace Prisma {
    */
   export type CampaignCountOutputTypeCountCharactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CharacterWhereInput
+  }
+
+
+  /**
+   * Count Type PlayerCountOutputType
+   */
+
+  export type PlayerCountOutputType = {
+    characters: number
+  }
+
+  export type PlayerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    characters?: boolean | PlayerCountOutputTypeCountCharactersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerCountOutputType
+     */
+    select?: PlayerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeCountCharactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CharacterWhereInput
+  }
+
+
+  /**
+   * Count Type CharacterCountOutputType
+   */
+
+  export type CharacterCountOutputType = {
+    notes: number
+  }
+
+  export type CharacterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    notes?: boolean | CharacterCountOutputTypeCountNotesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CharacterCountOutputType without action
+   */
+  export type CharacterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CharacterCountOutputType
+     */
+    select?: CharacterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CharacterCountOutputType without action
+   */
+  export type CharacterCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteWhereInput
   }
 
 
@@ -2614,6 +2776,7 @@ export namespace Prisma {
     updatedAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    players?: boolean | Campaign$playersArgs<ExtArgs>
     notes?: boolean | Campaign$notesArgs<ExtArgs>
     sessions?: boolean | Campaign$sessionsArgs<ExtArgs>
     characters?: boolean | Campaign$charactersArgs<ExtArgs>
@@ -2658,6 +2821,7 @@ export namespace Prisma {
   export type CampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "status" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["campaign"]>
   export type CampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    players?: boolean | Campaign$playersArgs<ExtArgs>
     notes?: boolean | Campaign$notesArgs<ExtArgs>
     sessions?: boolean | Campaign$sessionsArgs<ExtArgs>
     characters?: boolean | Campaign$charactersArgs<ExtArgs>
@@ -2674,6 +2838,7 @@ export namespace Prisma {
     name: "Campaign"
     objects: {
       owner: Prisma.$UserPayload<ExtArgs>
+      players: Prisma.$PlayerPayload<ExtArgs>[]
       notes: Prisma.$NotePayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       characters: Prisma.$CharacterPayload<ExtArgs>[]
@@ -3082,6 +3247,7 @@ export namespace Prisma {
   export interface Prisma__CampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    players<T extends Campaign$playersArgs<ExtArgs> = {}>(args?: Subset<T, Campaign$playersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notes<T extends Campaign$notesArgs<ExtArgs> = {}>(args?: Subset<T, Campaign$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends Campaign$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Campaign$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     characters<T extends Campaign$charactersArgs<ExtArgs> = {}>(args?: Subset<T, Campaign$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3518,6 +3684,30 @@ export namespace Prisma {
   }
 
   /**
+   * Campaign.players
+   */
+  export type Campaign$playersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    where?: PlayerWhereInput
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    cursor?: PlayerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
    * Campaign.notes
    */
   export type Campaign$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3609,6 +3799,1081 @@ export namespace Prisma {
 
 
   /**
+   * Model Player
+   */
+
+  export type AggregatePlayer = {
+    _count: PlayerCountAggregateOutputType | null
+    _min: PlayerMinAggregateOutputType | null
+    _max: PlayerMaxAggregateOutputType | null
+  }
+
+  export type PlayerMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    campaignId: string | null
+  }
+
+  export type PlayerMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    campaignId: string | null
+  }
+
+  export type PlayerCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    campaignId: number
+    _all: number
+  }
+
+
+  export type PlayerMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    campaignId?: true
+  }
+
+  export type PlayerMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    campaignId?: true
+  }
+
+  export type PlayerCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    campaignId?: true
+    _all?: true
+  }
+
+  export type PlayerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Player to aggregate.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Players
+    **/
+    _count?: true | PlayerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerMaxAggregateInputType
+  }
+
+  export type GetPlayerAggregateType<T extends PlayerAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayer[P]>
+      : GetScalarType<T[P], AggregatePlayer[P]>
+  }
+
+
+
+
+  export type PlayerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerWhereInput
+    orderBy?: PlayerOrderByWithAggregationInput | PlayerOrderByWithAggregationInput[]
+    by: PlayerScalarFieldEnum[] | PlayerScalarFieldEnum
+    having?: PlayerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerCountAggregateInputType | true
+    _min?: PlayerMinAggregateInputType
+    _max?: PlayerMaxAggregateInputType
+  }
+
+  export type PlayerGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    campaignId: string
+    _count: PlayerCountAggregateOutputType | null
+    _min: PlayerMinAggregateOutputType | null
+    _max: PlayerMaxAggregateOutputType | null
+  }
+
+  type GetPlayerGroupByPayload<T extends PlayerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    campaignId?: boolean
+    campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+    characters?: boolean | Player$charactersArgs<ExtArgs>
+    _count?: boolean | PlayerCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["player"]>
+
+  export type PlayerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    campaignId?: boolean
+    campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["player"]>
+
+  export type PlayerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    campaignId?: boolean
+    campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["player"]>
+
+  export type PlayerSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    campaignId?: boolean
+  }
+
+  export type PlayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "campaignId", ExtArgs["result"]["player"]>
+  export type PlayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+    characters?: boolean | Player$charactersArgs<ExtArgs>
+    _count?: boolean | PlayerCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PlayerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+  }
+  export type PlayerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+  }
+
+  export type $PlayerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Player"
+    objects: {
+      campaign: Prisma.$CampaignPayload<ExtArgs>
+      characters: Prisma.$CharacterPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      campaignId: string
+    }, ExtArgs["result"]["player"]>
+    composites: {}
+  }
+
+  type PlayerGetPayload<S extends boolean | null | undefined | PlayerDefaultArgs> = $Result.GetResult<Prisma.$PlayerPayload, S>
+
+  type PlayerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerCountAggregateInputType | true
+    }
+
+  export interface PlayerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Player'], meta: { name: 'Player' } }
+    /**
+     * Find zero or one Player that matches the filter.
+     * @param {PlayerFindUniqueArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerFindUniqueArgs>(args: SelectSubset<T, PlayerFindUniqueArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Player that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerFindUniqueOrThrowArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Player that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerFindFirstArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerFindFirstArgs>(args?: SelectSubset<T, PlayerFindFirstArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Player that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerFindFirstOrThrowArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Players that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Players
+     * const players = await prisma.player.findMany()
+     * 
+     * // Get first 10 Players
+     * const players = await prisma.player.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const playerWithIdOnly = await prisma.player.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlayerFindManyArgs>(args?: SelectSubset<T, PlayerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Player.
+     * @param {PlayerCreateArgs} args - Arguments to create a Player.
+     * @example
+     * // Create one Player
+     * const Player = await prisma.player.create({
+     *   data: {
+     *     // ... data to create a Player
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerCreateArgs>(args: SelectSubset<T, PlayerCreateArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Players.
+     * @param {PlayerCreateManyArgs} args - Arguments to create many Players.
+     * @example
+     * // Create many Players
+     * const player = await prisma.player.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerCreateManyArgs>(args?: SelectSubset<T, PlayerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Players and returns the data saved in the database.
+     * @param {PlayerCreateManyAndReturnArgs} args - Arguments to create many Players.
+     * @example
+     * // Create many Players
+     * const player = await prisma.player.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Players and only return the `id`
+     * const playerWithIdOnly = await prisma.player.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Player.
+     * @param {PlayerDeleteArgs} args - Arguments to delete one Player.
+     * @example
+     * // Delete one Player
+     * const Player = await prisma.player.delete({
+     *   where: {
+     *     // ... filter to delete one Player
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerDeleteArgs>(args: SelectSubset<T, PlayerDeleteArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Player.
+     * @param {PlayerUpdateArgs} args - Arguments to update one Player.
+     * @example
+     * // Update one Player
+     * const player = await prisma.player.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerUpdateArgs>(args: SelectSubset<T, PlayerUpdateArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Players.
+     * @param {PlayerDeleteManyArgs} args - Arguments to filter Players to delete.
+     * @example
+     * // Delete a few Players
+     * const { count } = await prisma.player.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerDeleteManyArgs>(args?: SelectSubset<T, PlayerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Players.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Players
+     * const player = await prisma.player.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerUpdateManyArgs>(args: SelectSubset<T, PlayerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Players and returns the data updated in the database.
+     * @param {PlayerUpdateManyAndReturnArgs} args - Arguments to update many Players.
+     * @example
+     * // Update many Players
+     * const player = await prisma.player.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Players and only return the `id`
+     * const playerWithIdOnly = await prisma.player.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Player.
+     * @param {PlayerUpsertArgs} args - Arguments to update or create a Player.
+     * @example
+     * // Update or create a Player
+     * const player = await prisma.player.upsert({
+     *   create: {
+     *     // ... data to create a Player
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Player we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerUpsertArgs>(args: SelectSubset<T, PlayerUpsertArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Players.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerCountArgs} args - Arguments to filter Players to count.
+     * @example
+     * // Count the number of Players
+     * const count = await prisma.player.count({
+     *   where: {
+     *     // ... the filter for the Players we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerCountArgs>(
+      args?: Subset<T, PlayerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Player.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerAggregateArgs>(args: Subset<T, PlayerAggregateArgs>): Prisma.PrismaPromise<GetPlayerAggregateType<T>>
+
+    /**
+     * Group by Player.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Player model
+   */
+  readonly fields: PlayerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Player.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    characters<T extends Player$charactersArgs<ExtArgs> = {}>(args?: Subset<T, Player$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Player model
+   */
+  interface PlayerFieldRefs {
+    readonly id: FieldRef<"Player", 'String'>
+    readonly name: FieldRef<"Player", 'String'>
+    readonly createdAt: FieldRef<"Player", 'DateTime'>
+    readonly campaignId: FieldRef<"Player", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Player findUnique
+   */
+  export type PlayerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player findUniqueOrThrow
+   */
+  export type PlayerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player findFirst
+   */
+  export type PlayerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Players.
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Players.
+     */
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Player findFirstOrThrow
+   */
+  export type PlayerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Players.
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Players.
+     */
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Player findMany
+   */
+  export type PlayerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Players to fetch.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Players.
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Player create
+   */
+  export type PlayerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Player.
+     */
+    data: XOR<PlayerCreateInput, PlayerUncheckedCreateInput>
+  }
+
+  /**
+   * Player createMany
+   */
+  export type PlayerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Players.
+     */
+    data: PlayerCreateManyInput | PlayerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Player createManyAndReturn
+   */
+  export type PlayerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * The data used to create many Players.
+     */
+    data: PlayerCreateManyInput | PlayerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Player update
+   */
+  export type PlayerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Player.
+     */
+    data: XOR<PlayerUpdateInput, PlayerUncheckedUpdateInput>
+    /**
+     * Choose, which Player to update.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player updateMany
+   */
+  export type PlayerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Players.
+     */
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which Players to update
+     */
+    where?: PlayerWhereInput
+    /**
+     * Limit how many Players to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Player updateManyAndReturn
+   */
+  export type PlayerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * The data used to update Players.
+     */
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which Players to update
+     */
+    where?: PlayerWhereInput
+    /**
+     * Limit how many Players to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Player upsert
+   */
+  export type PlayerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Player to update in case it exists.
+     */
+    where: PlayerWhereUniqueInput
+    /**
+     * In case the Player found by the `where` argument doesn't exist, create a new Player with this data.
+     */
+    create: XOR<PlayerCreateInput, PlayerUncheckedCreateInput>
+    /**
+     * In case the Player was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerUpdateInput, PlayerUncheckedUpdateInput>
+  }
+
+  /**
+   * Player delete
+   */
+  export type PlayerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter which Player to delete.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player deleteMany
+   */
+  export type PlayerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Players to delete
+     */
+    where?: PlayerWhereInput
+    /**
+     * Limit how many Players to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Player.characters
+   */
+  export type Player$charactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    where?: CharacterWhereInput
+    orderBy?: CharacterOrderByWithRelationInput | CharacterOrderByWithRelationInput[]
+    cursor?: CharacterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CharacterScalarFieldEnum | CharacterScalarFieldEnum[]
+  }
+
+  /**
+   * Player without action
+   */
+  export type PlayerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Note
    */
 
@@ -3622,30 +4887,33 @@ export namespace Prisma {
     id: string | null
     title: string | null
     content: string | null
+    type: $Enums.NoteType | null
     createdAt: Date | null
     updatedAt: Date | null
     campaignId: string | null
-    sessionId: string | null
+    characterId: string | null
   }
 
   export type NoteMaxAggregateOutputType = {
     id: string | null
     title: string | null
     content: string | null
+    type: $Enums.NoteType | null
     createdAt: Date | null
     updatedAt: Date | null
     campaignId: string | null
-    sessionId: string | null
+    characterId: string | null
   }
 
   export type NoteCountAggregateOutputType = {
     id: number
     title: number
     content: number
+    type: number
     createdAt: number
     updatedAt: number
     campaignId: number
-    sessionId: number
+    characterId: number
     _all: number
   }
 
@@ -3654,30 +4922,33 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     campaignId?: true
-    sessionId?: true
+    characterId?: true
   }
 
   export type NoteMaxAggregateInputType = {
     id?: true
     title?: true
     content?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     campaignId?: true
-    sessionId?: true
+    characterId?: true
   }
 
   export type NoteCountAggregateInputType = {
     id?: true
     title?: true
     content?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     campaignId?: true
-    sessionId?: true
+    characterId?: true
     _all?: true
   }
 
@@ -3757,10 +5028,11 @@ export namespace Prisma {
     id: string
     title: string | null
     content: string
+    type: $Enums.NoteType
     createdAt: Date
     updatedAt: Date
     campaignId: string
-    sessionId: string | null
+    characterId: string | null
     _count: NoteCountAggregateOutputType | null
     _min: NoteMinAggregateOutputType | null
     _max: NoteMaxAggregateOutputType | null
@@ -3784,76 +5056,81 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
-    sessionId?: boolean
+    characterId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    session?: boolean | Note$sessionArgs<ExtArgs>
+    character?: boolean | Note$characterArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     content?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
-    sessionId?: boolean
+    characterId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    session?: boolean | Note$sessionArgs<ExtArgs>
+    character?: boolean | Note$characterArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     content?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
-    sessionId?: boolean
+    characterId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    session?: boolean | Note$sessionArgs<ExtArgs>
+    character?: boolean | Note$characterArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectScalar = {
     id?: boolean
     title?: boolean
     content?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
-    sessionId?: boolean
+    characterId?: boolean
   }
 
-  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "createdAt" | "updatedAt" | "campaignId" | "sessionId", ExtArgs["result"]["note"]>
+  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "type" | "createdAt" | "updatedAt" | "campaignId" | "characterId", ExtArgs["result"]["note"]>
   export type NoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    session?: boolean | Note$sessionArgs<ExtArgs>
+    character?: boolean | Note$characterArgs<ExtArgs>
   }
   export type NoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    session?: boolean | Note$sessionArgs<ExtArgs>
+    character?: boolean | Note$characterArgs<ExtArgs>
   }
   export type NoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    session?: boolean | Note$sessionArgs<ExtArgs>
+    character?: boolean | Note$characterArgs<ExtArgs>
   }
 
   export type $NotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Note"
     objects: {
       campaign: Prisma.$CampaignPayload<ExtArgs>
-      session: Prisma.$SessionPayload<ExtArgs> | null
+      character: Prisma.$CharacterPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string | null
       content: string
+      type: $Enums.NoteType
       createdAt: Date
       updatedAt: Date
       campaignId: string
-      sessionId: string | null
+      characterId: string | null
     }, ExtArgs["result"]["note"]>
     composites: {}
   }
@@ -4249,7 +5526,7 @@ export namespace Prisma {
   export interface Prisma__NoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    session<T extends Note$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Note$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    character<T extends Note$characterArgs<ExtArgs> = {}>(args?: Subset<T, Note$characterArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4282,10 +5559,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Note", 'String'>
     readonly title: FieldRef<"Note", 'String'>
     readonly content: FieldRef<"Note", 'String'>
+    readonly type: FieldRef<"Note", 'NoteType'>
     readonly createdAt: FieldRef<"Note", 'DateTime'>
     readonly updatedAt: FieldRef<"Note", 'DateTime'>
     readonly campaignId: FieldRef<"Note", 'String'>
-    readonly sessionId: FieldRef<"Note", 'String'>
+    readonly characterId: FieldRef<"Note", 'String'>
   }
     
 
@@ -4682,22 +5960,22 @@ export namespace Prisma {
   }
 
   /**
-   * Note.session
+   * Note.character
    */
-  export type Note$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Note$characterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Session
+     * Select specific fields to fetch from the Character
      */
-    select?: SessionSelect<ExtArgs> | null
+    select?: CharacterSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Session
+     * Omit specific fields from the Character
      */
-    omit?: SessionOmit<ExtArgs> | null
+    omit?: CharacterOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
+    include?: CharacterInclude<ExtArgs> | null
+    where?: CharacterWhereInput
   }
 
   /**
@@ -4725,14 +6003,26 @@ export namespace Prisma {
 
   export type AggregateSession = {
     _count: SessionCountAggregateOutputType | null
+    _avg: SessionAvgAggregateOutputType | null
+    _sum: SessionSumAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
     _max: SessionMaxAggregateOutputType | null
+  }
+
+  export type SessionAvgAggregateOutputType = {
+    duration: number | null
+  }
+
+  export type SessionSumAggregateOutputType = {
+    duration: number | null
   }
 
   export type SessionMinAggregateOutputType = {
     id: string | null
     title: string | null
     sessionDate: Date | null
+    duration: number | null
+    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
     campaignId: string | null
@@ -4742,6 +6032,8 @@ export namespace Prisma {
     id: string | null
     title: string | null
     sessionDate: Date | null
+    duration: number | null
+    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
     campaignId: string | null
@@ -4751,6 +6043,8 @@ export namespace Prisma {
     id: number
     title: number
     sessionDate: number
+    duration: number
+    description: number
     createdAt: number
     updatedAt: number
     campaignId: number
@@ -4758,10 +6052,20 @@ export namespace Prisma {
   }
 
 
+  export type SessionAvgAggregateInputType = {
+    duration?: true
+  }
+
+  export type SessionSumAggregateInputType = {
+    duration?: true
+  }
+
   export type SessionMinAggregateInputType = {
     id?: true
     title?: true
     sessionDate?: true
+    duration?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     campaignId?: true
@@ -4771,6 +6075,8 @@ export namespace Prisma {
     id?: true
     title?: true
     sessionDate?: true
+    duration?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     campaignId?: true
@@ -4780,6 +6086,8 @@ export namespace Prisma {
     id?: true
     title?: true
     sessionDate?: true
+    duration?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     campaignId?: true
@@ -4824,6 +6132,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SessionMinAggregateInputType
@@ -4854,6 +6174,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SessionCountAggregateInputType | true
+    _avg?: SessionAvgAggregateInputType
+    _sum?: SessionSumAggregateInputType
     _min?: SessionMinAggregateInputType
     _max?: SessionMaxAggregateInputType
   }
@@ -4862,10 +6184,14 @@ export namespace Prisma {
     id: string
     title: string
     sessionDate: Date
+    duration: number
+    description: string | null
     createdAt: Date
     updatedAt: Date
     campaignId: string
     _count: SessionCountAggregateOutputType | null
+    _avg: SessionAvgAggregateOutputType | null
+    _sum: SessionSumAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
     _max: SessionMaxAggregateOutputType | null
   }
@@ -4888,17 +6214,20 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     sessionDate?: boolean
+    duration?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    note?: boolean | Session$noteArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
   export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     sessionDate?: boolean
+    duration?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
@@ -4909,6 +6238,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     sessionDate?: boolean
+    duration?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
@@ -4919,15 +6250,16 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     sessionDate?: boolean
+    duration?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campaignId?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "sessionDate" | "createdAt" | "updatedAt" | "campaignId", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "sessionDate" | "duration" | "description" | "createdAt" | "updatedAt" | "campaignId", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
-    note?: boolean | Session$noteArgs<ExtArgs>
   }
   export type SessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
@@ -4940,12 +6272,13 @@ export namespace Prisma {
     name: "Session"
     objects: {
       campaign: Prisma.$CampaignPayload<ExtArgs>
-      note: Prisma.$NotePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       sessionDate: Date
+      duration: number
+      description: string | null
       createdAt: Date
       updatedAt: Date
       campaignId: string
@@ -5344,7 +6677,6 @@ export namespace Prisma {
   export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    note<T extends Session$noteArgs<ExtArgs> = {}>(args?: Subset<T, Session$noteArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5377,6 +6709,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Session", 'String'>
     readonly title: FieldRef<"Session", 'String'>
     readonly sessionDate: FieldRef<"Session", 'DateTime'>
+    readonly duration: FieldRef<"Session", 'Int'>
+    readonly description: FieldRef<"Session", 'String'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
     readonly updatedAt: FieldRef<"Session", 'DateTime'>
     readonly campaignId: FieldRef<"Session", 'String'>
@@ -5776,25 +7110,6 @@ export namespace Prisma {
   }
 
   /**
-   * Session.note
-   */
-  export type Session$noteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Note
-     */
-    select?: NoteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Note
-     */
-    omit?: NoteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NoteInclude<ExtArgs> | null
-    where?: NoteWhereInput
-  }
-
-  /**
    * Session without action
    */
   export type SessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5819,28 +7134,8 @@ export namespace Prisma {
 
   export type AggregateCharacter = {
     _count: CharacterCountAggregateOutputType | null
-    _avg: CharacterAvgAggregateOutputType | null
-    _sum: CharacterSumAggregateOutputType | null
     _min: CharacterMinAggregateOutputType | null
     _max: CharacterMaxAggregateOutputType | null
-  }
-
-  export type CharacterAvgAggregateOutputType = {
-    strength: number | null
-    dexterity: number | null
-    constitution: number | null
-    intelligence: number | null
-    wisdom: number | null
-    charisma: number | null
-  }
-
-  export type CharacterSumAggregateOutputType = {
-    strength: number | null
-    dexterity: number | null
-    constitution: number | null
-    intelligence: number | null
-    wisdom: number | null
-    charisma: number | null
   }
 
   export type CharacterMinAggregateOutputType = {
@@ -5850,14 +7145,9 @@ export namespace Prisma {
     type: $Enums.CharacterType | null
     status: $Enums.CharacterStatus | null
     imageUrl: string | null
-    strength: number | null
-    dexterity: number | null
-    constitution: number | null
-    intelligence: number | null
-    wisdom: number | null
-    charisma: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    playerId: string | null
     campaignId: string | null
   }
 
@@ -5868,14 +7158,9 @@ export namespace Prisma {
     type: $Enums.CharacterType | null
     status: $Enums.CharacterStatus | null
     imageUrl: string | null
-    strength: number | null
-    dexterity: number | null
-    constitution: number | null
-    intelligence: number | null
-    wisdom: number | null
-    charisma: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    playerId: string | null
     campaignId: string | null
   }
 
@@ -5886,36 +7171,13 @@ export namespace Prisma {
     type: number
     status: number
     imageUrl: number
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt: number
     updatedAt: number
+    playerId: number
     campaignId: number
     _all: number
   }
 
-
-  export type CharacterAvgAggregateInputType = {
-    strength?: true
-    dexterity?: true
-    constitution?: true
-    intelligence?: true
-    wisdom?: true
-    charisma?: true
-  }
-
-  export type CharacterSumAggregateInputType = {
-    strength?: true
-    dexterity?: true
-    constitution?: true
-    intelligence?: true
-    wisdom?: true
-    charisma?: true
-  }
 
   export type CharacterMinAggregateInputType = {
     id?: true
@@ -5924,14 +7186,9 @@ export namespace Prisma {
     type?: true
     status?: true
     imageUrl?: true
-    strength?: true
-    dexterity?: true
-    constitution?: true
-    intelligence?: true
-    wisdom?: true
-    charisma?: true
     createdAt?: true
     updatedAt?: true
+    playerId?: true
     campaignId?: true
   }
 
@@ -5942,14 +7199,9 @@ export namespace Prisma {
     type?: true
     status?: true
     imageUrl?: true
-    strength?: true
-    dexterity?: true
-    constitution?: true
-    intelligence?: true
-    wisdom?: true
-    charisma?: true
     createdAt?: true
     updatedAt?: true
+    playerId?: true
     campaignId?: true
   }
 
@@ -5960,14 +7212,9 @@ export namespace Prisma {
     type?: true
     status?: true
     imageUrl?: true
-    strength?: true
-    dexterity?: true
-    constitution?: true
-    intelligence?: true
-    wisdom?: true
-    charisma?: true
     createdAt?: true
     updatedAt?: true
+    playerId?: true
     campaignId?: true
     _all?: true
   }
@@ -6010,18 +7257,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: CharacterAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CharacterSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: CharacterMinAggregateInputType
@@ -6052,8 +7287,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CharacterCountAggregateInputType | true
-    _avg?: CharacterAvgAggregateInputType
-    _sum?: CharacterSumAggregateInputType
     _min?: CharacterMinAggregateInputType
     _max?: CharacterMaxAggregateInputType
   }
@@ -6065,18 +7298,11 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt: Date
     updatedAt: Date
+    playerId: string | null
     campaignId: string
     _count: CharacterCountAggregateOutputType | null
-    _avg: CharacterAvgAggregateOutputType | null
-    _sum: CharacterSumAggregateOutputType | null
     _min: CharacterMinAggregateOutputType | null
     _max: CharacterMaxAggregateOutputType | null
   }
@@ -6102,16 +7328,14 @@ export namespace Prisma {
     type?: boolean
     status?: boolean
     imageUrl?: boolean
-    strength?: boolean
-    dexterity?: boolean
-    constitution?: boolean
-    intelligence?: boolean
-    wisdom?: boolean
-    charisma?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    playerId?: boolean
     campaignId?: boolean
+    notes?: boolean | Character$notesArgs<ExtArgs>
+    player?: boolean | Character$playerArgs<ExtArgs>
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+    _count?: boolean | CharacterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["character"]>
 
   export type CharacterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6121,15 +7345,11 @@ export namespace Prisma {
     type?: boolean
     status?: boolean
     imageUrl?: boolean
-    strength?: boolean
-    dexterity?: boolean
-    constitution?: boolean
-    intelligence?: boolean
-    wisdom?: boolean
-    charisma?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    playerId?: boolean
     campaignId?: boolean
+    player?: boolean | Character$playerArgs<ExtArgs>
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["character"]>
 
@@ -6140,15 +7360,11 @@ export namespace Prisma {
     type?: boolean
     status?: boolean
     imageUrl?: boolean
-    strength?: boolean
-    dexterity?: boolean
-    constitution?: boolean
-    intelligence?: boolean
-    wisdom?: boolean
-    charisma?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    playerId?: boolean
     campaignId?: boolean
+    player?: boolean | Character$playerArgs<ExtArgs>
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["character"]>
 
@@ -6159,31 +7375,33 @@ export namespace Prisma {
     type?: boolean
     status?: boolean
     imageUrl?: boolean
-    strength?: boolean
-    dexterity?: boolean
-    constitution?: boolean
-    intelligence?: boolean
-    wisdom?: boolean
-    charisma?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    playerId?: boolean
     campaignId?: boolean
   }
 
-  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type" | "status" | "imageUrl" | "strength" | "dexterity" | "constitution" | "intelligence" | "wisdom" | "charisma" | "createdAt" | "updatedAt" | "campaignId", ExtArgs["result"]["character"]>
+  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type" | "status" | "imageUrl" | "createdAt" | "updatedAt" | "playerId" | "campaignId", ExtArgs["result"]["character"]>
   export type CharacterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    notes?: boolean | Character$notesArgs<ExtArgs>
+    player?: boolean | Character$playerArgs<ExtArgs>
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+    _count?: boolean | CharacterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CharacterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | Character$playerArgs<ExtArgs>
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
   }
   export type CharacterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | Character$playerArgs<ExtArgs>
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
   }
 
   export type $CharacterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Character"
     objects: {
+      notes: Prisma.$NotePayload<ExtArgs>[]
+      player: Prisma.$PlayerPayload<ExtArgs> | null
       campaign: Prisma.$CampaignPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6193,14 +7411,9 @@ export namespace Prisma {
       type: $Enums.CharacterType
       status: $Enums.CharacterStatus
       imageUrl: string
-      strength: number
-      dexterity: number
-      constitution: number
-      intelligence: number
-      wisdom: number
-      charisma: number
       createdAt: Date
       updatedAt: Date
+      playerId: string | null
       campaignId: string
     }, ExtArgs["result"]["character"]>
     composites: {}
@@ -6596,6 +7809,8 @@ export namespace Prisma {
    */
   export interface Prisma__CharacterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    notes<T extends Character$notesArgs<ExtArgs> = {}>(args?: Subset<T, Character$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    player<T extends Character$playerArgs<ExtArgs> = {}>(args?: Subset<T, Character$playerArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6632,14 +7847,9 @@ export namespace Prisma {
     readonly type: FieldRef<"Character", 'CharacterType'>
     readonly status: FieldRef<"Character", 'CharacterStatus'>
     readonly imageUrl: FieldRef<"Character", 'String'>
-    readonly strength: FieldRef<"Character", 'Int'>
-    readonly dexterity: FieldRef<"Character", 'Int'>
-    readonly constitution: FieldRef<"Character", 'Int'>
-    readonly intelligence: FieldRef<"Character", 'Int'>
-    readonly wisdom: FieldRef<"Character", 'Int'>
-    readonly charisma: FieldRef<"Character", 'Int'>
     readonly createdAt: FieldRef<"Character", 'DateTime'>
     readonly updatedAt: FieldRef<"Character", 'DateTime'>
+    readonly playerId: FieldRef<"Character", 'String'>
     readonly campaignId: FieldRef<"Character", 'String'>
   }
     
@@ -7037,6 +8247,49 @@ export namespace Prisma {
   }
 
   /**
+   * Character.notes
+   */
+  export type Character$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    where?: NoteWhereInput
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    cursor?: NoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
+  }
+
+  /**
+   * Character.player
+   */
+  export type Character$playerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    where?: PlayerWhereInput
+  }
+
+  /**
    * Character without action
    */
   export type CharacterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7094,14 +8347,25 @@ export namespace Prisma {
   export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
 
 
+  export const PlayerScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    campaignId: 'campaignId'
+  };
+
+  export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
+
+
   export const NoteScalarFieldEnum: {
     id: 'id',
     title: 'title',
     content: 'content',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     campaignId: 'campaignId',
-    sessionId: 'sessionId'
+    characterId: 'characterId'
   };
 
   export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
@@ -7111,6 +8375,8 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     sessionDate: 'sessionDate',
+    duration: 'duration',
+    description: 'description',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     campaignId: 'campaignId'
@@ -7126,14 +8392,9 @@ export namespace Prisma {
     type: 'type',
     status: 'status',
     imageUrl: 'imageUrl',
-    strength: 'strength',
-    dexterity: 'dexterity',
-    constitution: 'constitution',
-    intelligence: 'intelligence',
-    wisdom: 'wisdom',
-    charisma: 'charisma',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    playerId: 'playerId',
     campaignId: 'campaignId'
   };
 
@@ -7212,6 +8473,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'NoteType'
+   */
+  export type EnumNoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteType'>
+    
+
+
+  /**
+   * Reference to a field of type 'NoteType[]'
+   */
+  export type ListEnumNoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'CharacterType'
    */
   export type EnumCharacterTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CharacterType'>
@@ -7236,20 +8525,6 @@ export namespace Prisma {
    * Reference to a field of type 'CharacterStatus[]'
    */
   export type ListEnumCharacterStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CharacterStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -7338,6 +8613,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
     ownerId?: StringFilter<"Campaign"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    players?: PlayerListRelationFilter
     notes?: NoteListRelationFilter
     sessions?: SessionListRelationFilter
     characters?: CharacterListRelationFilter
@@ -7353,6 +8629,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     ownerId?: SortOrder
     owner?: UserOrderByWithRelationInput
+    players?: PlayerOrderByRelationAggregateInput
     notes?: NoteOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     characters?: CharacterOrderByRelationAggregateInput
@@ -7371,6 +8648,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
     ownerId?: StringFilter<"Campaign"> | string
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    players?: PlayerListRelationFilter
     notes?: NoteListRelationFilter
     sessions?: SessionListRelationFilter
     characters?: CharacterListRelationFilter
@@ -7404,6 +8682,59 @@ export namespace Prisma {
     ownerId?: StringWithAggregatesFilter<"Campaign"> | string
   }
 
+  export type PlayerWhereInput = {
+    AND?: PlayerWhereInput | PlayerWhereInput[]
+    OR?: PlayerWhereInput[]
+    NOT?: PlayerWhereInput | PlayerWhereInput[]
+    id?: StringFilter<"Player"> | string
+    name?: StringFilter<"Player"> | string
+    createdAt?: DateTimeFilter<"Player"> | Date | string
+    campaignId?: StringFilter<"Player"> | string
+    campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
+    characters?: CharacterListRelationFilter
+  }
+
+  export type PlayerOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    campaignId?: SortOrder
+    campaign?: CampaignOrderByWithRelationInput
+    characters?: CharacterOrderByRelationAggregateInput
+  }
+
+  export type PlayerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PlayerWhereInput | PlayerWhereInput[]
+    OR?: PlayerWhereInput[]
+    NOT?: PlayerWhereInput | PlayerWhereInput[]
+    name?: StringFilter<"Player"> | string
+    createdAt?: DateTimeFilter<"Player"> | Date | string
+    campaignId?: StringFilter<"Player"> | string
+    campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
+    characters?: CharacterListRelationFilter
+  }, "id">
+
+  export type PlayerOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    campaignId?: SortOrder
+    _count?: PlayerCountOrderByAggregateInput
+    _max?: PlayerMaxOrderByAggregateInput
+    _min?: PlayerMinOrderByAggregateInput
+  }
+
+  export type PlayerScalarWhereWithAggregatesInput = {
+    AND?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
+    OR?: PlayerScalarWhereWithAggregatesInput[]
+    NOT?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Player"> | string
+    name?: StringWithAggregatesFilter<"Player"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Player"> | Date | string
+    campaignId?: StringWithAggregatesFilter<"Player"> | string
+  }
+
   export type NoteWhereInput = {
     AND?: NoteWhereInput | NoteWhereInput[]
     OR?: NoteWhereInput[]
@@ -7411,49 +8742,53 @@ export namespace Prisma {
     id?: StringFilter<"Note"> | string
     title?: StringNullableFilter<"Note"> | string | null
     content?: StringFilter<"Note"> | string
+    type?: EnumNoteTypeFilter<"Note"> | $Enums.NoteType
     createdAt?: DateTimeFilter<"Note"> | Date | string
     updatedAt?: DateTimeFilter<"Note"> | Date | string
     campaignId?: StringFilter<"Note"> | string
-    sessionId?: StringNullableFilter<"Note"> | string | null
+    characterId?: StringNullableFilter<"Note"> | string | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
-    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    character?: XOR<CharacterNullableScalarRelationFilter, CharacterWhereInput> | null
   }
 
   export type NoteOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrderInput | SortOrder
     content?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
-    sessionId?: SortOrderInput | SortOrder
+    characterId?: SortOrderInput | SortOrder
     campaign?: CampaignOrderByWithRelationInput
-    session?: SessionOrderByWithRelationInput
+    character?: CharacterOrderByWithRelationInput
   }
 
   export type NoteWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    sessionId?: string
     AND?: NoteWhereInput | NoteWhereInput[]
     OR?: NoteWhereInput[]
     NOT?: NoteWhereInput | NoteWhereInput[]
     title?: StringNullableFilter<"Note"> | string | null
     content?: StringFilter<"Note"> | string
+    type?: EnumNoteTypeFilter<"Note"> | $Enums.NoteType
     createdAt?: DateTimeFilter<"Note"> | Date | string
     updatedAt?: DateTimeFilter<"Note"> | Date | string
     campaignId?: StringFilter<"Note"> | string
+    characterId?: StringNullableFilter<"Note"> | string | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
-    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
-  }, "id" | "sessionId">
+    character?: XOR<CharacterNullableScalarRelationFilter, CharacterWhereInput> | null
+  }, "id">
 
   export type NoteOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrderInput | SortOrder
     content?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
-    sessionId?: SortOrderInput | SortOrder
+    characterId?: SortOrderInput | SortOrder
     _count?: NoteCountOrderByAggregateInput
     _max?: NoteMaxOrderByAggregateInput
     _min?: NoteMinOrderByAggregateInput
@@ -7466,10 +8801,11 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Note"> | string
     title?: StringNullableWithAggregatesFilter<"Note"> | string | null
     content?: StringWithAggregatesFilter<"Note"> | string
+    type?: EnumNoteTypeWithAggregatesFilter<"Note"> | $Enums.NoteType
     createdAt?: DateTimeWithAggregatesFilter<"Note"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Note"> | Date | string
     campaignId?: StringWithAggregatesFilter<"Note"> | string
-    sessionId?: StringNullableWithAggregatesFilter<"Note"> | string | null
+    characterId?: StringNullableWithAggregatesFilter<"Note"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -7479,22 +8815,24 @@ export namespace Prisma {
     id?: StringFilter<"Session"> | string
     title?: StringFilter<"Session"> | string
     sessionDate?: DateTimeFilter<"Session"> | Date | string
+    duration?: IntFilter<"Session"> | number
+    description?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
     updatedAt?: DateTimeFilter<"Session"> | Date | string
     campaignId?: StringFilter<"Session"> | string
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
-    note?: XOR<NoteNullableScalarRelationFilter, NoteWhereInput> | null
   }
 
   export type SessionOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
     sessionDate?: SortOrder
+    duration?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
     campaign?: CampaignOrderByWithRelationInput
-    note?: NoteOrderByWithRelationInput
   }
 
   export type SessionWhereUniqueInput = Prisma.AtLeast<{
@@ -7504,23 +8842,28 @@ export namespace Prisma {
     NOT?: SessionWhereInput | SessionWhereInput[]
     title?: StringFilter<"Session"> | string
     sessionDate?: DateTimeFilter<"Session"> | Date | string
+    duration?: IntFilter<"Session"> | number
+    description?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
     updatedAt?: DateTimeFilter<"Session"> | Date | string
     campaignId?: StringFilter<"Session"> | string
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
-    note?: XOR<NoteNullableScalarRelationFilter, NoteWhereInput> | null
   }, "id">
 
   export type SessionOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     sessionDate?: SortOrder
+    duration?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
     _count?: SessionCountOrderByAggregateInput
+    _avg?: SessionAvgOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
     _min?: SessionMinOrderByAggregateInput
+    _sum?: SessionSumOrderByAggregateInput
   }
 
   export type SessionScalarWhereWithAggregatesInput = {
@@ -7530,6 +8873,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Session"> | string
     title?: StringWithAggregatesFilter<"Session"> | string
     sessionDate?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    duration?: IntWithAggregatesFilter<"Session"> | number
+    description?: StringNullableWithAggregatesFilter<"Session"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     campaignId?: StringWithAggregatesFilter<"Session"> | string
@@ -7545,15 +8890,12 @@ export namespace Prisma {
     type?: EnumCharacterTypeFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusFilter<"Character"> | $Enums.CharacterStatus
     imageUrl?: StringFilter<"Character"> | string
-    strength?: IntFilter<"Character"> | number
-    dexterity?: IntFilter<"Character"> | number
-    constitution?: IntFilter<"Character"> | number
-    intelligence?: IntFilter<"Character"> | number
-    wisdom?: IntFilter<"Character"> | number
-    charisma?: IntFilter<"Character"> | number
     createdAt?: DateTimeFilter<"Character"> | Date | string
     updatedAt?: DateTimeFilter<"Character"> | Date | string
+    playerId?: StringNullableFilter<"Character"> | string | null
     campaignId?: StringFilter<"Character"> | string
+    notes?: NoteListRelationFilter
+    player?: XOR<PlayerNullableScalarRelationFilter, PlayerWhereInput> | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
   }
 
@@ -7564,15 +8906,12 @@ export namespace Prisma {
     type?: SortOrder
     status?: SortOrder
     imageUrl?: SortOrder
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    playerId?: SortOrderInput | SortOrder
     campaignId?: SortOrder
+    notes?: NoteOrderByRelationAggregateInput
+    player?: PlayerOrderByWithRelationInput
     campaign?: CampaignOrderByWithRelationInput
   }
 
@@ -7586,15 +8925,12 @@ export namespace Prisma {
     type?: EnumCharacterTypeFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusFilter<"Character"> | $Enums.CharacterStatus
     imageUrl?: StringFilter<"Character"> | string
-    strength?: IntFilter<"Character"> | number
-    dexterity?: IntFilter<"Character"> | number
-    constitution?: IntFilter<"Character"> | number
-    intelligence?: IntFilter<"Character"> | number
-    wisdom?: IntFilter<"Character"> | number
-    charisma?: IntFilter<"Character"> | number
     createdAt?: DateTimeFilter<"Character"> | Date | string
     updatedAt?: DateTimeFilter<"Character"> | Date | string
+    playerId?: StringNullableFilter<"Character"> | string | null
     campaignId?: StringFilter<"Character"> | string
+    notes?: NoteListRelationFilter
+    player?: XOR<PlayerNullableScalarRelationFilter, PlayerWhereInput> | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
   }, "id">
 
@@ -7605,20 +8941,13 @@ export namespace Prisma {
     type?: SortOrder
     status?: SortOrder
     imageUrl?: SortOrder
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    playerId?: SortOrderInput | SortOrder
     campaignId?: SortOrder
     _count?: CharacterCountOrderByAggregateInput
-    _avg?: CharacterAvgOrderByAggregateInput
     _max?: CharacterMaxOrderByAggregateInput
     _min?: CharacterMinOrderByAggregateInput
-    _sum?: CharacterSumOrderByAggregateInput
   }
 
   export type CharacterScalarWhereWithAggregatesInput = {
@@ -7631,14 +8960,9 @@ export namespace Prisma {
     type?: EnumCharacterTypeWithAggregatesFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusWithAggregatesFilter<"Character"> | $Enums.CharacterStatus
     imageUrl?: StringWithAggregatesFilter<"Character"> | string
-    strength?: IntWithAggregatesFilter<"Character"> | number
-    dexterity?: IntWithAggregatesFilter<"Character"> | number
-    constitution?: IntWithAggregatesFilter<"Character"> | number
-    intelligence?: IntWithAggregatesFilter<"Character"> | number
-    wisdom?: IntWithAggregatesFilter<"Character"> | number
-    charisma?: IntWithAggregatesFilter<"Character"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Character"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Character"> | Date | string
+    playerId?: StringNullableWithAggregatesFilter<"Character"> | string | null
     campaignId?: StringWithAggregatesFilter<"Character"> | string
   }
 
@@ -7711,6 +9035,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCampaignsInput
+    players?: PlayerCreateNestedManyWithoutCampaignInput
     notes?: NoteCreateNestedManyWithoutCampaignInput
     sessions?: SessionCreateNestedManyWithoutCampaignInput
     characters?: CharacterCreateNestedManyWithoutCampaignInput
@@ -7725,6 +9050,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    players?: PlayerUncheckedCreateNestedManyWithoutCampaignInput
     notes?: NoteUncheckedCreateNestedManyWithoutCampaignInput
     sessions?: SessionUncheckedCreateNestedManyWithoutCampaignInput
     characters?: CharacterUncheckedCreateNestedManyWithoutCampaignInput
@@ -7739,6 +9065,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCampaignsNestedInput
+    players?: PlayerUpdateManyWithoutCampaignNestedInput
     notes?: NoteUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUpdateManyWithoutCampaignNestedInput
@@ -7753,6 +9080,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    players?: PlayerUncheckedUpdateManyWithoutCampaignNestedInput
     notes?: NoteUncheckedUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUncheckedUpdateManyWithoutCampaignNestedInput
@@ -7790,60 +9118,118 @@ export namespace Prisma {
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PlayerCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    campaign: CampaignCreateNestedOneWithoutPlayersInput
+    characters?: CharacterCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    campaignId: string
+    characters?: CharacterUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneRequiredWithoutPlayersNestedInput
+    characters?: CharacterUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    characters?: CharacterUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    campaignId: string
+  }
+
+  export type PlayerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type NoteCreateInput = {
     id?: string
     title?: string | null
     content: string
+    type?: $Enums.NoteType
     createdAt?: Date | string
     updatedAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutNotesInput
-    session?: SessionCreateNestedOneWithoutNoteInput
+    character?: CharacterCreateNestedOneWithoutNotesInput
   }
 
   export type NoteUncheckedCreateInput = {
     id?: string
     title?: string | null
     content: string
+    type?: $Enums.NoteType
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
-    sessionId?: string | null
+    characterId?: string | null
   }
 
   export type NoteUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutNotesNestedInput
-    session?: SessionUpdateOneWithoutNoteNestedInput
+    character?: CharacterUpdateOneWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    characterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NoteCreateManyInput = {
     id?: string
     title?: string | null
     content: string
+    type?: $Enums.NoteType
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
-    sessionId?: string | null
+    characterId?: string | null
   }
 
   export type NoteUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7852,56 +9238,63 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    characterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
     id?: string
     title: string
     sessionDate: Date | string
+    duration: number
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutSessionsInput
-    note?: NoteCreateNestedOneWithoutSessionInput
   }
 
   export type SessionUncheckedCreateInput = {
     id?: string
     title: string
     sessionDate: Date | string
+    duration: number
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
-    note?: NoteUncheckedCreateNestedOneWithoutSessionInput
   }
 
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutSessionsNestedInput
-    note?: NoteUpdateOneWithoutSessionNestedInput
   }
 
   export type SessionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
-    note?: NoteUncheckedUpdateOneWithoutSessionNestedInput
   }
 
   export type SessionCreateManyInput = {
     id?: string
     title: string
     sessionDate: Date | string
+    duration: number
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
@@ -7911,6 +9304,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7919,6 +9314,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
@@ -7931,14 +9328,10 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    notes?: NoteCreateNestedManyWithoutCharacterInput
+    player?: PlayerCreateNestedOneWithoutCharactersInput
     campaign: CampaignCreateNestedOneWithoutCharactersInput
   }
 
@@ -7949,15 +9342,11 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    playerId?: string | null
     campaignId: string
+    notes?: NoteUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUpdateInput = {
@@ -7967,14 +9356,10 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUpdateManyWithoutCharacterNestedInput
+    player?: PlayerUpdateOneWithoutCharactersNestedInput
     campaign?: CampaignUpdateOneRequiredWithoutCharactersNestedInput
   }
 
@@ -7985,15 +9370,11 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
     campaignId?: StringFieldUpdateOperationsInput | string
+    notes?: NoteUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterCreateManyInput = {
@@ -8003,14 +9384,9 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    playerId?: string | null
     campaignId: string
   }
 
@@ -8021,12 +9397,6 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8038,14 +9408,9 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
     campaignId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -8168,6 +9533,12 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type PlayerListRelationFilter = {
+    every?: PlayerWhereInput
+    some?: PlayerWhereInput
+    none?: PlayerWhereInput
+  }
+
   export type NoteListRelationFilter = {
     every?: NoteWhereInput
     some?: NoteWhereInput
@@ -8189,6 +9560,10 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type PlayerOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type NoteOrderByRelationAggregateInput = {
@@ -8269,59 +9644,114 @@ export namespace Prisma {
     isNot?: CampaignWhereInput
   }
 
-  export type SessionNullableScalarRelationFilter = {
-    is?: SessionWhereInput | null
-    isNot?: SessionWhereInput | null
+  export type PlayerCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    campaignId?: SortOrder
+  }
+
+  export type PlayerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    campaignId?: SortOrder
+  }
+
+  export type PlayerMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    campaignId?: SortOrder
+  }
+
+  export type EnumNoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+  }
+
+  export type CharacterNullableScalarRelationFilter = {
+    is?: CharacterWhereInput | null
+    isNot?: CharacterWhereInput | null
   }
 
   export type NoteCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
-    sessionId?: SortOrder
+    characterId?: SortOrder
   }
 
   export type NoteMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
-    sessionId?: SortOrder
+    characterId?: SortOrder
   }
 
   export type NoteMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
-    sessionId?: SortOrder
+    characterId?: SortOrder
   }
 
-  export type NoteNullableScalarRelationFilter = {
-    is?: NoteWhereInput | null
-    isNot?: NoteWhereInput | null
+  export type EnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumNoteTypeFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     sessionDate?: SortOrder
+    duration?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
+  }
+
+  export type SessionAvgOrderByAggregateInput = {
+    duration?: SortOrder
   }
 
   export type SessionMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     sessionDate?: SortOrder
+    duration?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
@@ -8331,9 +9761,31 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     sessionDate?: SortOrder
+    duration?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     campaignId?: SortOrder
+  }
+
+  export type SessionSumOrderByAggregateInput = {
+    duration?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type EnumCharacterTypeFilter<$PrismaModel = never> = {
@@ -8350,15 +9802,9 @@ export namespace Prisma {
     not?: NestedEnumCharacterStatusFilter<$PrismaModel> | $Enums.CharacterStatus
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type PlayerNullableScalarRelationFilter = {
+    is?: PlayerWhereInput | null
+    isNot?: PlayerWhereInput | null
   }
 
   export type CharacterCountOrderByAggregateInput = {
@@ -8368,24 +9814,10 @@ export namespace Prisma {
     type?: SortOrder
     status?: SortOrder
     imageUrl?: SortOrder
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    playerId?: SortOrder
     campaignId?: SortOrder
-  }
-
-  export type CharacterAvgOrderByAggregateInput = {
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
   }
 
   export type CharacterMaxOrderByAggregateInput = {
@@ -8395,14 +9827,9 @@ export namespace Prisma {
     type?: SortOrder
     status?: SortOrder
     imageUrl?: SortOrder
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    playerId?: SortOrder
     campaignId?: SortOrder
   }
 
@@ -8413,24 +9840,10 @@ export namespace Prisma {
     type?: SortOrder
     status?: SortOrder
     imageUrl?: SortOrder
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    playerId?: SortOrder
     campaignId?: SortOrder
-  }
-
-  export type CharacterSumOrderByAggregateInput = {
-    strength?: SortOrder
-    dexterity?: SortOrder
-    constitution?: SortOrder
-    intelligence?: SortOrder
-    wisdom?: SortOrder
-    charisma?: SortOrder
   }
 
   export type EnumCharacterTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8451,22 +9864,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCharacterStatusFilter<$PrismaModel>
     _max?: NestedEnumCharacterStatusFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type CampaignCreateNestedManyWithoutOwnerInput = {
@@ -8525,6 +9922,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type PlayerCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<PlayerCreateWithoutCampaignInput, PlayerUncheckedCreateWithoutCampaignInput> | PlayerCreateWithoutCampaignInput[] | PlayerUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutCampaignInput | PlayerCreateOrConnectWithoutCampaignInput[]
+    createMany?: PlayerCreateManyCampaignInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+  }
+
   export type NoteCreateNestedManyWithoutCampaignInput = {
     create?: XOR<NoteCreateWithoutCampaignInput, NoteUncheckedCreateWithoutCampaignInput> | NoteCreateWithoutCampaignInput[] | NoteUncheckedCreateWithoutCampaignInput[]
     connectOrCreate?: NoteCreateOrConnectWithoutCampaignInput | NoteCreateOrConnectWithoutCampaignInput[]
@@ -8544,6 +9948,13 @@ export namespace Prisma {
     connectOrCreate?: CharacterCreateOrConnectWithoutCampaignInput | CharacterCreateOrConnectWithoutCampaignInput[]
     createMany?: CharacterCreateManyCampaignInputEnvelope
     connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+  }
+
+  export type PlayerUncheckedCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<PlayerCreateWithoutCampaignInput, PlayerUncheckedCreateWithoutCampaignInput> | PlayerCreateWithoutCampaignInput[] | PlayerUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutCampaignInput | PlayerCreateOrConnectWithoutCampaignInput[]
+    createMany?: PlayerCreateManyCampaignInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
   }
 
   export type NoteUncheckedCreateNestedManyWithoutCampaignInput = {
@@ -8581,6 +9992,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCampaignsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCampaignsInput, UserUpdateWithoutCampaignsInput>, UserUncheckedUpdateWithoutCampaignsInput>
+  }
+
+  export type PlayerUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<PlayerCreateWithoutCampaignInput, PlayerUncheckedCreateWithoutCampaignInput> | PlayerCreateWithoutCampaignInput[] | PlayerUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutCampaignInput | PlayerCreateOrConnectWithoutCampaignInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutCampaignInput | PlayerUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: PlayerCreateManyCampaignInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutCampaignInput | PlayerUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutCampaignInput | PlayerUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
   }
 
   export type NoteUpdateManyWithoutCampaignNestedInput = {
@@ -8625,6 +10050,20 @@ export namespace Prisma {
     deleteMany?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
   }
 
+  export type PlayerUncheckedUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<PlayerCreateWithoutCampaignInput, PlayerUncheckedCreateWithoutCampaignInput> | PlayerCreateWithoutCampaignInput[] | PlayerUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutCampaignInput | PlayerCreateOrConnectWithoutCampaignInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutCampaignInput | PlayerUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: PlayerCreateManyCampaignInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutCampaignInput | PlayerUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutCampaignInput | PlayerUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+  }
+
   export type NoteUncheckedUpdateManyWithoutCampaignNestedInput = {
     create?: XOR<NoteCreateWithoutCampaignInput, NoteUncheckedCreateWithoutCampaignInput> | NoteCreateWithoutCampaignInput[] | NoteUncheckedCreateWithoutCampaignInput[]
     connectOrCreate?: NoteCreateOrConnectWithoutCampaignInput | NoteCreateOrConnectWithoutCampaignInput[]
@@ -8667,16 +10106,76 @@ export namespace Prisma {
     deleteMany?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
   }
 
+  export type CampaignCreateNestedOneWithoutPlayersInput = {
+    create?: XOR<CampaignCreateWithoutPlayersInput, CampaignUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: CampaignCreateOrConnectWithoutPlayersInput
+    connect?: CampaignWhereUniqueInput
+  }
+
+  export type CharacterCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<CharacterCreateWithoutPlayerInput, CharacterUncheckedCreateWithoutPlayerInput> | CharacterCreateWithoutPlayerInput[] | CharacterUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutPlayerInput | CharacterCreateOrConnectWithoutPlayerInput[]
+    createMany?: CharacterCreateManyPlayerInputEnvelope
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+  }
+
+  export type CharacterUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<CharacterCreateWithoutPlayerInput, CharacterUncheckedCreateWithoutPlayerInput> | CharacterCreateWithoutPlayerInput[] | CharacterUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutPlayerInput | CharacterCreateOrConnectWithoutPlayerInput[]
+    createMany?: CharacterCreateManyPlayerInputEnvelope
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+  }
+
+  export type CampaignUpdateOneRequiredWithoutPlayersNestedInput = {
+    create?: XOR<CampaignCreateWithoutPlayersInput, CampaignUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: CampaignCreateOrConnectWithoutPlayersInput
+    upsert?: CampaignUpsertWithoutPlayersInput
+    connect?: CampaignWhereUniqueInput
+    update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutPlayersInput, CampaignUpdateWithoutPlayersInput>, CampaignUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type CharacterUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<CharacterCreateWithoutPlayerInput, CharacterUncheckedCreateWithoutPlayerInput> | CharacterCreateWithoutPlayerInput[] | CharacterUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutPlayerInput | CharacterCreateOrConnectWithoutPlayerInput[]
+    upsert?: CharacterUpsertWithWhereUniqueWithoutPlayerInput | CharacterUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: CharacterCreateManyPlayerInputEnvelope
+    set?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    disconnect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    delete?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    update?: CharacterUpdateWithWhereUniqueWithoutPlayerInput | CharacterUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: CharacterUpdateManyWithWhereWithoutPlayerInput | CharacterUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
+  }
+
+  export type CharacterUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<CharacterCreateWithoutPlayerInput, CharacterUncheckedCreateWithoutPlayerInput> | CharacterCreateWithoutPlayerInput[] | CharacterUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutPlayerInput | CharacterCreateOrConnectWithoutPlayerInput[]
+    upsert?: CharacterUpsertWithWhereUniqueWithoutPlayerInput | CharacterUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: CharacterCreateManyPlayerInputEnvelope
+    set?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    disconnect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    delete?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    update?: CharacterUpdateWithWhereUniqueWithoutPlayerInput | CharacterUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: CharacterUpdateManyWithWhereWithoutPlayerInput | CharacterUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
+  }
+
   export type CampaignCreateNestedOneWithoutNotesInput = {
     create?: XOR<CampaignCreateWithoutNotesInput, CampaignUncheckedCreateWithoutNotesInput>
     connectOrCreate?: CampaignCreateOrConnectWithoutNotesInput
     connect?: CampaignWhereUniqueInput
   }
 
-  export type SessionCreateNestedOneWithoutNoteInput = {
-    create?: XOR<SessionCreateWithoutNoteInput, SessionUncheckedCreateWithoutNoteInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutNoteInput
-    connect?: SessionWhereUniqueInput
+  export type CharacterCreateNestedOneWithoutNotesInput = {
+    create?: XOR<CharacterCreateWithoutNotesInput, CharacterUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: CharacterCreateOrConnectWithoutNotesInput
+    connect?: CharacterWhereUniqueInput
+  }
+
+  export type EnumNoteTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NoteType
   }
 
   export type CampaignUpdateOneRequiredWithoutNotesNestedInput = {
@@ -8687,74 +10186,20 @@ export namespace Prisma {
     update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutNotesInput, CampaignUpdateWithoutNotesInput>, CampaignUncheckedUpdateWithoutNotesInput>
   }
 
-  export type SessionUpdateOneWithoutNoteNestedInput = {
-    create?: XOR<SessionCreateWithoutNoteInput, SessionUncheckedCreateWithoutNoteInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutNoteInput
-    upsert?: SessionUpsertWithoutNoteInput
-    disconnect?: SessionWhereInput | boolean
-    delete?: SessionWhereInput | boolean
-    connect?: SessionWhereUniqueInput
-    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutNoteInput, SessionUpdateWithoutNoteInput>, SessionUncheckedUpdateWithoutNoteInput>
+  export type CharacterUpdateOneWithoutNotesNestedInput = {
+    create?: XOR<CharacterCreateWithoutNotesInput, CharacterUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: CharacterCreateOrConnectWithoutNotesInput
+    upsert?: CharacterUpsertWithoutNotesInput
+    disconnect?: CharacterWhereInput | boolean
+    delete?: CharacterWhereInput | boolean
+    connect?: CharacterWhereUniqueInput
+    update?: XOR<XOR<CharacterUpdateToOneWithWhereWithoutNotesInput, CharacterUpdateWithoutNotesInput>, CharacterUncheckedUpdateWithoutNotesInput>
   }
 
   export type CampaignCreateNestedOneWithoutSessionsInput = {
     create?: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: CampaignCreateOrConnectWithoutSessionsInput
     connect?: CampaignWhereUniqueInput
-  }
-
-  export type NoteCreateNestedOneWithoutSessionInput = {
-    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
-    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput
-    connect?: NoteWhereUniqueInput
-  }
-
-  export type NoteUncheckedCreateNestedOneWithoutSessionInput = {
-    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
-    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput
-    connect?: NoteWhereUniqueInput
-  }
-
-  export type CampaignUpdateOneRequiredWithoutSessionsNestedInput = {
-    create?: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
-    connectOrCreate?: CampaignCreateOrConnectWithoutSessionsInput
-    upsert?: CampaignUpsertWithoutSessionsInput
-    connect?: CampaignWhereUniqueInput
-    update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutSessionsInput, CampaignUpdateWithoutSessionsInput>, CampaignUncheckedUpdateWithoutSessionsInput>
-  }
-
-  export type NoteUpdateOneWithoutSessionNestedInput = {
-    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
-    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput
-    upsert?: NoteUpsertWithoutSessionInput
-    disconnect?: NoteWhereInput | boolean
-    delete?: NoteWhereInput | boolean
-    connect?: NoteWhereUniqueInput
-    update?: XOR<XOR<NoteUpdateToOneWithWhereWithoutSessionInput, NoteUpdateWithoutSessionInput>, NoteUncheckedUpdateWithoutSessionInput>
-  }
-
-  export type NoteUncheckedUpdateOneWithoutSessionNestedInput = {
-    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
-    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput
-    upsert?: NoteUpsertWithoutSessionInput
-    disconnect?: NoteWhereInput | boolean
-    delete?: NoteWhereInput | boolean
-    connect?: NoteWhereUniqueInput
-    update?: XOR<XOR<NoteUpdateToOneWithWhereWithoutSessionInput, NoteUpdateWithoutSessionInput>, NoteUncheckedUpdateWithoutSessionInput>
-  }
-
-  export type CampaignCreateNestedOneWithoutCharactersInput = {
-    create?: XOR<CampaignCreateWithoutCharactersInput, CampaignUncheckedCreateWithoutCharactersInput>
-    connectOrCreate?: CampaignCreateOrConnectWithoutCharactersInput
-    connect?: CampaignWhereUniqueInput
-  }
-
-  export type EnumCharacterTypeFieldUpdateOperationsInput = {
-    set?: $Enums.CharacterType
-  }
-
-  export type EnumCharacterStatusFieldUpdateOperationsInput = {
-    set?: $Enums.CharacterStatus
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8765,12 +10210,92 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type CampaignUpdateOneRequiredWithoutSessionsNestedInput = {
+    create?: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: CampaignCreateOrConnectWithoutSessionsInput
+    upsert?: CampaignUpsertWithoutSessionsInput
+    connect?: CampaignWhereUniqueInput
+    update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutSessionsInput, CampaignUpdateWithoutSessionsInput>, CampaignUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type NoteCreateNestedManyWithoutCharacterInput = {
+    create?: XOR<NoteCreateWithoutCharacterInput, NoteUncheckedCreateWithoutCharacterInput> | NoteCreateWithoutCharacterInput[] | NoteUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutCharacterInput | NoteCreateOrConnectWithoutCharacterInput[]
+    createMany?: NoteCreateManyCharacterInputEnvelope
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
+  export type PlayerCreateNestedOneWithoutCharactersInput = {
+    create?: XOR<PlayerCreateWithoutCharactersInput, PlayerUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutCharactersInput
+    connect?: PlayerWhereUniqueInput
+  }
+
+  export type CampaignCreateNestedOneWithoutCharactersInput = {
+    create?: XOR<CampaignCreateWithoutCharactersInput, CampaignUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: CampaignCreateOrConnectWithoutCharactersInput
+    connect?: CampaignWhereUniqueInput
+  }
+
+  export type NoteUncheckedCreateNestedManyWithoutCharacterInput = {
+    create?: XOR<NoteCreateWithoutCharacterInput, NoteUncheckedCreateWithoutCharacterInput> | NoteCreateWithoutCharacterInput[] | NoteUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutCharacterInput | NoteCreateOrConnectWithoutCharacterInput[]
+    createMany?: NoteCreateManyCharacterInputEnvelope
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
+  export type EnumCharacterTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CharacterType
+  }
+
+  export type EnumCharacterStatusFieldUpdateOperationsInput = {
+    set?: $Enums.CharacterStatus
+  }
+
+  export type NoteUpdateManyWithoutCharacterNestedInput = {
+    create?: XOR<NoteCreateWithoutCharacterInput, NoteUncheckedCreateWithoutCharacterInput> | NoteCreateWithoutCharacterInput[] | NoteUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutCharacterInput | NoteCreateOrConnectWithoutCharacterInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutCharacterInput | NoteUpsertWithWhereUniqueWithoutCharacterInput[]
+    createMany?: NoteCreateManyCharacterInputEnvelope
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutCharacterInput | NoteUpdateWithWhereUniqueWithoutCharacterInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutCharacterInput | NoteUpdateManyWithWhereWithoutCharacterInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
+  }
+
+  export type PlayerUpdateOneWithoutCharactersNestedInput = {
+    create?: XOR<PlayerCreateWithoutCharactersInput, PlayerUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutCharactersInput
+    upsert?: PlayerUpsertWithoutCharactersInput
+    disconnect?: PlayerWhereInput | boolean
+    delete?: PlayerWhereInput | boolean
+    connect?: PlayerWhereUniqueInput
+    update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutCharactersInput, PlayerUpdateWithoutCharactersInput>, PlayerUncheckedUpdateWithoutCharactersInput>
+  }
+
   export type CampaignUpdateOneRequiredWithoutCharactersNestedInput = {
     create?: XOR<CampaignCreateWithoutCharactersInput, CampaignUncheckedCreateWithoutCharactersInput>
     connectOrCreate?: CampaignCreateOrConnectWithoutCharactersInput
     upsert?: CampaignUpsertWithoutCharactersInput
     connect?: CampaignWhereUniqueInput
     update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutCharactersInput, CampaignUpdateWithoutCharactersInput>, CampaignUncheckedUpdateWithoutCharactersInput>
+  }
+
+  export type NoteUncheckedUpdateManyWithoutCharacterNestedInput = {
+    create?: XOR<NoteCreateWithoutCharacterInput, NoteUncheckedCreateWithoutCharacterInput> | NoteCreateWithoutCharacterInput[] | NoteUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutCharacterInput | NoteCreateOrConnectWithoutCharacterInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutCharacterInput | NoteUpsertWithWhereUniqueWithoutCharacterInput[]
+    createMany?: NoteCreateManyCharacterInputEnvelope
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutCharacterInput | NoteUpdateWithWhereUniqueWithoutCharacterInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutCharacterInput | NoteUpdateManyWithWhereWithoutCharacterInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8899,6 +10424,50 @@ export namespace Prisma {
     _max?: NestedEnumCampaignStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumNoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+  }
+
+  export type NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumNoteTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedEnumCharacterTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.CharacterType | EnumCharacterTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
@@ -8933,33 +10502,6 @@ export namespace Prisma {
     _max?: NestedEnumCharacterStatusFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type CampaignCreateWithoutOwnerInput = {
     id?: string
     name: string
@@ -8968,6 +10510,7 @@ export namespace Prisma {
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    players?: PlayerCreateNestedManyWithoutCampaignInput
     notes?: NoteCreateNestedManyWithoutCampaignInput
     sessions?: SessionCreateNestedManyWithoutCampaignInput
     characters?: CharacterCreateNestedManyWithoutCampaignInput
@@ -8981,6 +10524,7 @@ export namespace Prisma {
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    players?: PlayerUncheckedCreateNestedManyWithoutCampaignInput
     notes?: NoteUncheckedCreateNestedManyWithoutCampaignInput
     sessions?: SessionUncheckedCreateNestedManyWithoutCampaignInput
     characters?: CharacterUncheckedCreateNestedManyWithoutCampaignInput
@@ -9047,22 +10591,48 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutCampaignsInput, UserUncheckedCreateWithoutCampaignsInput>
   }
 
+  export type PlayerCreateWithoutCampaignInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    characters?: CharacterCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUncheckedCreateWithoutCampaignInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    characters?: CharacterUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerCreateOrConnectWithoutCampaignInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutCampaignInput, PlayerUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type PlayerCreateManyCampaignInputEnvelope = {
+    data: PlayerCreateManyCampaignInput | PlayerCreateManyCampaignInput[]
+    skipDuplicates?: boolean
+  }
+
   export type NoteCreateWithoutCampaignInput = {
     id?: string
     title?: string | null
     content: string
+    type?: $Enums.NoteType
     createdAt?: Date | string
     updatedAt?: Date | string
-    session?: SessionCreateNestedOneWithoutNoteInput
+    character?: CharacterCreateNestedOneWithoutNotesInput
   }
 
   export type NoteUncheckedCreateWithoutCampaignInput = {
     id?: string
     title?: string | null
     content: string
+    type?: $Enums.NoteType
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionId?: string | null
+    characterId?: string | null
   }
 
   export type NoteCreateOrConnectWithoutCampaignInput = {
@@ -9079,18 +10649,20 @@ export namespace Prisma {
     id?: string
     title: string
     sessionDate: Date | string
+    duration: number
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    note?: NoteCreateNestedOneWithoutSessionInput
   }
 
   export type SessionUncheckedCreateWithoutCampaignInput = {
     id?: string
     title: string
     sessionDate: Date | string
+    duration: number
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    note?: NoteUncheckedCreateNestedOneWithoutSessionInput
   }
 
   export type SessionCreateOrConnectWithoutCampaignInput = {
@@ -9110,14 +10682,10 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    notes?: NoteCreateNestedManyWithoutCharacterInput
+    player?: PlayerCreateNestedOneWithoutCharactersInput
   }
 
   export type CharacterUncheckedCreateWithoutCampaignInput = {
@@ -9127,14 +10695,10 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    playerId?: string | null
+    notes?: NoteUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterCreateOrConnectWithoutCampaignInput = {
@@ -9174,6 +10738,32 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PlayerUpsertWithWhereUniqueWithoutCampaignInput = {
+    where: PlayerWhereUniqueInput
+    update: XOR<PlayerUpdateWithoutCampaignInput, PlayerUncheckedUpdateWithoutCampaignInput>
+    create: XOR<PlayerCreateWithoutCampaignInput, PlayerUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type PlayerUpdateWithWhereUniqueWithoutCampaignInput = {
+    where: PlayerWhereUniqueInput
+    data: XOR<PlayerUpdateWithoutCampaignInput, PlayerUncheckedUpdateWithoutCampaignInput>
+  }
+
+  export type PlayerUpdateManyWithWhereWithoutCampaignInput = {
+    where: PlayerScalarWhereInput
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyWithoutCampaignInput>
+  }
+
+  export type PlayerScalarWhereInput = {
+    AND?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+    OR?: PlayerScalarWhereInput[]
+    NOT?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+    id?: StringFilter<"Player"> | string
+    name?: StringFilter<"Player"> | string
+    createdAt?: DateTimeFilter<"Player"> | Date | string
+    campaignId?: StringFilter<"Player"> | string
+  }
+
   export type NoteUpsertWithWhereUniqueWithoutCampaignInput = {
     where: NoteWhereUniqueInput
     update: XOR<NoteUpdateWithoutCampaignInput, NoteUncheckedUpdateWithoutCampaignInput>
@@ -9197,10 +10787,11 @@ export namespace Prisma {
     id?: StringFilter<"Note"> | string
     title?: StringNullableFilter<"Note"> | string | null
     content?: StringFilter<"Note"> | string
+    type?: EnumNoteTypeFilter<"Note"> | $Enums.NoteType
     createdAt?: DateTimeFilter<"Note"> | Date | string
     updatedAt?: DateTimeFilter<"Note"> | Date | string
     campaignId?: StringFilter<"Note"> | string
-    sessionId?: StringNullableFilter<"Note"> | string | null
+    characterId?: StringNullableFilter<"Note"> | string | null
   }
 
   export type SessionUpsertWithWhereUniqueWithoutCampaignInput = {
@@ -9226,6 +10817,8 @@ export namespace Prisma {
     id?: StringFilter<"Session"> | string
     title?: StringFilter<"Session"> | string
     sessionDate?: DateTimeFilter<"Session"> | Date | string
+    duration?: IntFilter<"Session"> | number
+    description?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
     updatedAt?: DateTimeFilter<"Session"> | Date | string
     campaignId?: StringFilter<"Session"> | string
@@ -9257,15 +10850,134 @@ export namespace Prisma {
     type?: EnumCharacterTypeFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusFilter<"Character"> | $Enums.CharacterStatus
     imageUrl?: StringFilter<"Character"> | string
-    strength?: IntFilter<"Character"> | number
-    dexterity?: IntFilter<"Character"> | number
-    constitution?: IntFilter<"Character"> | number
-    intelligence?: IntFilter<"Character"> | number
-    wisdom?: IntFilter<"Character"> | number
-    charisma?: IntFilter<"Character"> | number
     createdAt?: DateTimeFilter<"Character"> | Date | string
     updatedAt?: DateTimeFilter<"Character"> | Date | string
+    playerId?: StringNullableFilter<"Character"> | string | null
     campaignId?: StringFilter<"Character"> | string
+  }
+
+  export type CampaignCreateWithoutPlayersInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    status?: $Enums.CampaignStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutCampaignsInput
+    notes?: NoteCreateNestedManyWithoutCampaignInput
+    sessions?: SessionCreateNestedManyWithoutCampaignInput
+    characters?: CharacterCreateNestedManyWithoutCampaignInput
+  }
+
+  export type CampaignUncheckedCreateWithoutPlayersInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    status?: $Enums.CampaignStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    notes?: NoteUncheckedCreateNestedManyWithoutCampaignInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutCampaignInput
+    characters?: CharacterUncheckedCreateNestedManyWithoutCampaignInput
+  }
+
+  export type CampaignCreateOrConnectWithoutPlayersInput = {
+    where: CampaignWhereUniqueInput
+    create: XOR<CampaignCreateWithoutPlayersInput, CampaignUncheckedCreateWithoutPlayersInput>
+  }
+
+  export type CharacterCreateWithoutPlayerInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.CharacterType
+    status?: $Enums.CharacterStatus
+    imageUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    notes?: NoteCreateNestedManyWithoutCharacterInput
+    campaign: CampaignCreateNestedOneWithoutCharactersInput
+  }
+
+  export type CharacterUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.CharacterType
+    status?: $Enums.CharacterStatus
+    imageUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    notes?: NoteUncheckedCreateNestedManyWithoutCharacterInput
+  }
+
+  export type CharacterCreateOrConnectWithoutPlayerInput = {
+    where: CharacterWhereUniqueInput
+    create: XOR<CharacterCreateWithoutPlayerInput, CharacterUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type CharacterCreateManyPlayerInputEnvelope = {
+    data: CharacterCreateManyPlayerInput | CharacterCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CampaignUpsertWithoutPlayersInput = {
+    update: XOR<CampaignUpdateWithoutPlayersInput, CampaignUncheckedUpdateWithoutPlayersInput>
+    create: XOR<CampaignCreateWithoutPlayersInput, CampaignUncheckedCreateWithoutPlayersInput>
+    where?: CampaignWhereInput
+  }
+
+  export type CampaignUpdateToOneWithWhereWithoutPlayersInput = {
+    where?: CampaignWhereInput
+    data: XOR<CampaignUpdateWithoutPlayersInput, CampaignUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type CampaignUpdateWithoutPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutCampaignsNestedInput
+    notes?: NoteUpdateManyWithoutCampaignNestedInput
+    sessions?: SessionUpdateManyWithoutCampaignNestedInput
+    characters?: CharacterUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type CampaignUncheckedUpdateWithoutPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    notes?: NoteUncheckedUpdateManyWithoutCampaignNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutCampaignNestedInput
+    characters?: CharacterUncheckedUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type CharacterUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: CharacterWhereUniqueInput
+    update: XOR<CharacterUpdateWithoutPlayerInput, CharacterUncheckedUpdateWithoutPlayerInput>
+    create: XOR<CharacterCreateWithoutPlayerInput, CharacterUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type CharacterUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: CharacterWhereUniqueInput
+    data: XOR<CharacterUpdateWithoutPlayerInput, CharacterUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type CharacterUpdateManyWithWhereWithoutPlayerInput = {
+    where: CharacterScalarWhereInput
+    data: XOR<CharacterUpdateManyMutationInput, CharacterUncheckedUpdateManyWithoutPlayerInput>
   }
 
   export type CampaignCreateWithoutNotesInput = {
@@ -9277,6 +10989,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCampaignsInput
+    players?: PlayerCreateNestedManyWithoutCampaignInput
     sessions?: SessionCreateNestedManyWithoutCampaignInput
     characters?: CharacterCreateNestedManyWithoutCampaignInput
   }
@@ -9290,6 +11003,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    players?: PlayerUncheckedCreateNestedManyWithoutCampaignInput
     sessions?: SessionUncheckedCreateNestedManyWithoutCampaignInput
     characters?: CharacterUncheckedCreateNestedManyWithoutCampaignInput
   }
@@ -9299,27 +11013,35 @@ export namespace Prisma {
     create: XOR<CampaignCreateWithoutNotesInput, CampaignUncheckedCreateWithoutNotesInput>
   }
 
-  export type SessionCreateWithoutNoteInput = {
+  export type CharacterCreateWithoutNotesInput = {
     id?: string
-    title: string
-    sessionDate: Date | string
+    name: string
+    description?: string | null
+    type: $Enums.CharacterType
+    status?: $Enums.CharacterStatus
+    imageUrl: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    campaign: CampaignCreateNestedOneWithoutSessionsInput
+    player?: PlayerCreateNestedOneWithoutCharactersInput
+    campaign: CampaignCreateNestedOneWithoutCharactersInput
   }
 
-  export type SessionUncheckedCreateWithoutNoteInput = {
+  export type CharacterUncheckedCreateWithoutNotesInput = {
     id?: string
-    title: string
-    sessionDate: Date | string
+    name: string
+    description?: string | null
+    type: $Enums.CharacterType
+    status?: $Enums.CharacterStatus
+    imageUrl: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    playerId?: string | null
     campaignId: string
   }
 
-  export type SessionCreateOrConnectWithoutNoteInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutNoteInput, SessionUncheckedCreateWithoutNoteInput>
+  export type CharacterCreateOrConnectWithoutNotesInput = {
+    where: CharacterWhereUniqueInput
+    create: XOR<CharacterCreateWithoutNotesInput, CharacterUncheckedCreateWithoutNotesInput>
   }
 
   export type CampaignUpsertWithoutNotesInput = {
@@ -9342,6 +11064,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCampaignsNestedInput
+    players?: PlayerUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUpdateManyWithoutCampaignNestedInput
   }
@@ -9355,36 +11078,45 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    players?: PlayerUncheckedUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUncheckedUpdateManyWithoutCampaignNestedInput
   }
 
-  export type SessionUpsertWithoutNoteInput = {
-    update: XOR<SessionUpdateWithoutNoteInput, SessionUncheckedUpdateWithoutNoteInput>
-    create: XOR<SessionCreateWithoutNoteInput, SessionUncheckedCreateWithoutNoteInput>
-    where?: SessionWhereInput
+  export type CharacterUpsertWithoutNotesInput = {
+    update: XOR<CharacterUpdateWithoutNotesInput, CharacterUncheckedUpdateWithoutNotesInput>
+    create: XOR<CharacterCreateWithoutNotesInput, CharacterUncheckedCreateWithoutNotesInput>
+    where?: CharacterWhereInput
   }
 
-  export type SessionUpdateToOneWithWhereWithoutNoteInput = {
-    where?: SessionWhereInput
-    data: XOR<SessionUpdateWithoutNoteInput, SessionUncheckedUpdateWithoutNoteInput>
+  export type CharacterUpdateToOneWithWhereWithoutNotesInput = {
+    where?: CharacterWhereInput
+    data: XOR<CharacterUpdateWithoutNotesInput, CharacterUncheckedUpdateWithoutNotesInput>
   }
 
-  export type SessionUpdateWithoutNoteInput = {
+  export type CharacterUpdateWithoutNotesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
+    status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
+    imageUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaign?: CampaignUpdateOneRequiredWithoutSessionsNestedInput
+    player?: PlayerUpdateOneWithoutCharactersNestedInput
+    campaign?: CampaignUpdateOneRequiredWithoutCharactersNestedInput
   }
 
-  export type SessionUncheckedUpdateWithoutNoteInput = {
+  export type CharacterUncheckedUpdateWithoutNotesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
+    status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
+    imageUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
     campaignId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -9397,6 +11129,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCampaignsInput
+    players?: PlayerCreateNestedManyWithoutCampaignInput
     notes?: NoteCreateNestedManyWithoutCampaignInput
     characters?: CharacterCreateNestedManyWithoutCampaignInput
   }
@@ -9410,6 +11143,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    players?: PlayerUncheckedCreateNestedManyWithoutCampaignInput
     notes?: NoteUncheckedCreateNestedManyWithoutCampaignInput
     characters?: CharacterUncheckedCreateNestedManyWithoutCampaignInput
   }
@@ -9417,29 +11151,6 @@ export namespace Prisma {
   export type CampaignCreateOrConnectWithoutSessionsInput = {
     where: CampaignWhereUniqueInput
     create: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
-  }
-
-  export type NoteCreateWithoutSessionInput = {
-    id?: string
-    title?: string | null
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaign: CampaignCreateNestedOneWithoutNotesInput
-  }
-
-  export type NoteUncheckedCreateWithoutSessionInput = {
-    id?: string
-    title?: string | null
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    campaignId: string
-  }
-
-  export type NoteCreateOrConnectWithoutSessionInput = {
-    where: NoteWhereUniqueInput
-    create: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
   }
 
   export type CampaignUpsertWithoutSessionsInput = {
@@ -9462,6 +11173,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCampaignsNestedInput
+    players?: PlayerUpdateManyWithoutCampaignNestedInput
     notes?: NoteUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUpdateManyWithoutCampaignNestedInput
   }
@@ -9475,37 +11187,58 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    players?: PlayerUncheckedUpdateManyWithoutCampaignNestedInput
     notes?: NoteUncheckedUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUncheckedUpdateManyWithoutCampaignNestedInput
   }
 
-  export type NoteUpsertWithoutSessionInput = {
-    update: XOR<NoteUpdateWithoutSessionInput, NoteUncheckedUpdateWithoutSessionInput>
-    create: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
-    where?: NoteWhereInput
+  export type NoteCreateWithoutCharacterInput = {
+    id?: string
+    title?: string | null
+    content: string
+    type?: $Enums.NoteType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign: CampaignCreateNestedOneWithoutNotesInput
   }
 
-  export type NoteUpdateToOneWithWhereWithoutSessionInput = {
-    where?: NoteWhereInput
-    data: XOR<NoteUpdateWithoutSessionInput, NoteUncheckedUpdateWithoutSessionInput>
+  export type NoteUncheckedCreateWithoutCharacterInput = {
+    id?: string
+    title?: string | null
+    content: string
+    type?: $Enums.NoteType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
   }
 
-  export type NoteUpdateWithoutSessionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaign?: CampaignUpdateOneRequiredWithoutNotesNestedInput
+  export type NoteCreateOrConnectWithoutCharacterInput = {
+    where: NoteWhereUniqueInput
+    create: XOR<NoteCreateWithoutCharacterInput, NoteUncheckedCreateWithoutCharacterInput>
   }
 
-  export type NoteUncheckedUpdateWithoutSessionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    campaignId?: StringFieldUpdateOperationsInput | string
+  export type NoteCreateManyCharacterInputEnvelope = {
+    data: NoteCreateManyCharacterInput | NoteCreateManyCharacterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlayerCreateWithoutCharactersInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    campaign: CampaignCreateNestedOneWithoutPlayersInput
+  }
+
+  export type PlayerUncheckedCreateWithoutCharactersInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    campaignId: string
+  }
+
+  export type PlayerCreateOrConnectWithoutCharactersInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutCharactersInput, PlayerUncheckedCreateWithoutCharactersInput>
   }
 
   export type CampaignCreateWithoutCharactersInput = {
@@ -9517,6 +11250,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutCampaignsInput
+    players?: PlayerCreateNestedManyWithoutCampaignInput
     notes?: NoteCreateNestedManyWithoutCampaignInput
     sessions?: SessionCreateNestedManyWithoutCampaignInput
   }
@@ -9530,6 +11264,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    players?: PlayerUncheckedCreateNestedManyWithoutCampaignInput
     notes?: NoteUncheckedCreateNestedManyWithoutCampaignInput
     sessions?: SessionUncheckedCreateNestedManyWithoutCampaignInput
   }
@@ -9537,6 +11272,47 @@ export namespace Prisma {
   export type CampaignCreateOrConnectWithoutCharactersInput = {
     where: CampaignWhereUniqueInput
     create: XOR<CampaignCreateWithoutCharactersInput, CampaignUncheckedCreateWithoutCharactersInput>
+  }
+
+  export type NoteUpsertWithWhereUniqueWithoutCharacterInput = {
+    where: NoteWhereUniqueInput
+    update: XOR<NoteUpdateWithoutCharacterInput, NoteUncheckedUpdateWithoutCharacterInput>
+    create: XOR<NoteCreateWithoutCharacterInput, NoteUncheckedCreateWithoutCharacterInput>
+  }
+
+  export type NoteUpdateWithWhereUniqueWithoutCharacterInput = {
+    where: NoteWhereUniqueInput
+    data: XOR<NoteUpdateWithoutCharacterInput, NoteUncheckedUpdateWithoutCharacterInput>
+  }
+
+  export type NoteUpdateManyWithWhereWithoutCharacterInput = {
+    where: NoteScalarWhereInput
+    data: XOR<NoteUpdateManyMutationInput, NoteUncheckedUpdateManyWithoutCharacterInput>
+  }
+
+  export type PlayerUpsertWithoutCharactersInput = {
+    update: XOR<PlayerUpdateWithoutCharactersInput, PlayerUncheckedUpdateWithoutCharactersInput>
+    create: XOR<PlayerCreateWithoutCharactersInput, PlayerUncheckedCreateWithoutCharactersInput>
+    where?: PlayerWhereInput
+  }
+
+  export type PlayerUpdateToOneWithWhereWithoutCharactersInput = {
+    where?: PlayerWhereInput
+    data: XOR<PlayerUpdateWithoutCharactersInput, PlayerUncheckedUpdateWithoutCharactersInput>
+  }
+
+  export type PlayerUpdateWithoutCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneRequiredWithoutPlayersNestedInput
+  }
+
+  export type PlayerUncheckedUpdateWithoutCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CampaignUpsertWithoutCharactersInput = {
@@ -9559,6 +11335,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutCampaignsNestedInput
+    players?: PlayerUpdateManyWithoutCampaignNestedInput
     notes?: NoteUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUpdateManyWithoutCampaignNestedInput
   }
@@ -9572,6 +11349,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    players?: PlayerUncheckedUpdateManyWithoutCampaignNestedInput
     notes?: NoteUncheckedUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutCampaignNestedInput
   }
@@ -9594,6 +11372,7 @@ export namespace Prisma {
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    players?: PlayerUpdateManyWithoutCampaignNestedInput
     notes?: NoteUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUpdateManyWithoutCampaignNestedInput
@@ -9607,6 +11386,7 @@ export namespace Prisma {
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    players?: PlayerUncheckedUpdateManyWithoutCampaignNestedInput
     notes?: NoteUncheckedUpdateManyWithoutCampaignNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutCampaignNestedInput
     characters?: CharacterUncheckedUpdateManyWithoutCampaignNestedInput
@@ -9622,19 +11402,28 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PlayerCreateManyCampaignInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+  }
+
   export type NoteCreateManyCampaignInput = {
     id?: string
     title?: string | null
     content: string
+    type?: $Enums.NoteType
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessionId?: string | null
+    characterId?: string | null
   }
 
   export type SessionCreateManyCampaignInput = {
     id?: string
     title: string
     sessionDate: Date | string
+    duration: number
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9646,65 +11435,87 @@ export namespace Prisma {
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
     imageUrl: string
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    playerId?: string | null
+  }
+
+  export type PlayerUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    characters?: CharacterUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    characters?: CharacterUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateManyWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NoteUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    session?: SessionUpdateOneWithoutNoteNestedInput
+    character?: CharacterUpdateOneWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    characterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NoteUncheckedUpdateManyWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    characterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NoteUpdateOneWithoutSessionNestedInput
   }
 
   export type SessionUncheckedUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    note?: NoteUncheckedUpdateOneWithoutSessionNestedInput
   }
 
   export type SessionUncheckedUpdateManyWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9716,14 +11527,10 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUpdateManyWithoutCharacterNestedInput
+    player?: PlayerUpdateOneWithoutCharactersNestedInput
   }
 
   export type CharacterUncheckedUpdateWithoutCampaignInput = {
@@ -9733,14 +11540,10 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NoteUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterUncheckedUpdateManyWithoutCampaignInput = {
@@ -9750,14 +11553,99 @@ export namespace Prisma {
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
     imageUrl?: StringFieldUpdateOperationsInput | string
-    strength?: IntFieldUpdateOperationsInput | number
-    dexterity?: IntFieldUpdateOperationsInput | number
-    constitution?: IntFieldUpdateOperationsInput | number
-    intelligence?: IntFieldUpdateOperationsInput | number
-    wisdom?: IntFieldUpdateOperationsInput | number
-    charisma?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CharacterCreateManyPlayerInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.CharacterType
+    status?: $Enums.CharacterStatus
+    imageUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+  }
+
+  export type CharacterUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
+    status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUpdateManyWithoutCharacterNestedInput
+    campaign?: CampaignUpdateOneRequiredWithoutCharactersNestedInput
+  }
+
+  export type CharacterUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
+    status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    notes?: NoteUncheckedUpdateManyWithoutCharacterNestedInput
+  }
+
+  export type CharacterUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
+    status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NoteCreateManyCharacterInput = {
+    id?: string
+    title?: string | null
+    content: string
+    type?: $Enums.NoteType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+  }
+
+  export type NoteUpdateWithoutCharacterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneRequiredWithoutNotesNestedInput
+  }
+
+  export type NoteUncheckedUpdateWithoutCharacterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NoteUncheckedUpdateManyWithoutCharacterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
   }
 
 

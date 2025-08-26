@@ -45,7 +45,31 @@
   --accent: var(--silver-light);
 } */
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--crimson-dark);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--crimson-dark);
+}
+
+/* Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--crimson-dark) transparent;
+}
 
 * {
   box-sizing: border-box;
