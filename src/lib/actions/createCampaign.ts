@@ -8,9 +8,10 @@ import { generateSlug } from "../utils/slugify"
 type CampaignInput = {
     name: string
     description?: string
+    system: string
 }
 
-export async function createCampaign({name, description}: CampaignInput) {
+export async function createCampaign({name, description, system}: CampaignInput) {
     const session = await getServerSession(authOptions)
     if (!session) {
         throw new Error('Usuário não encontrado')
@@ -25,6 +26,7 @@ export async function createCampaign({name, description}: CampaignInput) {
         data: {
             name,
             description,
+            system,
             slug,
             ownerId: session.user.id,
         }

@@ -1,0 +1,36 @@
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, auto);
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Linha 1 */
+.summary {
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+
+/* Linhas 2–3 */
+.activity {
+  grid-column: 1 / 3;
+  grid-row: 2 / 4;
+}
+
+.quickActions {
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+}
+
+/* Linha 4 */
+.characters {
+  grid-column: 1 / 3;
+  grid-row: 4 / 6;
+}
+
+.stats {
+  grid-column: 3 / 4;
+  grid-row: 4 / 6;
+}
+

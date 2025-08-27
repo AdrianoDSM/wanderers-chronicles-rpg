@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
 import { Shell } from "../providers/Shell";
-import { CreateCampaignModal } from "@/components/CreateCampaignModal/createCampaignModal";
-import styles from './dashboard/dashboard.module.css'
+import { CreateCampaignModal } from "@/components/Modals/CreateCampaignModal/createCampaignModal";
+import styles from "./dashboard/dashboard.module.css";
 import { AsideWrapper } from "@/components/AsideWrapper/AsideWrapper";
 import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
 import { CollapseAsideButtonWrapper } from "@/components/CollapseAsideButton/CollapseAsideButtonWrapper";
@@ -15,7 +15,7 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  const campaigns = await getUserCampaigns()
+  const campaigns = await getUserCampaigns();
 
   if (!session) {
     redirect("/login");
@@ -26,7 +26,7 @@ export default async function DashboardLayout({
       <div className={styles.dashboardWrapper}>
         <AsideWrapper campaigns={campaigns} />
         <div className={styles.dashboardContent}>
-          <CollapseAsideButtonWrapper/>
+          <CollapseAsideButtonWrapper />
           <main className={styles.mainWrapper}>{children}</main>
         </div>
         <CreateCampaignModal />

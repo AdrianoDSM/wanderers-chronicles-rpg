@@ -12,6 +12,7 @@ export async function getUserCampaigns() {
       id: true,
       name: true,
       slug: true,
+      system: true,
       createdAt: true,
       updatedAt: true,
       description: true,

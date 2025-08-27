@@ -1,5 +1,5 @@
-import { Header } from "@/components/Header/header";
-import { Hero } from "@/components/Hero/hero";
+import { Header } from "@/components/LandingPage/Header/header";
+import { Hero } from "@/components/LandingPage/Hero/hero";
 
 
 export default function Home() {

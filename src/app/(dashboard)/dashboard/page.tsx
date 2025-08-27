@@ -1,7 +1,7 @@
-import { CampaignDetails } from "@/components/CampaignDetails/CampaignDetails";
-import { CampaignList } from "@/components/CampaignList/CampaignList";
+import { CampaignDetails } from "@/components/DashboardPage/CampaignDetails/CampaignDetails";
 import styles from "./dashboard.module.css";
-import { DashboardHeader } from "@/components/DashboardHeader/dashboardHeader";
+import { DashboardHeader } from "@/components/DashboardPage/DashboardHeader/dashboardHeader";
+import { CampaignList } from "@/components/DashboardPage/CampaignList/CampaignList";
 
 export default function DashboardPage() {
   return (

@@ -133,6 +133,7 @@ exports.Prisma.CampaignScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
+  system: 'system',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -143,6 +144,7 @@ exports.Prisma.PlayerScalarFieldEnum = {
   id: 'id',
   name: 'name',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   campaignId: 'campaignId'
 };
 

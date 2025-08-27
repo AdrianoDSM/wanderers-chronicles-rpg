@@ -1,9 +1,9 @@
 import Image from "next/image";
 import styles from "./dashboardAside.module.css";
-import { SidebarCampaignMenu } from "../SidebarCampaignMenu/sidebarCampaignMenu";
-import { UserInfo } from "../SidebarUserInfo/sidebarUserInfo";
+import { SidebarCampaignMenu } from "./SidebarCampaignMenu/sidebarCampaignMenu";
+import { SidebarUserInfo } from "./SidebarUserInfo/sidebarUserInfo";
 import { Settings } from "lucide-react";
-import { LogoutButton } from "../LogoutButton/logoutButton";
+import { LogoutButton } from "./LogoutButton/logoutButton";
 import type { Campaign } from "@/generated/prisma";
 
 export function DashboardAside ({campaigns}: {campaigns: Campaign[]}) {
@@ -22,7 +22,7 @@ export function DashboardAside ({campaigns}: {campaigns: Campaign[]}) {
           <p className={styles.subtitle}>Your Chronicles</p>
         </div>
       </div>
-      <UserInfo />
+      <SidebarUserInfo />
         <SidebarCampaignMenu campaigns={campaigns} />
       <div className={styles.footer}>
         <button className={styles.footerButton}>

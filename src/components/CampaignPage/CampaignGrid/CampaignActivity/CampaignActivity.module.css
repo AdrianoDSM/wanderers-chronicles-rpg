@@ -1,0 +1,164 @@
+.activityContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 700px;
+    background-color: var(--graphite-light);
+    padding: 1rem;
+    border-radius: 20px;
+    border: 2px solid var(--crimson-dark);
+    gap: 1rem;
+}
+
+.activityTitle {
+    color: var(--crimson-dark);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    margin: 0 1rem;
+    border-bottom: 1px solid var(--crimson-dark);
+}
+
+.lastsSessionsDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--graphite);
+    border-radius: 10px;
+    padding: 1rem;
+    gap: 1rem;
+    height: 45%;
+    border: 1px solid var(--silver-dark);
+}
+
+.lastsSessionsTitle {
+    color: var(--crimson-dark);
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.sessionCardWrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.sessionCard {
+    flex: 1;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--graphite-light);
+    border: 1px solid var(--silver-dark);
+    border-radius: 10px;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.sessionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titleSession {
+    color: var(--crimson);
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.dateSession {
+    font-size: 0.75rem;
+}
+
+.descriptionDiv {
+    font-size: 0.8rem;
+    height: 80%;
+    padding: 0.2rem 0.4rem;
+}
+
+.durationDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--crimson-dark);
+}
+
+.duration {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.durationDiv span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.recentNotesDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--graphite);
+    border-radius: 10px;
+    padding: 1rem;
+    gap: 1rem;
+    height: 45%;
+    border: 1px solid var(--silver-dark);
+}
+
+.recentNotesTitle {
+    color: var(--crimson-dark);
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.recentNotesCardWrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 100%;
+    height: 80%;
+}
+
+.recentNotesCard {
+    width: 30%;
+    height: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--graphite-light);
+    border: 1px solid var(--silver-dark);
+    border-radius: 10px;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.notesHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.typeNotesDiv{
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--crimson-dark);
+}
+
+.typeNotes {
+    background-color: var(--crimson-dark);
+    color: var(--silver);
+    border-radius: 20px;
+    padding: 0.25rem 0.5rem;
+}
+
+.dateNotes {
+    font-size: 0.75rem;
+}

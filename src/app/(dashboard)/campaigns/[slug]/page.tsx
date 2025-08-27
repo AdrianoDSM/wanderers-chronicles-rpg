@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 // import styles from './campaign.module.css'
-import CampaignGrid from "@/components/CampaignGrid/CampaignGrid";
+import CampaignGrid from "@/components/CampaignPage/CampaignGrid/CampaignGrid";
 
 interface Props {
   params: { slug: string };
@@ -30,7 +30,5 @@ export default async function CampaignsPage({ params }: Props) {
     notFound();
   }
 
-  return (
-    <CampaignGrid campaign={campaign}/>
-  );
+  return <CampaignGrid campaign={campaign} />;
 }
