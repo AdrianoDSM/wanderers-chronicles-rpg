@@ -1,0 +1,156 @@
+.charactersContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 700px;
+    background-color: var(--graphite-light);
+    padding: 1rem;
+    border-radius: 20px;
+    border: 2px solid var(--crimson-dark);
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--crimson-dark);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    margin: 0 1rem;
+    border-bottom: 1px solid var(--crimson-dark);
+}
+
+.navTabs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 5rem;
+    height: 2rem;
+    background-color: var(--graphite);
+}
+
+.charactersContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.contentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.characterPages {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.characterPages button {
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--graphite);
+    transition: 0.2s all ease;
+}
+
+.characterPages button:hover {
+    background-color: var(--crimson-dark);
+}
+
+.charactersWrapper {
+    display: flex;
+    gap: 1rem;
+    background-color: var(--graphite);
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--silver-dark);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    height: 100%;
+    min-height: 300px;
+    background-color: var(--graphite-light);
+    border: 1px solid var(--silver-dark);
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.characterContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.characterStats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 95%;
+    width: 75%;
+    background-color: var(--graphite);
+    gap: 0.5rem;
+    border: 1px solid var(--crimson-dark);
+    border-radius: 5px;
+}
+
+.characterName {
+    color: var(--crimson-dark);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.characterMainStats {
+    display: flex;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.mainStat {
+    padding: 0.3rem;
+    background-color: var(--crimson-dark);
+    color: var(--silver-light);
+    border-radius: 20px;
+}
+
+.characterDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 50%;
+    background-color: var(--crimson-dark);
+    border-radius: 5px;
+    color: var(--silver-light);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.characterDetails:hover {
+    background-color: var(--crimson);
+}

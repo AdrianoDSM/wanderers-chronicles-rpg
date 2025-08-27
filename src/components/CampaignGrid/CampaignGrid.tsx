@@ -1,8 +1,10 @@
-import type { CampaignStatus, Character, Note, Session } from '@/generated/prisma';
+import { CampaignStatus, Character, Note, Session } from '@/generated/prisma';
 import styles from './CampaignGrid.module.css';
 import CampaignSummary from '../CampaignSummary/CampaignSummary';
 import CampaignActivity from '../CampaignActivity/CampaignActivity';
 import CampaignQuickActions from '../CampaignQuickActions/CampaignQuickActions';
+import CampaignCharacters from '../CampaignCharacters/CampaignCharacters';
+import CampaignStats from '../CampaignStats/CampaignStats';
 
 type CampaignProps = {
   name: string;
@@ -20,9 +22,8 @@ export default function CampaignGrid({campaign}: {campaign: CampaignProps}) {
       <div className={styles.summary}><CampaignSummary campaign={campaign}/></div>
       <div className={styles.activity}><CampaignActivity/></div>
       <div className={styles.quickActions}><CampaignQuickActions/></div>
-      <div className={styles.characters}>Personagens</div>
-      <div className={styles.stats}>Estatísticas da Campanha</div>
-      <div className={styles.ideas}>Notas / Inspiração</div>
+      <div className={styles.characters}><CampaignCharacters/></div>
+      <div className={styles.stats}><CampaignStats/></div>
     </div>
   );
 }
