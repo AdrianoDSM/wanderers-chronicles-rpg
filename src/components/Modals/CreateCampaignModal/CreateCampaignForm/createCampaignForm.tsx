@@ -9,6 +9,8 @@ import { z } from "zod";
 import styles from "./createCampaignForm.module.css";
 import { rpgSystems } from "@/constants/rpgSystem";
 import { useCampaignFormStore } from "@/store/useCampaignFormStore";
+import { useCampaignPlayersStore } from "@/store/useCampaignPlayersStore";
+import { useMutation } from "@tanstack/react-query";
 
 export const createCampaignSchema = z.object({
   name: z.string().min(1, { message: "Nome obrigatório" }),
@@ -17,11 +19,22 @@ export const createCampaignSchema = z.object({
     .max(450, { message: "Máximo de 450 caracteres" })
     .optional(),
   system: z.string().min(2, { message: "Sistema obrigatório" }),
+  players: z.array(z.string().min(1, { message: "Nome do jogador obrigatório"}))
+  .min(1, { message: "É necessário pelo menos 1 jogador" })
+  .max(10, { message: "Máximo de 10 jogadores permitidos" }),
 });
 
 type CreateCampaignInput = z.infer<typeof createCampaignSchema>;
 
 export function CreateCampaignForm() {
+  const {
+    playerCount,
+    playerNames,
+    setPlayerCount,
+    setPlayerName,
+    resetPlayers,
+  } = useCampaignPlayersStore()
+
   const {
     customSystem,
     setCustomSystem,
@@ -32,7 +45,7 @@ export function CreateCampaignForm() {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<CreateCampaignInput>({
     resolver: zodResolver(createCampaignSchema),
   });
@@ -40,23 +53,27 @@ export function CreateCampaignForm() {
   const router = useRouter();
   const selectedSystem = watch('system');
   const finalSystem = selectedSystem === "Outros" ? customSystem : selectedSystem;
+  const description = watch("description") || "";
 
-  const onSubmit = async (data: CreateCampaignInput) => {
-    try {
-      const campaign = await createCampaign({
-        ...data,
-        system: finalSystem,
-      });
+  const mutation = useMutation({
+    mutationFn: createCampaign,
+    onSuccess: (campaign: { slug: string; }) => {
       toast.success("Campanha criada com sucesso!");
       resetCustomSystem();
-      router.push(`/campaigns/${campaign.slug}`);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("Erro ao criar campanha");
-      }
-    }
+      resetPlayers();
+      router.push(`/campaigns/${campaign.slug}`)
+    },
+    onError: (error: unknown) => {
+      toast.error(error instanceof Error ? error.message : "Erro ao criar campanha")
+    },
+  });
+
+  const onSubmit = (data: CreateCampaignInput) => {
+    mutation.mutate({ 
+      ...data, 
+      system: finalSystem,
+      players: playerNames,
+    })
   };
 
   function autoResize(e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -64,7 +81,7 @@ export function CreateCampaignForm() {
     e.target.style.height = `${e.target.scrollHeight}px`;
   }
 
-  const description = watch("description") || "";
+  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -124,9 +141,42 @@ export function CreateCampaignForm() {
           />
         </div>
       )}
+      <div className={styles.formItem}>
+        <label className={styles.label} htmlFor="playerCount">Número de Jogadores</label>
+        <input
+          id="playerCount"
+          type="number"
+          min={1}
+          max={10}
+          value={playerCount || ""}
+          onChange={(e) => {
+            const raw = Number(e.target.value);
+            const safe = Math.min(Math.max(raw, 1), 10)
+            setPlayerCount(safe);
+          }}
+          onWheel={(e) => e.currentTarget.blur()}
+          className={styles.input}
+          required
+        />
+      </div>
 
-      <button type="submit" disabled={isSubmitting} className={styles.button}>
-        Criar Campanha
+      {playerNames.map((name, index) => (
+        <div key={index} className={styles.formItem}>
+          <label className={styles.label}>Jogador {index + 1}</label>
+          <input
+            value={name}
+            onChange={(e) => setPlayerName(index, e.target.value)}
+            className={styles.input}
+            placeholder={`Nome do jogador ${index + 1}`}
+            required
+          />
+          {errors.players?.[index] && (
+            <p className={styles.error}>{errors.players[index]?.message}</p>
+          )}
+        </div>
+      ))}
+      <button type="submit" disabled={mutation.isPending} className={styles.button}>
+        {mutation.isPending ? "Criando..." : "Criar Campanha"}
       </button>
     </form>
   );

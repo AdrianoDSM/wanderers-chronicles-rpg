@@ -23,7 +23,7 @@ model Campaign {
   name        String
   slug        String         @unique
   description String?
-  system      String          @default("D&D 5e")
+  system      String         @default("D&D 5e")
   status      CampaignStatus @default(ACTIVE)
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
@@ -41,7 +41,7 @@ model Player {
   id        String   @id @default(cuid())
   name      String
   createdAt DateTime @default(now())
-  updatedAt   DateTime       @updatedAt
+  updatedAt DateTime @updatedAt
 
   campaignId String
   campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
@@ -81,6 +81,9 @@ model Session {
 model Character {
   id          String          @id @default(cuid())
   name        String
+  race        String?
+  class       String?
+  level       Int?
   description String?
   type        CharacterType
   status      CharacterStatus @default(ALIVE)

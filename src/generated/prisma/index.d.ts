@@ -7122,13 +7122,26 @@ export namespace Prisma {
 
   export type AggregateCharacter = {
     _count: CharacterCountAggregateOutputType | null
+    _avg: CharacterAvgAggregateOutputType | null
+    _sum: CharacterSumAggregateOutputType | null
     _min: CharacterMinAggregateOutputType | null
     _max: CharacterMaxAggregateOutputType | null
+  }
+
+  export type CharacterAvgAggregateOutputType = {
+    level: number | null
+  }
+
+  export type CharacterSumAggregateOutputType = {
+    level: number | null
   }
 
   export type CharacterMinAggregateOutputType = {
     id: string | null
     name: string | null
+    race: string | null
+    class: string | null
+    level: number | null
     description: string | null
     type: $Enums.CharacterType | null
     status: $Enums.CharacterStatus | null
@@ -7142,6 +7155,9 @@ export namespace Prisma {
   export type CharacterMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    race: string | null
+    class: string | null
+    level: number | null
     description: string | null
     type: $Enums.CharacterType | null
     status: $Enums.CharacterStatus | null
@@ -7155,6 +7171,9 @@ export namespace Prisma {
   export type CharacterCountAggregateOutputType = {
     id: number
     name: number
+    race: number
+    class: number
+    level: number
     description: number
     type: number
     status: number
@@ -7167,9 +7186,20 @@ export namespace Prisma {
   }
 
 
+  export type CharacterAvgAggregateInputType = {
+    level?: true
+  }
+
+  export type CharacterSumAggregateInputType = {
+    level?: true
+  }
+
   export type CharacterMinAggregateInputType = {
     id?: true
     name?: true
+    race?: true
+    class?: true
+    level?: true
     description?: true
     type?: true
     status?: true
@@ -7183,6 +7213,9 @@ export namespace Prisma {
   export type CharacterMaxAggregateInputType = {
     id?: true
     name?: true
+    race?: true
+    class?: true
+    level?: true
     description?: true
     type?: true
     status?: true
@@ -7196,6 +7229,9 @@ export namespace Prisma {
   export type CharacterCountAggregateInputType = {
     id?: true
     name?: true
+    race?: true
+    class?: true
+    level?: true
     description?: true
     type?: true
     status?: true
@@ -7245,6 +7281,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CharacterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CharacterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CharacterMinAggregateInputType
@@ -7275,6 +7323,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CharacterCountAggregateInputType | true
+    _avg?: CharacterAvgAggregateInputType
+    _sum?: CharacterSumAggregateInputType
     _min?: CharacterMinAggregateInputType
     _max?: CharacterMaxAggregateInputType
   }
@@ -7282,6 +7332,9 @@ export namespace Prisma {
   export type CharacterGroupByOutputType = {
     id: string
     name: string
+    race: string | null
+    class: string | null
+    level: number | null
     description: string | null
     type: $Enums.CharacterType
     status: $Enums.CharacterStatus
@@ -7291,6 +7344,8 @@ export namespace Prisma {
     playerId: string | null
     campaignId: string
     _count: CharacterCountAggregateOutputType | null
+    _avg: CharacterAvgAggregateOutputType | null
+    _sum: CharacterSumAggregateOutputType | null
     _min: CharacterMinAggregateOutputType | null
     _max: CharacterMaxAggregateOutputType | null
   }
@@ -7312,6 +7367,9 @@ export namespace Prisma {
   export type CharacterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    race?: boolean
+    class?: boolean
+    level?: boolean
     description?: boolean
     type?: boolean
     status?: boolean
@@ -7329,6 +7387,9 @@ export namespace Prisma {
   export type CharacterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    race?: boolean
+    class?: boolean
+    level?: boolean
     description?: boolean
     type?: boolean
     status?: boolean
@@ -7344,6 +7405,9 @@ export namespace Prisma {
   export type CharacterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    race?: boolean
+    class?: boolean
+    level?: boolean
     description?: boolean
     type?: boolean
     status?: boolean
@@ -7359,6 +7423,9 @@ export namespace Prisma {
   export type CharacterSelectScalar = {
     id?: boolean
     name?: boolean
+    race?: boolean
+    class?: boolean
+    level?: boolean
     description?: boolean
     type?: boolean
     status?: boolean
@@ -7369,7 +7436,7 @@ export namespace Prisma {
     campaignId?: boolean
   }
 
-  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type" | "status" | "imageUrl" | "createdAt" | "updatedAt" | "playerId" | "campaignId", ExtArgs["result"]["character"]>
+  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "race" | "class" | "level" | "description" | "type" | "status" | "imageUrl" | "createdAt" | "updatedAt" | "playerId" | "campaignId", ExtArgs["result"]["character"]>
   export type CharacterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     notes?: boolean | Character$notesArgs<ExtArgs>
     player?: boolean | Character$playerArgs<ExtArgs>
@@ -7395,6 +7462,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      race: string | null
+      class: string | null
+      level: number | null
       description: string | null
       type: $Enums.CharacterType
       status: $Enums.CharacterStatus
@@ -7831,6 +7901,9 @@ export namespace Prisma {
   interface CharacterFieldRefs {
     readonly id: FieldRef<"Character", 'String'>
     readonly name: FieldRef<"Character", 'String'>
+    readonly race: FieldRef<"Character", 'String'>
+    readonly class: FieldRef<"Character", 'String'>
+    readonly level: FieldRef<"Character", 'Int'>
     readonly description: FieldRef<"Character", 'String'>
     readonly type: FieldRef<"Character", 'CharacterType'>
     readonly status: FieldRef<"Character", 'CharacterStatus'>
@@ -8378,6 +8451,9 @@ export namespace Prisma {
   export const CharacterScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    race: 'race',
+    class: 'class',
+    level: 'level',
     description: 'description',
     type: 'type',
     status: 'status',
@@ -8886,6 +8962,9 @@ export namespace Prisma {
     NOT?: CharacterWhereInput | CharacterWhereInput[]
     id?: StringFilter<"Character"> | string
     name?: StringFilter<"Character"> | string
+    race?: StringNullableFilter<"Character"> | string | null
+    class?: StringNullableFilter<"Character"> | string | null
+    level?: IntNullableFilter<"Character"> | number | null
     description?: StringNullableFilter<"Character"> | string | null
     type?: EnumCharacterTypeFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusFilter<"Character"> | $Enums.CharacterStatus
@@ -8902,6 +8981,9 @@ export namespace Prisma {
   export type CharacterOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    race?: SortOrderInput | SortOrder
+    class?: SortOrderInput | SortOrder
+    level?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     type?: SortOrder
     status?: SortOrder
@@ -8922,6 +9004,9 @@ export namespace Prisma {
     OR?: CharacterWhereInput[]
     NOT?: CharacterWhereInput | CharacterWhereInput[]
     name?: StringFilter<"Character"> | string
+    race?: StringNullableFilter<"Character"> | string | null
+    class?: StringNullableFilter<"Character"> | string | null
+    level?: IntNullableFilter<"Character"> | number | null
     description?: StringNullableFilter<"Character"> | string | null
     type?: EnumCharacterTypeFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusFilter<"Character"> | $Enums.CharacterStatus
@@ -8937,6 +9022,9 @@ export namespace Prisma {
   export type CharacterOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    race?: SortOrderInput | SortOrder
+    class?: SortOrderInput | SortOrder
+    level?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     type?: SortOrder
     status?: SortOrder
@@ -8946,8 +9034,10 @@ export namespace Prisma {
     playerId?: SortOrderInput | SortOrder
     campaignId?: SortOrder
     _count?: CharacterCountOrderByAggregateInput
+    _avg?: CharacterAvgOrderByAggregateInput
     _max?: CharacterMaxOrderByAggregateInput
     _min?: CharacterMinOrderByAggregateInput
+    _sum?: CharacterSumOrderByAggregateInput
   }
 
   export type CharacterScalarWhereWithAggregatesInput = {
@@ -8956,6 +9046,9 @@ export namespace Prisma {
     NOT?: CharacterScalarWhereWithAggregatesInput | CharacterScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Character"> | string
     name?: StringWithAggregatesFilter<"Character"> | string
+    race?: StringNullableWithAggregatesFilter<"Character"> | string | null
+    class?: StringNullableWithAggregatesFilter<"Character"> | string | null
+    level?: IntNullableWithAggregatesFilter<"Character"> | number | null
     description?: StringNullableWithAggregatesFilter<"Character"> | string | null
     type?: EnumCharacterTypeWithAggregatesFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusWithAggregatesFilter<"Character"> | $Enums.CharacterStatus
@@ -9338,6 +9431,9 @@ export namespace Prisma {
   export type CharacterCreateInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -9352,6 +9448,9 @@ export namespace Prisma {
   export type CharacterUncheckedCreateInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -9366,6 +9465,9 @@ export namespace Prisma {
   export type CharacterUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -9380,6 +9482,9 @@ export namespace Prisma {
   export type CharacterUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -9394,6 +9499,9 @@ export namespace Prisma {
   export type CharacterCreateManyInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -9407,6 +9515,9 @@ export namespace Prisma {
   export type CharacterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -9418,6 +9529,9 @@ export namespace Prisma {
   export type CharacterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -9808,6 +9922,17 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type EnumCharacterTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.CharacterType | EnumCharacterTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
@@ -9830,6 +9955,9 @@ export namespace Prisma {
   export type CharacterCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    race?: SortOrder
+    class?: SortOrder
+    level?: SortOrder
     description?: SortOrder
     type?: SortOrder
     status?: SortOrder
@@ -9840,9 +9968,16 @@ export namespace Prisma {
     campaignId?: SortOrder
   }
 
+  export type CharacterAvgOrderByAggregateInput = {
+    level?: SortOrder
+  }
+
   export type CharacterMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    race?: SortOrder
+    class?: SortOrder
+    level?: SortOrder
     description?: SortOrder
     type?: SortOrder
     status?: SortOrder
@@ -9856,6 +9991,9 @@ export namespace Prisma {
   export type CharacterMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    race?: SortOrder
+    class?: SortOrder
+    level?: SortOrder
     description?: SortOrder
     type?: SortOrder
     status?: SortOrder
@@ -9864,6 +10002,26 @@ export namespace Prisma {
     updatedAt?: SortOrder
     playerId?: SortOrder
     campaignId?: SortOrder
+  }
+
+  export type CharacterSumOrderByAggregateInput = {
+    level?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumCharacterTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10254,6 +10412,14 @@ export namespace Prisma {
     connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type EnumCharacterTypeFieldUpdateOperationsInput = {
     set?: $Enums.CharacterType
   }
@@ -10492,6 +10658,33 @@ export namespace Prisma {
     not?: NestedEnumCharacterStatusFilter<$PrismaModel> | $Enums.CharacterStatus
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumCharacterTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.CharacterType | EnumCharacterTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
@@ -10693,6 +10886,9 @@ export namespace Prisma {
   export type CharacterCreateWithoutCampaignInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -10706,6 +10902,9 @@ export namespace Prisma {
   export type CharacterUncheckedCreateWithoutCampaignInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -10862,6 +11061,9 @@ export namespace Prisma {
     NOT?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
     id?: StringFilter<"Character"> | string
     name?: StringFilter<"Character"> | string
+    race?: StringNullableFilter<"Character"> | string | null
+    class?: StringNullableFilter<"Character"> | string | null
+    level?: IntNullableFilter<"Character"> | number | null
     description?: StringNullableFilter<"Character"> | string | null
     type?: EnumCharacterTypeFilter<"Character"> | $Enums.CharacterType
     status?: EnumCharacterStatusFilter<"Character"> | $Enums.CharacterStatus
@@ -10910,6 +11112,9 @@ export namespace Prisma {
   export type CharacterCreateWithoutPlayerInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -10923,6 +11128,9 @@ export namespace Prisma {
   export type CharacterUncheckedCreateWithoutPlayerInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -10993,6 +11201,9 @@ export namespace Prisma {
   export type CharacterUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -11006,6 +11217,9 @@ export namespace Prisma {
   export type CharacterUncheckedUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -11054,6 +11268,9 @@ export namespace Prisma {
   export type CharacterCreateWithoutNotesInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -11067,6 +11284,9 @@ export namespace Prisma {
   export type CharacterUncheckedCreateWithoutNotesInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -11137,6 +11357,9 @@ export namespace Prisma {
   export type CharacterUpdateWithoutNotesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -11150,6 +11373,9 @@ export namespace Prisma {
   export type CharacterUncheckedUpdateWithoutNotesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -11488,6 +11714,9 @@ export namespace Prisma {
   export type CharacterCreateManyCampaignInput = {
     id?: string
     name: string
+    race?: string | null
+    class?: string | null
+    level?: number | null
     description?: string | null
     type: $Enums.CharacterType
     status?: $Enums.CharacterStatus
@@ -11583,6 +11812,9 @@ export namespace Prisma {
   export type CharacterUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -11596,6 +11828,9 @@ export namespace Prisma {
   export type CharacterUncheckedUpdateWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus
@@ -11609,6 +11844,9 @@ export namespace Prisma {
   export type CharacterUncheckedUpdateManyWithoutCampaignInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    race?: NullableStringFieldUpdateOperationsInput | string | null
+    class?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumCharacterTypeFieldUpdateOperationsInput | $Enums.CharacterType
     status?: EnumCharacterStatusFieldUpdateOperationsInput | $Enums.CharacterStatus

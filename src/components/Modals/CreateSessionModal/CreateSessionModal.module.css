@@ -17,21 +17,8 @@
   border: 2px solid var(--crimson-dark);
   max-width: 600px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.modal::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal::-webkit-scrollbar-thumb {
-  background-color: var(--crimson-dark);
-  border-radius: 4px;
 }
 
 .title {

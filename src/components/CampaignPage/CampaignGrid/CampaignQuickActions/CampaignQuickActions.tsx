@@ -1,12 +1,16 @@
+'use client'
+
 import { BookOpen, ChevronsRight, ScrollText, UserRoundPlus } from "lucide-react";
 import styles from "./CampaignQuickActions.module.css";
+import { useCreateModalStore } from "@/store/useCreateModalStore";
 
 export default function CampaignQuickActions() {
+  const openModal = useCreateModalStore((state) => state.open);
   return (
     <div className={styles.quickActionsContainer}>
       <p className={styles.title}>Ações Rápidas</p>
       <div className={styles.cardWrapper}>
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => openModal("session")}>
           <div className={styles.cardContent}>
             <BookOpen size={40}/>
             <div>

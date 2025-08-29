@@ -1,6 +1,6 @@
 "use client";
 
-import { useCreateCampaignStore } from "@/store/useCreateCampaignStore";
+import { useCreateModalStore } from "@/store/useCreateModalStore";
 import { useSidebarCampaignMenuStore } from "@/store/useSidebarCampaignStore";
 import Link from "next/link";
 import { ArrowDown, Plus } from "lucide-react";
@@ -13,7 +13,7 @@ type Campaign = {
 };
 
 export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
-  const openCreateCampaignModal = useCreateCampaignStore((state) => state.open);
+  const openModal = useCreateModalStore((state) => state.open);
   const isOpen = useSidebarCampaignMenuStore(
     (state) => state.isCampaignMenuOpen
   );
@@ -40,7 +40,7 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
               className={styles.plusButton}
               onClick={(e) => {
                 e.stopPropagation();
-                openCreateCampaignModal();
+                openModal("campaign");
               }}
             >
               <Plus size={20} />
@@ -55,12 +55,12 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
               <>
                 <li key={campaign.id}>
                   <div className={styles.campaignButtonContainer}>
-                  <Link
-                    href={`/campaigns/${campaign.slug}`}
-                    className={styles.campaignButton}
-                  >
-                    {campaign.name}
-                  </Link>
+                    <Link
+                      href={`/campaigns/${campaign.slug}`}
+                      className={styles.campaignButton}
+                    >
+                      {campaign.name}
+                    </Link>
                   </div>
                 </li>
               </>
@@ -69,7 +69,7 @@ export function SidebarCampaignMenu({ campaigns }: { campaigns: Campaign[] }) {
             <li className={styles.emptyCampaign}>
               <button
                 type="button"
-                onClick={openCreateCampaignModal}
+                onClick={() => openModal("campaign")}
                 className={styles.createCampaignButton}
               >
                 Crie sua Campanha

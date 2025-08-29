@@ -45,6 +45,13 @@
   --accent: var(--silver-light);
 } */
 
+/* Chrome, Safari, Edge */
+input[type="number"] {
+  -webkit-appearance: none; /* ✅ para Chrome, Safari, Edge */
+  -moz-appearance: textfield; /* ✅ para Firefox */
+  appearance: none;         /* ✅ padrão moderno */
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

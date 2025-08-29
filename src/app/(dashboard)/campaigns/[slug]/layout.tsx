@@ -5,7 +5,6 @@ import { notFound, redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import styles from "./campaign.module.css";
 import { CampaignPageHeader } from "@/components/CampaignPage/CampaignPageHeader/CampaignPageHeader";
-import { CreateCampaignModal } from "@/components/Modals/CreateCampaignModal/createCampaignModal";
 import { prisma } from "@/lib/prisma";
 
 export default async function CampaignsLayout({
@@ -41,7 +40,6 @@ export default async function CampaignsLayout({
           slug={campaign.slug}
         />
         <div className={styles.campaignContent}>{children}</div>
-        <CreateCampaignModal />
       </div>
     </Shell>
   );

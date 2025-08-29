@@ -70,15 +70,6 @@
   background-color: var(--crimson-dark);
 }
 
-.select {
-  padding: 0.5rem;
-  border-radius: 5px;
-  border: 1px solid var(--silver-dark);
-  background-color: var(--graphite-light);
-  color: var(--silver);
-  font-size: 1rem;
-}
-
 .input[type="number"]::-webkit-inner-spin-button,
 .input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

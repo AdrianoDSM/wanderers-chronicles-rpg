@@ -173,6 +173,9 @@ exports.Prisma.SessionScalarFieldEnum = {
 exports.Prisma.CharacterScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  race: 'race',
+  class: 'class',
+  level: 'level',
   description: 'description',
   type: 'type',
   status: 'status',

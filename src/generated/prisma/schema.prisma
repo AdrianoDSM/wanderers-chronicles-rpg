@@ -81,6 +81,9 @@ model Session {
 model Character {
   id          String          @id @default(cuid())
   name        String
+  race        String?
+  class       String?
+  level       Int?
   description String?
   type        CharacterType
   status      CharacterStatus @default(ALIVE)
