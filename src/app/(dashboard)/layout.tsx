@@ -9,6 +9,7 @@ import { AsideWrapper } from "@/components/AsideWrapper/AsideWrapper";
 import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
 import { CollapseAsideButtonWrapper } from "@/components/CollapseAsideButton/CollapseAsideButtonWrapper";
 import { CreateSessionModal } from "@/components/Modals/CreateSessionModal/CreateSessionModal";
+import { CreateCharacterModal } from "@/components/Modals/CreateCharacterModal/CreateCharacterModal";
 
 export default async function DashboardLayout({
   children,
@@ -33,6 +34,7 @@ export default async function DashboardLayout({
         
         <CreateCampaignModal />
         <CreateSessionModal />
+        <CreateCharacterModal />
       </div>
     </Shell>
   );

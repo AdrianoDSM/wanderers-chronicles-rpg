@@ -30,7 +30,7 @@ export default function CampaignQuickActions() {
           </div>
           <ChevronsRight size={30}/>
         </div>
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => openModal("character")}>
           <div className={styles.cardContent}>
             <UserRoundPlus size={40}/>
             <div>

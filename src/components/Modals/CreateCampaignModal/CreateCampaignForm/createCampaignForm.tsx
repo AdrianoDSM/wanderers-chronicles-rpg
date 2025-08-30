@@ -19,9 +19,6 @@ export const createCampaignSchema = z.object({
     .max(450, { message: "Máximo de 450 caracteres" })
     .optional(),
   system: z.string().min(2, { message: "Sistema obrigatório" }),
-  players: z.array(z.string().min(1, { message: "Nome do jogador obrigatório"}))
-  .min(1, { message: "É necessário pelo menos 1 jogador" })
-  .max(10, { message: "Máximo de 10 jogadores permitidos" }),
 });
 
 type CreateCampaignInput = z.infer<typeof createCampaignSchema>;
@@ -33,13 +30,10 @@ export function CreateCampaignForm() {
     setPlayerCount,
     setPlayerName,
     resetPlayers,
-  } = useCampaignPlayersStore()
+  } = useCampaignPlayersStore();
 
-  const {
-    customSystem,
-    setCustomSystem,
-    resetCustomSystem,
-  } = useCampaignFormStore()
+  const { customSystem, setCustomSystem, resetCustomSystem } =
+    useCampaignFormStore();
 
   const {
     register,
@@ -51,37 +45,49 @@ export function CreateCampaignForm() {
   });
 
   const router = useRouter();
-  const selectedSystem = watch('system');
-  const finalSystem = selectedSystem === "Outros" ? customSystem : selectedSystem;
+  const selectedSystem = watch("system");
+  const finalSystem =
+    selectedSystem === "Outros" ? customSystem : selectedSystem;
   const description = watch("description") || "";
 
   const mutation = useMutation({
     mutationFn: createCampaign,
-    onSuccess: (campaign: { slug: string; }) => {
+    onSuccess: (campaign: { slug: string }) => {
       toast.success("Campanha criada com sucesso!");
       resetCustomSystem();
       resetPlayers();
-      router.push(`/campaigns/${campaign.slug}`)
+      router.push(`/campaigns/${campaign.slug}`);
     },
     onError: (error: unknown) => {
-      toast.error(error instanceof Error ? error.message : "Erro ao criar campanha")
+      toast.error(
+        error instanceof Error ? error.message : "Erro ao criar campanha"
+      );
     },
   });
 
-  const onSubmit = (data: CreateCampaignInput) => {
-    mutation.mutate({ 
-      ...data, 
+  const onSubmit = (data: Omit<CreateCampaignInput, "players">) => {
+    if (playerNames.length < 1) {
+      toast.error("É necessário pelo menos 1 jogador");
+      return;
+    }
+
+    const invalidNames = playerNames.filter((name) => name.trim().length === 0);
+    if (invalidNames.length > 0) {
+      toast.error("Todos os jogadores devem ter nome");
+      return;
+    }
+
+    mutation.mutate({
+      ...data,
       system: finalSystem,
       players: playerNames,
-    })
+    });
   };
 
   function autoResize(e: React.ChangeEvent<HTMLTextAreaElement>) {
     e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
   }
-
-  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -117,7 +123,9 @@ export function CreateCampaignForm() {
         )}
       </div>
       <div className={styles.formItem}>
-        <label className={styles.label} htmlFor="system">Sistema</label>
+        <label className={styles.label} htmlFor="system">
+          Sistema
+        </label>
         <select {...register("system")} id="system" className={styles.select}>
           <option value="">Selecione um sistema</option>
           {rpgSystems.map((system) => (
@@ -126,11 +134,15 @@ export function CreateCampaignForm() {
             </option>
           ))}
         </select>
-        {errors.system && <p className={styles.error}>{errors.system.message}</p>}
+        {errors.system && (
+          <p className={styles.error}>{errors.system.message}</p>
+        )}
       </div>
       {selectedSystem === "Outros" && (
         <div className={styles.formItem}>
-          <label className={styles.label} htmlFor="customSystem">Nome do Sistema</label>
+          <label className={styles.label} htmlFor="customSystem">
+            Nome do Sistema
+          </label>
           <input
             id="customSystem"
             value={customSystem}
@@ -142,7 +154,9 @@ export function CreateCampaignForm() {
         </div>
       )}
       <div className={styles.formItem}>
-        <label className={styles.label} htmlFor="playerCount">Número de Jogadores</label>
+        <label className={styles.label} htmlFor="playerCount">
+          Número de Jogadores
+        </label>
         <input
           id="playerCount"
           type="number"
@@ -151,7 +165,7 @@ export function CreateCampaignForm() {
           value={playerCount || ""}
           onChange={(e) => {
             const raw = Number(e.target.value);
-            const safe = Math.min(Math.max(raw, 1), 10)
+            const safe = Math.min(Math.max(raw, 1), 10);
             setPlayerCount(safe);
           }}
           onWheel={(e) => e.currentTarget.blur()}
@@ -170,12 +184,14 @@ export function CreateCampaignForm() {
             placeholder={`Nome do jogador ${index + 1}`}
             required
           />
-          {errors.players?.[index] && (
-            <p className={styles.error}>{errors.players[index]?.message}</p>
-          )}
         </div>
       ))}
-      <button type="submit" disabled={mutation.isPending} className={styles.button}>
+
+      <button
+        type="submit"
+        disabled={mutation.isPending}
+        className={styles.button}
+      >
         {mutation.isPending ? "Criando..." : "Criar Campanha"}
       </button>
     </form>

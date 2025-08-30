@@ -9000,6 +9000,7 @@ export namespace Prisma {
   export type CharacterWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     playerId?: string
+    name_campaignId?: CharacterNameCampaignIdCompoundUniqueInput
     AND?: CharacterWhereInput | CharacterWhereInput[]
     OR?: CharacterWhereInput[]
     NOT?: CharacterWhereInput | CharacterWhereInput[]
@@ -9017,7 +9018,7 @@ export namespace Prisma {
     notes?: NoteListRelationFilter
     player?: XOR<PlayerNullableScalarRelationFilter, PlayerWhereInput> | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
-  }, "id" | "playerId">
+  }, "id" | "playerId" | "name_campaignId">
 
   export type CharacterOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9950,6 +9951,11 @@ export namespace Prisma {
   export type PlayerNullableScalarRelationFilter = {
     is?: PlayerWhereInput | null
     isNot?: PlayerWhereInput | null
+  }
+
+  export type CharacterNameCampaignIdCompoundUniqueInput = {
+    name: string
+    campaignId: string
   }
 
   export type CharacterCountOrderByAggregateInput = {

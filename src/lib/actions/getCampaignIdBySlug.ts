@@ -2,7 +2,7 @@
 
 import { prisma } from "../prisma";
 
-export async function getCampaignIdBySlug(slug: string) {
+export async function getCampaignIdBySlug(slug: string): Promise<string> {
   const campaign = await prisma.campaign.findUnique({
     where: { slug },
     select: { id: true },

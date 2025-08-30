@@ -99,6 +99,8 @@ model Character {
 
   campaignId String
   campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@unique([name, campaignId])
 }
 
 enum CampaignStatus {
