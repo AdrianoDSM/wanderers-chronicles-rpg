@@ -20,7 +20,7 @@ export default function CampaignQuickActions() {
           </div>
           <ChevronsRight size={30}/>
         </div>
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => openModal("note")}>
           <div className={styles.cardContent}>
             <ScrollText size={40}/>
             <div>

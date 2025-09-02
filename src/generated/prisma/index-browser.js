@@ -156,7 +156,8 @@ exports.Prisma.NoteScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   campaignId: 'campaignId',
-  characterId: 'characterId'
+  characterId: 'characterId',
+  sessionId: 'sessionId'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {

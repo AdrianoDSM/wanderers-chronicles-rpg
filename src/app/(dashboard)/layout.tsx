@@ -10,6 +10,7 @@ import { getUserCampaigns } from "@/lib/queries/getUserCampaigns";
 import { CollapseAsideButtonWrapper } from "@/components/CollapseAsideButton/CollapseAsideButtonWrapper";
 import { CreateSessionModal } from "@/components/Modals/CreateSessionModal/CreateSessionModal";
 import { CreateCharacterModal } from "@/components/Modals/CreateCharacterModal/CreateCharacterModal";
+import { CreateNoteModal } from "@/components/Modals/CreateNoteModal/CreateNoteModal";
 
 export default async function DashboardLayout({
   children,
@@ -35,6 +36,7 @@ export default async function DashboardLayout({
         <CreateCampaignModal />
         <CreateSessionModal />
         <CreateCharacterModal />
+        <CreateNoteModal />
       </div>
     </Shell>
   );

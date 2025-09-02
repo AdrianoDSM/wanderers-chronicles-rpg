@@ -1452,6 +1452,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type SessionCountOutputType
+   */
+
+  export type SessionCountOutputType = {
+    notes: number
+  }
+
+  export type SessionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    notes?: boolean | SessionCountOutputTypeCountNotesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SessionCountOutputType without action
+   */
+  export type SessionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SessionCountOutputType
+     */
+    select?: SessionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SessionCountOutputType without action
+   */
+  export type SessionCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteWhereInput
+  }
+
+
+  /**
    * Count Type CharacterCountOutputType
    */
 
@@ -4880,6 +4911,7 @@ export namespace Prisma {
     updatedAt: Date | null
     campaignId: string | null
     characterId: string | null
+    sessionId: string | null
   }
 
   export type NoteMaxAggregateOutputType = {
@@ -4891,6 +4923,7 @@ export namespace Prisma {
     updatedAt: Date | null
     campaignId: string | null
     characterId: string | null
+    sessionId: string | null
   }
 
   export type NoteCountAggregateOutputType = {
@@ -4902,6 +4935,7 @@ export namespace Prisma {
     updatedAt: number
     campaignId: number
     characterId: number
+    sessionId: number
     _all: number
   }
 
@@ -4915,6 +4949,7 @@ export namespace Prisma {
     updatedAt?: true
     campaignId?: true
     characterId?: true
+    sessionId?: true
   }
 
   export type NoteMaxAggregateInputType = {
@@ -4926,6 +4961,7 @@ export namespace Prisma {
     updatedAt?: true
     campaignId?: true
     characterId?: true
+    sessionId?: true
   }
 
   export type NoteCountAggregateInputType = {
@@ -4937,6 +4973,7 @@ export namespace Prisma {
     updatedAt?: true
     campaignId?: true
     characterId?: true
+    sessionId?: true
     _all?: true
   }
 
@@ -5021,6 +5058,7 @@ export namespace Prisma {
     updatedAt: Date
     campaignId: string
     characterId: string | null
+    sessionId: string | null
     _count: NoteCountAggregateOutputType | null
     _min: NoteMinAggregateOutputType | null
     _max: NoteMaxAggregateOutputType | null
@@ -5049,8 +5087,10 @@ export namespace Prisma {
     updatedAt?: boolean
     campaignId?: boolean
     characterId?: boolean
+    sessionId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     character?: boolean | Note$characterArgs<ExtArgs>
+    session?: boolean | Note$sessionArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5062,8 +5102,10 @@ export namespace Prisma {
     updatedAt?: boolean
     campaignId?: boolean
     characterId?: boolean
+    sessionId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     character?: boolean | Note$characterArgs<ExtArgs>
+    session?: boolean | Note$sessionArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5075,8 +5117,10 @@ export namespace Prisma {
     updatedAt?: boolean
     campaignId?: boolean
     characterId?: boolean
+    sessionId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     character?: boolean | Note$characterArgs<ExtArgs>
+    session?: boolean | Note$sessionArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectScalar = {
@@ -5088,20 +5132,24 @@ export namespace Prisma {
     updatedAt?: boolean
     campaignId?: boolean
     characterId?: boolean
+    sessionId?: boolean
   }
 
-  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "type" | "createdAt" | "updatedAt" | "campaignId" | "characterId", ExtArgs["result"]["note"]>
+  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "type" | "createdAt" | "updatedAt" | "campaignId" | "characterId" | "sessionId", ExtArgs["result"]["note"]>
   export type NoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     character?: boolean | Note$characterArgs<ExtArgs>
+    session?: boolean | Note$sessionArgs<ExtArgs>
   }
   export type NoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     character?: boolean | Note$characterArgs<ExtArgs>
+    session?: boolean | Note$sessionArgs<ExtArgs>
   }
   export type NoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
     character?: boolean | Note$characterArgs<ExtArgs>
+    session?: boolean | Note$sessionArgs<ExtArgs>
   }
 
   export type $NotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5109,6 +5157,7 @@ export namespace Prisma {
     objects: {
       campaign: Prisma.$CampaignPayload<ExtArgs>
       character: Prisma.$CharacterPayload<ExtArgs> | null
+      session: Prisma.$SessionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5119,6 +5168,7 @@ export namespace Prisma {
       updatedAt: Date
       campaignId: string
       characterId: string | null
+      sessionId: string | null
     }, ExtArgs["result"]["note"]>
     composites: {}
   }
@@ -5515,6 +5565,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     character<T extends Note$characterArgs<ExtArgs> = {}>(args?: Subset<T, Note$characterArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    session<T extends Note$sessionArgs<ExtArgs> = {}>(args?: Subset<T, Note$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5552,6 +5603,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Note", 'DateTime'>
     readonly campaignId: FieldRef<"Note", 'String'>
     readonly characterId: FieldRef<"Note", 'String'>
+    readonly sessionId: FieldRef<"Note", 'String'>
   }
     
 
@@ -5967,6 +6019,25 @@ export namespace Prisma {
   }
 
   /**
+   * Note.session
+   */
+  export type Note$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+  }
+
+  /**
    * Note without action
    */
   export type NoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6208,6 +6279,8 @@ export namespace Prisma {
     updatedAt?: boolean
     campaignId?: boolean
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+    notes?: boolean | Session$notesArgs<ExtArgs>
+    _count?: boolean | SessionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
   export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6248,6 +6321,8 @@ export namespace Prisma {
   export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "sessionDate" | "duration" | "description" | "createdAt" | "updatedAt" | "campaignId", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
+    notes?: boolean | Session$notesArgs<ExtArgs>
+    _count?: boolean | SessionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campaign?: boolean | CampaignDefaultArgs<ExtArgs>
@@ -6260,6 +6335,7 @@ export namespace Prisma {
     name: "Session"
     objects: {
       campaign: Prisma.$CampaignPayload<ExtArgs>
+      notes: Prisma.$NotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6665,6 +6741,7 @@ export namespace Prisma {
   export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     campaign<T extends CampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CampaignDefaultArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    notes<T extends Session$notesArgs<ExtArgs> = {}>(args?: Subset<T, Session$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7095,6 +7172,30 @@ export namespace Prisma {
      * Limit how many Sessions to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Session.notes
+   */
+  export type Session$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    where?: NoteWhereInput
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    cursor?: NoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
   }
 
   /**
@@ -8428,7 +8529,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     campaignId: 'campaignId',
-    characterId: 'characterId'
+    characterId: 'characterId',
+    sessionId: 'sessionId'
   };
 
   export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
@@ -8823,8 +8925,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Note"> | Date | string
     campaignId?: StringFilter<"Note"> | string
     characterId?: StringNullableFilter<"Note"> | string | null
+    sessionId?: StringNullableFilter<"Note"> | string | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
     character?: XOR<CharacterNullableScalarRelationFilter, CharacterWhereInput> | null
+    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
   }
 
   export type NoteOrderByWithRelationInput = {
@@ -8836,8 +8940,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     campaignId?: SortOrder
     characterId?: SortOrderInput | SortOrder
+    sessionId?: SortOrderInput | SortOrder
     campaign?: CampaignOrderByWithRelationInput
     character?: CharacterOrderByWithRelationInput
+    session?: SessionOrderByWithRelationInput
   }
 
   export type NoteWhereUniqueInput = Prisma.AtLeast<{
@@ -8852,8 +8958,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Note"> | Date | string
     campaignId?: StringFilter<"Note"> | string
     characterId?: StringNullableFilter<"Note"> | string | null
+    sessionId?: StringNullableFilter<"Note"> | string | null
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
     character?: XOR<CharacterNullableScalarRelationFilter, CharacterWhereInput> | null
+    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
   }, "id">
 
   export type NoteOrderByWithAggregationInput = {
@@ -8865,6 +8973,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     campaignId?: SortOrder
     characterId?: SortOrderInput | SortOrder
+    sessionId?: SortOrderInput | SortOrder
     _count?: NoteCountOrderByAggregateInput
     _max?: NoteMaxOrderByAggregateInput
     _min?: NoteMinOrderByAggregateInput
@@ -8882,6 +8991,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Note"> | Date | string
     campaignId?: StringWithAggregatesFilter<"Note"> | string
     characterId?: StringNullableWithAggregatesFilter<"Note"> | string | null
+    sessionId?: StringNullableWithAggregatesFilter<"Note"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -8897,6 +9007,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Session"> | Date | string
     campaignId?: StringFilter<"Session"> | string
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
+    notes?: NoteListRelationFilter
   }
 
   export type SessionOrderByWithRelationInput = {
@@ -8909,6 +9020,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     campaignId?: SortOrder
     campaign?: CampaignOrderByWithRelationInput
+    notes?: NoteOrderByRelationAggregateInput
   }
 
   export type SessionWhereUniqueInput = Prisma.AtLeast<{
@@ -8924,6 +9036,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Session"> | Date | string
     campaignId?: StringFilter<"Session"> | string
     campaign?: XOR<CampaignScalarRelationFilter, CampaignWhereInput>
+    notes?: NoteListRelationFilter
   }, "id">
 
   export type SessionOrderByWithAggregationInput = {
@@ -9287,6 +9400,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutNotesInput
     character?: CharacterCreateNestedOneWithoutNotesInput
+    session?: SessionCreateNestedOneWithoutNotesInput
   }
 
   export type NoteUncheckedCreateInput = {
@@ -9298,6 +9412,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     campaignId: string
     characterId?: string | null
+    sessionId?: string | null
   }
 
   export type NoteUpdateInput = {
@@ -9309,6 +9424,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutNotesNestedInput
     character?: CharacterUpdateOneWithoutNotesNestedInput
+    session?: SessionUpdateOneWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateInput = {
@@ -9320,6 +9436,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
     characterId?: NullableStringFieldUpdateOperationsInput | string | null
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NoteCreateManyInput = {
@@ -9331,6 +9448,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     campaignId: string
     characterId?: string | null
+    sessionId?: string | null
   }
 
   export type NoteUpdateManyMutationInput = {
@@ -9351,6 +9469,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
     characterId?: NullableStringFieldUpdateOperationsInput | string | null
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -9362,6 +9481,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutSessionsInput
+    notes?: NoteCreateNestedManyWithoutSessionInput
   }
 
   export type SessionUncheckedCreateInput = {
@@ -9373,6 +9493,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
+    notes?: NoteUncheckedCreateNestedManyWithoutSessionInput
   }
 
   export type SessionUpdateInput = {
@@ -9384,6 +9505,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutSessionsNestedInput
+    notes?: NoteUpdateManyWithoutSessionNestedInput
   }
 
   export type SessionUncheckedUpdateInput = {
@@ -9395,6 +9517,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
+    notes?: NoteUncheckedUpdateManyWithoutSessionNestedInput
   }
 
   export type SessionCreateManyInput = {
@@ -9812,6 +9935,11 @@ export namespace Prisma {
     not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
   }
 
+  export type SessionNullableScalarRelationFilter = {
+    is?: SessionWhereInput | null
+    isNot?: SessionWhereInput | null
+  }
+
   export type NoteCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -9821,6 +9949,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     campaignId?: SortOrder
     characterId?: SortOrder
+    sessionId?: SortOrder
   }
 
   export type NoteMaxOrderByAggregateInput = {
@@ -9832,6 +9961,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     campaignId?: SortOrder
     characterId?: SortOrder
+    sessionId?: SortOrder
   }
 
   export type NoteMinOrderByAggregateInput = {
@@ -9843,6 +9973,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     campaignId?: SortOrder
     characterId?: SortOrder
+    sessionId?: SortOrder
   }
 
   export type EnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10348,6 +10479,12 @@ export namespace Prisma {
     connect?: CharacterWhereUniqueInput
   }
 
+  export type SessionCreateNestedOneWithoutNotesInput = {
+    create?: XOR<SessionCreateWithoutNotesInput, SessionUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutNotesInput
+    connect?: SessionWhereUniqueInput
+  }
+
   export type EnumNoteTypeFieldUpdateOperationsInput = {
     set?: $Enums.NoteType
   }
@@ -10370,10 +10507,34 @@ export namespace Prisma {
     update?: XOR<XOR<CharacterUpdateToOneWithWhereWithoutNotesInput, CharacterUpdateWithoutNotesInput>, CharacterUncheckedUpdateWithoutNotesInput>
   }
 
+  export type SessionUpdateOneWithoutNotesNestedInput = {
+    create?: XOR<SessionCreateWithoutNotesInput, SessionUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: SessionCreateOrConnectWithoutNotesInput
+    upsert?: SessionUpsertWithoutNotesInput
+    disconnect?: SessionWhereInput | boolean
+    delete?: SessionWhereInput | boolean
+    connect?: SessionWhereUniqueInput
+    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutNotesInput, SessionUpdateWithoutNotesInput>, SessionUncheckedUpdateWithoutNotesInput>
+  }
+
   export type CampaignCreateNestedOneWithoutSessionsInput = {
     create?: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: CampaignCreateOrConnectWithoutSessionsInput
     connect?: CampaignWhereUniqueInput
+  }
+
+  export type NoteCreateNestedManyWithoutSessionInput = {
+    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput> | NoteCreateWithoutSessionInput[] | NoteUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput | NoteCreateOrConnectWithoutSessionInput[]
+    createMany?: NoteCreateManySessionInputEnvelope
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
+  export type NoteUncheckedCreateNestedManyWithoutSessionInput = {
+    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput> | NoteCreateWithoutSessionInput[] | NoteUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput | NoteCreateOrConnectWithoutSessionInput[]
+    createMany?: NoteCreateManySessionInputEnvelope
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -10390,6 +10551,34 @@ export namespace Prisma {
     upsert?: CampaignUpsertWithoutSessionsInput
     connect?: CampaignWhereUniqueInput
     update?: XOR<XOR<CampaignUpdateToOneWithWhereWithoutSessionsInput, CampaignUpdateWithoutSessionsInput>, CampaignUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type NoteUpdateManyWithoutSessionNestedInput = {
+    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput> | NoteCreateWithoutSessionInput[] | NoteUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput | NoteCreateOrConnectWithoutSessionInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutSessionInput | NoteUpsertWithWhereUniqueWithoutSessionInput[]
+    createMany?: NoteCreateManySessionInputEnvelope
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutSessionInput | NoteUpdateWithWhereUniqueWithoutSessionInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutSessionInput | NoteUpdateManyWithWhereWithoutSessionInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
+  }
+
+  export type NoteUncheckedUpdateManyWithoutSessionNestedInput = {
+    create?: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput> | NoteCreateWithoutSessionInput[] | NoteUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutSessionInput | NoteCreateOrConnectWithoutSessionInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutSessionInput | NoteUpsertWithWhereUniqueWithoutSessionInput[]
+    createMany?: NoteCreateManySessionInputEnvelope
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutSessionInput | NoteUpdateWithWhereUniqueWithoutSessionInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutSessionInput | NoteUpdateManyWithWhereWithoutSessionInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
   }
 
   export type NoteCreateNestedManyWithoutCharacterInput = {
@@ -10837,6 +11026,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     character?: CharacterCreateNestedOneWithoutNotesInput
+    session?: SessionCreateNestedOneWithoutNotesInput
   }
 
   export type NoteUncheckedCreateWithoutCampaignInput = {
@@ -10847,6 +11037,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     characterId?: string | null
+    sessionId?: string | null
   }
 
   export type NoteCreateOrConnectWithoutCampaignInput = {
@@ -10867,6 +11058,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    notes?: NoteCreateNestedManyWithoutSessionInput
   }
 
   export type SessionUncheckedCreateWithoutCampaignInput = {
@@ -10877,6 +11069,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    notes?: NoteUncheckedCreateNestedManyWithoutSessionInput
   }
 
   export type SessionCreateOrConnectWithoutCampaignInput = {
@@ -11013,6 +11206,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Note"> | Date | string
     campaignId?: StringFilter<"Note"> | string
     characterId?: StringNullableFilter<"Note"> | string | null
+    sessionId?: StringNullableFilter<"Note"> | string | null
   }
 
   export type SessionUpsertWithWhereUniqueWithoutCampaignInput = {
@@ -11308,6 +11502,33 @@ export namespace Prisma {
     create: XOR<CharacterCreateWithoutNotesInput, CharacterUncheckedCreateWithoutNotesInput>
   }
 
+  export type SessionCreateWithoutNotesInput = {
+    id?: string
+    title: string
+    sessionDate: Date | string
+    duration: number
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign: CampaignCreateNestedOneWithoutSessionsInput
+  }
+
+  export type SessionUncheckedCreateWithoutNotesInput = {
+    id?: string
+    title: string
+    sessionDate: Date | string
+    duration: number
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+  }
+
+  export type SessionCreateOrConnectWithoutNotesInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutNotesInput, SessionUncheckedCreateWithoutNotesInput>
+  }
+
   export type CampaignUpsertWithoutNotesInput = {
     update: XOR<CampaignUpdateWithoutNotesInput, CampaignUncheckedUpdateWithoutNotesInput>
     create: XOR<CampaignCreateWithoutNotesInput, CampaignUncheckedCreateWithoutNotesInput>
@@ -11392,6 +11613,39 @@ export namespace Prisma {
     campaignId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type SessionUpsertWithoutNotesInput = {
+    update: XOR<SessionUpdateWithoutNotesInput, SessionUncheckedUpdateWithoutNotesInput>
+    create: XOR<SessionCreateWithoutNotesInput, SessionUncheckedCreateWithoutNotesInput>
+    where?: SessionWhereInput
+  }
+
+  export type SessionUpdateToOneWithWhereWithoutNotesInput = {
+    where?: SessionWhereInput
+    data: XOR<SessionUpdateWithoutNotesInput, SessionUncheckedUpdateWithoutNotesInput>
+  }
+
+  export type SessionUpdateWithoutNotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneRequiredWithoutSessionsNestedInput
+  }
+
+  export type SessionUncheckedUpdateWithoutNotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    sessionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type CampaignCreateWithoutSessionsInput = {
     id?: string
     name: string
@@ -11425,6 +11679,38 @@ export namespace Prisma {
   export type CampaignCreateOrConnectWithoutSessionsInput = {
     where: CampaignWhereUniqueInput
     create: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type NoteCreateWithoutSessionInput = {
+    id?: string
+    title?: string | null
+    content: string
+    type?: $Enums.NoteType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign: CampaignCreateNestedOneWithoutNotesInput
+    character?: CharacterCreateNestedOneWithoutNotesInput
+  }
+
+  export type NoteUncheckedCreateWithoutSessionInput = {
+    id?: string
+    title?: string | null
+    content: string
+    type?: $Enums.NoteType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    characterId?: string | null
+  }
+
+  export type NoteCreateOrConnectWithoutSessionInput = {
+    where: NoteWhereUniqueInput
+    create: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
+  }
+
+  export type NoteCreateManySessionInputEnvelope = {
+    data: NoteCreateManySessionInput | NoteCreateManySessionInput[]
+    skipDuplicates?: boolean
   }
 
   export type CampaignUpsertWithoutSessionsInput = {
@@ -11468,6 +11754,22 @@ export namespace Prisma {
     characters?: CharacterUncheckedUpdateManyWithoutCampaignNestedInput
   }
 
+  export type NoteUpsertWithWhereUniqueWithoutSessionInput = {
+    where: NoteWhereUniqueInput
+    update: XOR<NoteUpdateWithoutSessionInput, NoteUncheckedUpdateWithoutSessionInput>
+    create: XOR<NoteCreateWithoutSessionInput, NoteUncheckedCreateWithoutSessionInput>
+  }
+
+  export type NoteUpdateWithWhereUniqueWithoutSessionInput = {
+    where: NoteWhereUniqueInput
+    data: XOR<NoteUpdateWithoutSessionInput, NoteUncheckedUpdateWithoutSessionInput>
+  }
+
+  export type NoteUpdateManyWithWhereWithoutSessionInput = {
+    where: NoteScalarWhereInput
+    data: XOR<NoteUpdateManyMutationInput, NoteUncheckedUpdateManyWithoutSessionInput>
+  }
+
   export type NoteCreateWithoutCharacterInput = {
     id?: string
     title?: string | null
@@ -11476,6 +11778,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     campaign: CampaignCreateNestedOneWithoutNotesInput
+    session?: SessionCreateNestedOneWithoutNotesInput
   }
 
   export type NoteUncheckedCreateWithoutCharacterInput = {
@@ -11486,6 +11789,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
+    sessionId?: string | null
   }
 
   export type NoteCreateOrConnectWithoutCharacterInput = {
@@ -11705,6 +12009,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     characterId?: string | null
+    sessionId?: string | null
   }
 
   export type SessionCreateManyCampaignInput = {
@@ -11763,6 +12068,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     character?: CharacterUpdateOneWithoutNotesNestedInput
+    session?: SessionUpdateOneWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateWithoutCampaignInput = {
@@ -11773,6 +12079,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     characterId?: NullableStringFieldUpdateOperationsInput | string | null
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NoteUncheckedUpdateManyWithoutCampaignInput = {
@@ -11783,6 +12090,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     characterId?: NullableStringFieldUpdateOperationsInput | string | null
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUpdateWithoutCampaignInput = {
@@ -11793,6 +12101,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUpdateManyWithoutSessionNestedInput
   }
 
   export type SessionUncheckedUpdateWithoutCampaignInput = {
@@ -11803,6 +12112,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUncheckedUpdateManyWithoutSessionNestedInput
   }
 
   export type SessionUncheckedUpdateManyWithoutCampaignInput = {
@@ -11862,6 +12172,50 @@ export namespace Prisma {
     playerId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type NoteCreateManySessionInput = {
+    id?: string
+    title?: string | null
+    content: string
+    type?: $Enums.NoteType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaignId: string
+    characterId?: string | null
+  }
+
+  export type NoteUpdateWithoutSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: CampaignUpdateOneRequiredWithoutNotesNestedInput
+    character?: CharacterUpdateOneWithoutNotesNestedInput
+  }
+
+  export type NoteUncheckedUpdateWithoutSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    characterId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NoteUncheckedUpdateManyWithoutSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    characterId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type NoteCreateManyCharacterInput = {
     id?: string
     title?: string | null
@@ -11870,6 +12224,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     campaignId: string
+    sessionId?: string | null
   }
 
   export type NoteUpdateWithoutCharacterInput = {
@@ -11880,6 +12235,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaign?: CampaignUpdateOneRequiredWithoutNotesNestedInput
+    session?: SessionUpdateOneWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateWithoutCharacterInput = {
@@ -11890,6 +12246,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NoteUncheckedUpdateManyWithoutCharacterInput = {
@@ -11900,6 +12257,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     campaignId?: StringFieldUpdateOperationsInput | string
+    sessionId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

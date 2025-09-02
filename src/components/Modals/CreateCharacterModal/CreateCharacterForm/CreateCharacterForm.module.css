@@ -81,29 +81,3 @@
   -moz-appearance: textfield;
   appearance: none;
 }
-
-.previewImage {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 0.5rem;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  object-fit: cover;
-}
-
-.dragDropZone {
-  border: 2px dashed var(--silver-dark);
-  border-radius: 6px;
-  padding: 1rem;
-  text-align: center;
-  background-color: var(--graphite-light);
-  color: var(--silver);
-  font-family: var(--font-lora);
-  transition: border-color 0.2s;
-}
-
-.dragDropZone:hover {
-  border-color: var(--crimson);
-  cursor: pointer;
-}
