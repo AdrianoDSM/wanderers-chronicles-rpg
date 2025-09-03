@@ -1,4 +1,4 @@
-import { CampaignStatus, Character, Note, Session } from "@/generated/prisma";
+import { CampaignStatus, Character, Note, Session, Player } from "@/generated/prisma";
 import styles from "./CampaignGrid.module.css";
 import CampaignSummary from "./CampaignSummary/CampaignSummary";
 import CampaignActivity from "./CampaignActivity/CampaignActivity";
@@ -9,11 +9,13 @@ import CampaignStats from "./CampaignStats/CampaignStats";
 type CampaignProps = {
   name: string;
   slug: string;
+  system: string;
   description: string | null;
   status: CampaignStatus;
   characters: Character[];
   sessions: Session[];
   notes: Note[];
+  players: Player[];
 };
 
 export default function CampaignGrid({

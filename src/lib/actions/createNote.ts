@@ -4,12 +4,13 @@ import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { prisma } from "../prisma";
 import type { NoteType } from "@/types/enums/NoteType";
+import { getCampaignIdBySlug } from "./getCampaignIdBySlug";
 
 type NoteInput = {
   title?: string;
   content: string;
   type: NoteType;
-  campaignId: string;
+  slug: string;
   characterId?: string | null;
   sessionId?: string | null;
 };
@@ -35,12 +36,14 @@ export async function createNote(data: NoteInput) {
     throw new Error("Notas do tipo NPC precisam estar vinculadas a um personagem")
   }
 
+  const campaignId = await getCampaignIdBySlug(data.slug);
+
   const note = await prisma.note.create({
     data: {
       title: data.title?.trim() || null,
       content: trimmedContent,
       type: noteType,
-      campaignId: data.campaignId,
+      campaignId,
       characterId: noteType === "NPC" ? data.characterId! : null,
       sessionId: data.sessionId ?? null,
     },

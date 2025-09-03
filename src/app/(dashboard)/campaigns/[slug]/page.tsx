@@ -17,12 +17,14 @@ export default async function CampaignsPage({ params }: Props) {
     select: {
       name: true,
       description: true,
+      system: true,
       status: true,
       createdAt: true,
       slug: true,
       characters: true,
       notes: true,
       sessions: true,
+      players: true,
     },
   });
 

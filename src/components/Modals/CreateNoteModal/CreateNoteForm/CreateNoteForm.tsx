@@ -80,12 +80,12 @@ export function CreateNoteForm({ characterId }: Props) {
     mutationFn: (data: CreateNoteInput) =>
       createNote({
         ...data,
-        campaignId: slug,
+        slug,
         characterId: data.characterId ?? characterId ?? null,
       }),
     onSuccess: () => {
       toast.success("Nota criada com sucesso!");
-      router.refresh();
+      router.push(`/campaigns/${slug}/notes`);
     },
     onError: (error: unknown) => {
       toast.error(
