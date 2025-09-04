@@ -18,6 +18,8 @@ export default async function CampaignsPage({ params }: Props) {
       name: true,
       description: true,
       system: true,
+      startLevel: true,
+      endLevel: true,
       status: true,
       createdAt: true,
       slug: true,

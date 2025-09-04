@@ -2593,8 +2593,20 @@ export namespace Prisma {
 
   export type AggregateCampaign = {
     _count: CampaignCountAggregateOutputType | null
+    _avg: CampaignAvgAggregateOutputType | null
+    _sum: CampaignSumAggregateOutputType | null
     _min: CampaignMinAggregateOutputType | null
     _max: CampaignMaxAggregateOutputType | null
+  }
+
+  export type CampaignAvgAggregateOutputType = {
+    startLevel: number | null
+    endLevel: number | null
+  }
+
+  export type CampaignSumAggregateOutputType = {
+    startLevel: number | null
+    endLevel: number | null
   }
 
   export type CampaignMinAggregateOutputType = {
@@ -2603,6 +2615,8 @@ export namespace Prisma {
     slug: string | null
     description: string | null
     system: string | null
+    startLevel: number | null
+    endLevel: number | null
     status: $Enums.CampaignStatus | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2615,6 +2629,8 @@ export namespace Prisma {
     slug: string | null
     description: string | null
     system: string | null
+    startLevel: number | null
+    endLevel: number | null
     status: $Enums.CampaignStatus | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2627,6 +2643,8 @@ export namespace Prisma {
     slug: number
     description: number
     system: number
+    startLevel: number
+    endLevel: number
     status: number
     createdAt: number
     updatedAt: number
@@ -2635,12 +2653,24 @@ export namespace Prisma {
   }
 
 
+  export type CampaignAvgAggregateInputType = {
+    startLevel?: true
+    endLevel?: true
+  }
+
+  export type CampaignSumAggregateInputType = {
+    startLevel?: true
+    endLevel?: true
+  }
+
   export type CampaignMinAggregateInputType = {
     id?: true
     name?: true
     slug?: true
     description?: true
     system?: true
+    startLevel?: true
+    endLevel?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -2653,6 +2683,8 @@ export namespace Prisma {
     slug?: true
     description?: true
     system?: true
+    startLevel?: true
+    endLevel?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -2665,6 +2697,8 @@ export namespace Prisma {
     slug?: true
     description?: true
     system?: true
+    startLevel?: true
+    endLevel?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -2710,6 +2744,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CampaignAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CampaignSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CampaignMinAggregateInputType
@@ -2740,6 +2786,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CampaignCountAggregateInputType | true
+    _avg?: CampaignAvgAggregateInputType
+    _sum?: CampaignSumAggregateInputType
     _min?: CampaignMinAggregateInputType
     _max?: CampaignMaxAggregateInputType
   }
@@ -2750,11 +2798,15 @@ export namespace Prisma {
     slug: string
     description: string | null
     system: string
+    startLevel: number
+    endLevel: number | null
     status: $Enums.CampaignStatus
     createdAt: Date
     updatedAt: Date
     ownerId: string
     _count: CampaignCountAggregateOutputType | null
+    _avg: CampaignAvgAggregateOutputType | null
+    _sum: CampaignSumAggregateOutputType | null
     _min: CampaignMinAggregateOutputType | null
     _max: CampaignMaxAggregateOutputType | null
   }
@@ -2779,6 +2831,8 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     system?: boolean
+    startLevel?: boolean
+    endLevel?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2797,6 +2851,8 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     system?: boolean
+    startLevel?: boolean
+    endLevel?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2810,6 +2866,8 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     system?: boolean
+    startLevel?: boolean
+    endLevel?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2823,13 +2881,15 @@ export namespace Prisma {
     slug?: boolean
     description?: boolean
     system?: boolean
+    startLevel?: boolean
+    endLevel?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
   }
 
-  export type CampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "system" | "status" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["campaign"]>
+  export type CampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "system" | "startLevel" | "endLevel" | "status" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["campaign"]>
   export type CampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
     players?: boolean | Campaign$playersArgs<ExtArgs>
@@ -2860,6 +2920,8 @@ export namespace Prisma {
       slug: string
       description: string | null
       system: string
+      startLevel: number
+      endLevel: number | null
       status: $Enums.CampaignStatus
       createdAt: Date
       updatedAt: Date
@@ -3297,6 +3359,8 @@ export namespace Prisma {
     readonly slug: FieldRef<"Campaign", 'String'>
     readonly description: FieldRef<"Campaign", 'String'>
     readonly system: FieldRef<"Campaign", 'String'>
+    readonly startLevel: FieldRef<"Campaign", 'Int'>
+    readonly endLevel: FieldRef<"Campaign", 'Int'>
     readonly status: FieldRef<"Campaign", 'CampaignStatus'>
     readonly createdAt: FieldRef<"Campaign", 'DateTime'>
     readonly updatedAt: FieldRef<"Campaign", 'DateTime'>
@@ -8501,6 +8565,8 @@ export namespace Prisma {
     slug: 'slug',
     description: 'description',
     system: 'system',
+    startLevel: 'startLevel',
+    endLevel: 'endLevel',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -8627,6 +8693,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'CampaignStatus'
    */
   export type EnumCampaignStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignStatus'>
@@ -8651,20 +8731,6 @@ export namespace Prisma {
    * Reference to a field of type 'NoteType[]'
    */
   export type ListEnumNoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -8777,6 +8843,8 @@ export namespace Prisma {
     slug?: StringFilter<"Campaign"> | string
     description?: StringNullableFilter<"Campaign"> | string | null
     system?: StringFilter<"Campaign"> | string
+    startLevel?: IntFilter<"Campaign"> | number
+    endLevel?: IntNullableFilter<"Campaign"> | number | null
     status?: EnumCampaignStatusFilter<"Campaign"> | $Enums.CampaignStatus
     createdAt?: DateTimeFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
@@ -8794,6 +8862,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrderInput | SortOrder
     system?: SortOrder
+    startLevel?: SortOrder
+    endLevel?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8814,6 +8884,8 @@ export namespace Prisma {
     name?: StringFilter<"Campaign"> | string
     description?: StringNullableFilter<"Campaign"> | string | null
     system?: StringFilter<"Campaign"> | string
+    startLevel?: IntFilter<"Campaign"> | number
+    endLevel?: IntNullableFilter<"Campaign"> | number | null
     status?: EnumCampaignStatusFilter<"Campaign"> | $Enums.CampaignStatus
     createdAt?: DateTimeFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
@@ -8831,13 +8903,17 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrderInput | SortOrder
     system?: SortOrder
+    startLevel?: SortOrder
+    endLevel?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
     _count?: CampaignCountOrderByAggregateInput
+    _avg?: CampaignAvgOrderByAggregateInput
     _max?: CampaignMaxOrderByAggregateInput
     _min?: CampaignMinOrderByAggregateInput
+    _sum?: CampaignSumOrderByAggregateInput
   }
 
   export type CampaignScalarWhereWithAggregatesInput = {
@@ -8849,6 +8925,8 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Campaign"> | string
     description?: StringNullableWithAggregatesFilter<"Campaign"> | string | null
     system?: StringWithAggregatesFilter<"Campaign"> | string
+    startLevel?: IntWithAggregatesFilter<"Campaign"> | number
+    endLevel?: IntNullableWithAggregatesFilter<"Campaign"> | number | null
     status?: EnumCampaignStatusWithAggregatesFilter<"Campaign"> | $Enums.CampaignStatus
     createdAt?: DateTimeWithAggregatesFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Campaign"> | Date | string
@@ -9239,6 +9317,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9255,6 +9335,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9271,6 +9353,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9287,6 +9371,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9303,6 +9389,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9315,6 +9403,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9326,6 +9416,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9773,6 +9865,28 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type EnumCampaignStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.CampaignStatus | EnumCampaignStatusFieldRefInput<$PrismaModel>
     in?: $Enums.CampaignStatus[] | ListEnumCampaignStatusFieldRefInput<$PrismaModel>
@@ -9836,10 +9950,17 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrder
     system?: SortOrder
+    startLevel?: SortOrder
+    endLevel?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
+  }
+
+  export type CampaignAvgOrderByAggregateInput = {
+    startLevel?: SortOrder
+    endLevel?: SortOrder
   }
 
   export type CampaignMaxOrderByAggregateInput = {
@@ -9848,6 +9969,8 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrder
     system?: SortOrder
+    startLevel?: SortOrder
+    endLevel?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9860,10 +9983,17 @@ export namespace Prisma {
     slug?: SortOrder
     description?: SortOrder
     system?: SortOrder
+    startLevel?: SortOrder
+    endLevel?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
+  }
+
+  export type CampaignSumOrderByAggregateInput = {
+    startLevel?: SortOrder
+    endLevel?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9882,6 +10012,38 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumCampaignStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -9986,17 +10148,6 @@ export namespace Prisma {
     _max?: NestedEnumNoteTypeFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -10036,33 +10187,6 @@ export namespace Prisma {
 
   export type SessionSumOrderByAggregateInput = {
     duration?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type EnumCharacterTypeFilter<$PrismaModel = never> = {
@@ -10143,22 +10267,6 @@ export namespace Prisma {
 
   export type CharacterSumOrderByAggregateInput = {
     level?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumCharacterTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10295,6 +10403,22 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type EnumCampaignStatusFieldUpdateOperationsInput = {
@@ -10537,14 +10661,6 @@ export namespace Prisma {
     connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type CampaignUpdateOneRequiredWithoutSessionsNestedInput = {
     create?: XOR<CampaignCreateWithoutSessionsInput, CampaignUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: CampaignCreateOrConnectWithoutSessionsInput
@@ -10605,14 +10721,6 @@ export namespace Prisma {
     connectOrCreate?: NoteCreateOrConnectWithoutCharacterInput | NoteCreateOrConnectWithoutCharacterInput[]
     createMany?: NoteCreateManyCharacterInputEnvelope
     connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type EnumCharacterTypeFieldUpdateOperationsInput = {
@@ -10750,6 +10858,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumCampaignStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.CampaignStatus | EnumCampaignStatusFieldRefInput<$PrismaModel>
     in?: $Enums.CampaignStatus[] | ListEnumCampaignStatusFieldRefInput<$PrismaModel>
@@ -10772,44 +10891,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumCampaignStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CampaignStatus | EnumCampaignStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.CampaignStatus[] | ListEnumCampaignStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CampaignStatus[] | ListEnumCampaignStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumCampaignStatusWithAggregatesFilter<$PrismaModel> | $Enums.CampaignStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCampaignStatusFilter<$PrismaModel>
-    _max?: NestedEnumCampaignStatusFilter<$PrismaModel>
-  }
-
-  export type NestedEnumNoteTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
-  }
-
-  export type NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumNoteTypeFilter<$PrismaModel>
-    _max?: NestedEnumNoteTypeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -10839,20 +10920,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumCharacterTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.CharacterType | EnumCharacterTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCharacterTypeFilter<$PrismaModel> | $Enums.CharacterType
-  }
-
-  export type NestedEnumCharacterStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.CharacterStatus | EnumCharacterStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.CharacterStatus[] | ListEnumCharacterStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CharacterStatus[] | ListEnumCharacterStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumCharacterStatusFilter<$PrismaModel> | $Enums.CharacterStatus
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -10878,6 +10945,47 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumCampaignStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CampaignStatus | EnumCampaignStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CampaignStatus[] | ListEnumCampaignStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CampaignStatus[] | ListEnumCampaignStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCampaignStatusWithAggregatesFilter<$PrismaModel> | $Enums.CampaignStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCampaignStatusFilter<$PrismaModel>
+    _max?: NestedEnumCampaignStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+  }
+
+  export type NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumNoteTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCharacterTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CharacterType | EnumCharacterTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CharacterType[] | ListEnumCharacterTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCharacterTypeFilter<$PrismaModel> | $Enums.CharacterType
+  }
+
+  export type NestedEnumCharacterStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CharacterStatus | EnumCharacterStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CharacterStatus[] | ListEnumCharacterStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CharacterStatus[] | ListEnumCharacterStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCharacterStatusFilter<$PrismaModel> | $Enums.CharacterStatus
   }
 
   export type NestedEnumCharacterTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10906,6 +11014,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10921,6 +11031,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10965,6 +11077,8 @@ export namespace Prisma {
     slug?: StringFilter<"Campaign"> | string
     description?: StringNullableFilter<"Campaign"> | string | null
     system?: StringFilter<"Campaign"> | string
+    startLevel?: IntFilter<"Campaign"> | number
+    endLevel?: IntNullableFilter<"Campaign"> | number | null
     status?: EnumCampaignStatusFilter<"Campaign"> | $Enums.CampaignStatus
     createdAt?: DateTimeFilter<"Campaign"> | Date | string
     updatedAt?: DateTimeFilter<"Campaign"> | Date | string
@@ -11280,6 +11394,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11295,6 +11411,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11363,6 +11481,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11378,6 +11498,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11436,6 +11558,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11451,6 +11575,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11546,6 +11672,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11561,6 +11689,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11652,6 +11782,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11667,6 +11799,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11730,6 +11864,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11745,6 +11881,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11829,6 +11967,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11844,6 +11984,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11918,6 +12060,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11933,6 +12077,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11948,6 +12094,8 @@ export namespace Prisma {
     slug: string
     description?: string | null
     system?: string
+    startLevel?: number
+    endLevel?: number | null
     status?: $Enums.CampaignStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11959,6 +12107,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11974,6 +12124,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11989,6 +12141,8 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     system?: StringFieldUpdateOperationsInput | string
+    startLevel?: IntFieldUpdateOperationsInput | number
+    endLevel?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -9,10 +9,12 @@ type CampaignInput = {
     name: string
     description?: string
     system: string
+    startLevel: number
+    endLevel: number | null
     players: string[]
 }
 
-export async function createCampaign({name, description, system, players}: CampaignInput) {
+export async function createCampaign({name, description, system, startLevel, endLevel, players}: CampaignInput) {
     const session = await getServerSession(authOptions)
     if (!session) {
         throw new Error('Usuário não encontrado')
@@ -29,6 +31,8 @@ export async function createCampaign({name, description, system, players}: Campa
             description,
             system,
             slug,
+            startLevel,
+            endLevel,
             ownerId: session.user.id,
             players: {
                 create: players.map((name) => ({ name }))

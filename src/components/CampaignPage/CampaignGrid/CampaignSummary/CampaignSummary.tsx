@@ -6,6 +6,8 @@ type CampaignProps = {
   name: string;
   slug: string;
   system: string;
+  startLevel: number;
+  endLevel: number | null;
   description: string | null;
   status: CampaignStatus;
   characters: Character[];
@@ -48,19 +50,20 @@ export default function CampaignSummary({
         </div>
         <div className={styles.infos}>
           <div className={styles.info}>
-            Sistema: 
+            Sistema:
             <strong>{campaign.system}</strong>
           </div>
           <div className={styles.info}>
-            Nível: <strong></strong>
+            Nível:
+            <strong>{campaign.startLevel} - {campaign.endLevel ?? '??'}</strong>
           </div>
           <div className={styles.info}>
-            Jogadores: 
+            Jogadores:
             <strong>{campaign.players.length}</strong>
           </div>
           <div className={styles.info}>
-            Sessões: {campaign.sessions.length}
-            <strong></strong>
+            Sessões:
+            <strong>{campaign.sessions.length}</strong>
           </div>
         </div>
         <div className={styles.session}>

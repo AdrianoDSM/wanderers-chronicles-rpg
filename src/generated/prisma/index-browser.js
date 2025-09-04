@@ -134,6 +134,8 @@ exports.Prisma.CampaignScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   system: 'system',
+  startLevel: 'startLevel',
+  endLevel: 'endLevel',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

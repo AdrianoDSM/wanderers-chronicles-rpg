@@ -12,14 +12,35 @@ import { useCampaignFormStore } from "@/store/useCampaignFormStore";
 import { useCampaignPlayersStore } from "@/store/useCampaignPlayersStore";
 import { useMutation } from "@tanstack/react-query";
 
-export const createCampaignSchema = z.object({
-  name: z.string().min(1, { message: "Nome obrigatório" }),
-  description: z
-    .string()
-    .max(450, { message: "Máximo de 450 caracteres" })
-    .optional(),
-  system: z.string().min(2, { message: "Sistema obrigatório" }),
-});
+export const createCampaignSchema = z
+  .object({
+    name: z.string().min(1, { message: "Nome obrigatório" }),
+    description: z
+      .string()
+      .max(450, { message: "Máximo de 450 caracteres" })
+      .optional(),
+    system: z.string().min(2, { message: "Sistema obrigatório" }),
+    startLevel: z
+      .number()
+      .min(1)
+      .max(20, { message: "Nivel inicial entre 1 e 20" }),
+    endLevel: z.union([
+      z.literal("Indefinido"),
+      z.coerce.number().min(1).max(20),
+    ]),
+  })
+  .refine(
+    (data) => {
+      if (typeof data.endLevel === "number") {
+        return data.endLevel >= data.startLevel;
+      }
+      return true;
+    },
+    {
+      message: "Nível final não pode ser menor que o inicial",
+      path: ["endLevel"],
+    }
+  );
 
 type CreateCampaignInput = z.infer<typeof createCampaignSchema>;
 
@@ -42,6 +63,10 @@ export function CreateCampaignForm() {
     formState: { errors },
   } = useForm<CreateCampaignInput>({
     resolver: zodResolver(createCampaignSchema),
+    defaultValues: {
+      startLevel: 1,
+      endLevel: "Indefinido",
+    }
   });
 
   const router = useRouter();
@@ -49,6 +74,7 @@ export function CreateCampaignForm() {
   const finalSystem =
     selectedSystem === "Outros" ? customSystem : selectedSystem;
   const description = watch("description") || "";
+  const startLevel = watch("startLevel") || 1;
 
   const mutation = useMutation({
     mutationFn: createCampaign,
@@ -80,6 +106,7 @@ export function CreateCampaignForm() {
     mutation.mutate({
       ...data,
       system: finalSystem,
+      endLevel: typeof data.endLevel === "number" ? data.endLevel : null,
       players: playerNames,
     });
   };
@@ -153,6 +180,48 @@ export function CreateCampaignForm() {
           />
         </div>
       )}
+      <div className={styles.formItem}>
+        <label className={styles.label} htmlFor="startLevel">
+          Nível Inicial
+        </label>
+        <select
+          {...register("startLevel", { valueAsNumber: true })}
+          id="startLevel"
+          className={styles.select}
+        >
+          {[...Array(20)].map((_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+        {errors.startLevel && (
+          <p className={styles.error}>{errors.startLevel.message}</p>
+        )}
+      </div>
+      <div className={styles.formItem}>
+        <label className={styles.label} htmlFor="endLevel">
+          Nível Final
+        </label>
+        <select
+          {...register("endLevel")}
+          id="endLevel"
+          className={styles.select}
+        >
+          <option value="Indefinido">Indefinido</option>
+          {[...Array(20 - startLevel + 1)].map((_, i) => {
+            const level = i + startLevel;
+            return (
+              <option key={level} value={level}>
+                {level}
+              </option>
+            );
+          })}
+        </select>
+        {errors.endLevel && (
+          <p className={styles.error}>{errors.endLevel.message}</p>
+        )}
+      </div>
       <div className={styles.formItem}>
         <label className={styles.label} htmlFor="playerCount">
           Número de Jogadores

@@ -24,6 +24,8 @@ model Campaign {
   slug        String         @unique
   description String?
   system      String         @default("D&D 5e")
+  startLevel  Int             @default(1)
+  endLevel    Int?
   status      CampaignStatus @default(ACTIVE)
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
